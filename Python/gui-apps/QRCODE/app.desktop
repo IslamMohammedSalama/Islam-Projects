@@ -1,0 +1,9 @@
+[Desktop Entry]
+
+Name=QR Code Gnaretor
+Exec=/home/islam/anaconda3/bin/python /home/shared/Islam-Projects/Python/gui-apps/QRCODE/main.py
+Icon=/home/shared/Islam-Projects/Python/gui-apps/QRCODE/download.png
+Type=Application
+Terminal=false
+
+#/home/islam/anaconda3/bin/python /home/shared/Islam-projects/Python/gui_apps/phon/main.py

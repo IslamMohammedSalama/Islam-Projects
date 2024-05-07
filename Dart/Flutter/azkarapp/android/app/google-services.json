@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "633568819720",
+    "project_id": "myapp-58c25",
+    "storage_bucket": "myapp-58c25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633568819720:android:27ecf7393d97570684efbd",
+        "android_client_info": {
+          "package_name": "com.example.azkarapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD567KNZfHmgFgr2hom8QS5zfnI0qlLxxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

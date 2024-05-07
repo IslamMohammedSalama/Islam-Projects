@@ -1,0 +1,9 @@
+[Desktop Entry]
+
+Name=Camera
+Exec=/home/islam/anaconda3/envs/py312/bin/python /home/shared/Islam-Projects/Python/gui-apps/camera/camera.py
+Icon=/home/shared/Islam-Projects/Python/gui-apps/camera/pngegg.png
+Type=Application
+Terminal=false
+
+#/home/islam/anaconda3/bin/python /home/shared/Islam-projects/Python/gui_apps/phon/main.py

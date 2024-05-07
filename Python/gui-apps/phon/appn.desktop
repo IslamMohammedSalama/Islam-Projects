@@ -1,0 +1,9 @@
+[Desktop Entry]
+
+Name=Phone Number Tracer
+Exec=/home/islam/anaconda3/bin/python /home/shared/Islam-Projects/Python/gui-apps/phon/main.py
+Icon=/home/shared/Islam-Projects/Python/gui-apps/phon/icons8-phone.svg
+Type=Application
+Terminal=false
+
+#/home/islam/anaconda3/bin/python /home/shared/Islam-projects/Python/gui_apps/phon/main.py
