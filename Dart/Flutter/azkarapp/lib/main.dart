@@ -1,13 +1,11 @@
-// ignore_for_file: avoid_print, unused_import
+// ignore_for_file: avoid_print
+
 import 'package:azkarapp/auth/singin.dart';
 import 'package:azkarapp/firebase_options.dart';
 import 'package:azkarapp/homepage.dart';
 import 'package:azkarapp/auth/page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:azkarapp/fristpage.dart';
-import 'package:azkarapp/package/bs.dart';
-import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:azkarapp/secondpage.dart';
 import 'package:azkarapp/forth_page.dart';
@@ -19,17 +17,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const  MyApp());
+  runApp(const MyApp());
 }
 
 void printme(int i) {
   i++;
-
-  print("print me plase $i");
 }
 
 class MyApp extends StatefulWidget {
-   const MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -38,39 +34,39 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
       }
-    });    super.initState();
+    });
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: FirebaseAuth.instance.currentUser != null ? "page5" : "page1",
+      initialRoute:
+          FirebaseAuth.instance.currentUser != null ? "page5" : "page1",
       theme: ThemeData(
-        
           fontFamily: "Anta",
-          appBarTheme:  const AppBarTheme(
+          appBarTheme: const AppBarTheme(
             color: Colors.red,
           ),
-          textTheme:  const TextTheme(
+          textTheme: const TextTheme(
             bodySmall: TextStyle(fontFamily: "Anta", fontSize: 10),
             bodyMedium: TextStyle(fontFamily: "Anta", fontSize: 12),
             bodyLarge: TextStyle(fontFamily: "Anta", fontSize: 14),
-          )
-          
-          ),
+          )),
       routes: {
-        "pageone": (context) =>  const fristpage(),
-        "page1": (context) =>  Page1(),
-        "pagetwo": (context) =>  const Second_Page(),
+        "pageone": (context) => const Fristpage(),
+        "page1": (context) => Page1(),
+        "pagetwo": (context) => const SecondPage(),
         "page3": (context) => const MyApp(),
-        "page4": (context) =>  const forth_page(),
-        "singin": (context) =>   SingIn(),
-        "page5": (context) =>  const homepage(),
+        "page4": (context) => const Forthpage(),
+        "singin": (context) => SingIn(),
+        "page5": (context) => const Homepage(),
       },
       debugShowCheckedModeBanner: false,
       // home:  homepage()

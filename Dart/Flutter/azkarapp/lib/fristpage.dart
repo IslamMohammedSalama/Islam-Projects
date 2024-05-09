@@ -1,18 +1,15 @@
-// ignore_for_file: unused_import, camel_case_types
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:azkarapp/homepage.dart';
-import 'package:flutter/material.dart';
-import 'package:azkarapp/secondpage.dart';
-import 'package:azkarapp/forth_page.dart';
 
-class fristpage extends StatefulWidget {
-  const fristpage({super.key});
+import 'package:flutter/material.dart';
+
+
+class Fristpage extends StatefulWidget {
+  const Fristpage({super.key});
 
   @override
-  State<fristpage> createState() => _fristpageState();
+  State<Fristpage> createState() => _FristpageState();
 }
 
-class _fristpageState extends State<fristpage> {
+class _FristpageState extends State<Fristpage> {
   int index = 0;
   List<Widget> screens = [];
   List usernames = [

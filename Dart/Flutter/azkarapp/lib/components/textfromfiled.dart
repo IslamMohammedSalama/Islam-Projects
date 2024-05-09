@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-
 class CustomizedTextField extends StatelessWidget {
-    CustomizedTextField(
+  CustomizedTextField(
       {super.key,
       required this.controller,
       required this.hintText,
@@ -16,10 +15,15 @@ class CustomizedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     if (obscureText) {
       return TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "can't keep it empty ";
+          }
+          return null;
+        },
         obscureText: obscureText,
         controller: controller,
         decoration: InputDecoration(
-          
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(40),
               borderSide: BorderSide.none),
@@ -32,7 +36,13 @@ class CustomizedTextField extends StatelessWidget {
         ),
       );
     } else {
-      return TextField(
+      return TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "can't keep it empty ";
+          }
+          return null;
+        },
         obscureText: obscureText,
         controller: controller,
         decoration: InputDecoration(

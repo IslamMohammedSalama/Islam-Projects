@@ -1,22 +1,16 @@
-// ignore_for_file: unused_import, camel_case_types
-import 'package:azkarapp/homepage.dart';
-import 'package:drop_down_list/model/selected_list_item.dart';
+
 import 'package:flutter/material.dart';
-import 'package:azkarapp/secondpage.dart';
-import 'package:azkarapp/forth_page.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'package:azkarapp/package/bs.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class forth_page extends StatefulWidget {
-  const forth_page({super.key});
+class Forthpage extends StatefulWidget {
+  const Forthpage({super.key});
 
   @override
-  State<forth_page> createState() => _forth_pageState();
+  State<Forthpage> createState() => _ForthpageState();
 }
 
-class _forth_pageState extends State<forth_page> {
+class _ForthpageState extends State<Forthpage> {
   bool loadingg = true;
   Future<List> getdate() async {
     var respo =

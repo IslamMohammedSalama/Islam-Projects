@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, avoid_print, use_build_context_synchronously
+// ignore_for_file: must_be_immutable, use_build_context_synchronously, avoid_print
 
 import 'package:azkarapp/auth/page.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
@@ -12,10 +12,12 @@ class SingIn extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confpass = TextEditingController();
+  final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
+        key: _formstate,
         child: Container(
           padding: const EdgeInsets.all(10),
           child: SafeArea(
@@ -76,28 +78,39 @@ class SingIn extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () async {
-                  try {
-                    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                      email: email.text,
-                      password: password.text,
-                    );
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const homepage()));
-                  } on FirebaseAuthException catch (e) {
-                    print("sdfas");
-                    if (e.code == 'weak-password') {
-                      print('The password provided is too weak.');
+                  if (_formstate.currentState!.validate()) {                    try {
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                        email: email.text,
+                        password: password.text,
+                      );  
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const homepage()));
-                    } else if (e.code == 'email-already-in-use') {
-                      print('The account already exists for that email.');
+                              builder: (context) => const Homepage()));
+                    } on FirebaseAuthException catch (e) {
+                      print("sdfas");
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                        showDialog(
+                            context: context,
+                            builder: (builder) => const AlertDialog(
+                                  title: Text("Error"),
+                                  content: Text(
+                                      "The password provided is too weak."),
+                                ));
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                        showDialog(
+                            context: context,
+                            builder: (builder) => const AlertDialog(
+                                  title: Text("Error"),
+                                  content: Text("Email Already In Use"),
+                                ));
+                      }
+                    } catch (e) {
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
                   }
                 },
                 color: Colors.cyan,

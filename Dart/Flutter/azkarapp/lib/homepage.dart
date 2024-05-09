@@ -1,29 +1,23 @@
-// ignore_for_file: avoid_print, unused_import, camel_case_types
 import 'package:azkarapp/auth/page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:azkarapp/fristpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:azkarapp/package/bs.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:azkarapp/secondpage.dart';
-import 'package:azkarapp/forth_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 void printme(int i) {
   i++;
-
-  print("print me plase $i");
 }
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<Homepage> createState() => _HomepageState();
 }
 
-class _homepageState extends State<homepage> {
+class _HomepageState extends State<Homepage> {
   TextEditingController tec = TextEditingController();
 
   bool status = false;
@@ -265,8 +259,8 @@ class _homepageState extends State<homepage> {
                               leading: IconButton(
                                 onPressed: () {
                                   index.isEven
-                                      ? print("android")
-                                      : print("apple");
+                                      ? const Text("android")
+                                      : const Text("apple");
                                 },
                                 icon: index.isEven
                                     ? const Icon(Icons.android)
@@ -284,14 +278,12 @@ class _homepageState extends State<homepage> {
                                         setState(() {
                                           status = statu;
                                         });
-                                        print(statu);
                                       },
                                     )
                                   : Checkbox(
                                       value: check,
                                       onChanged: (value) => setState(() {
                                         check = value!;
-                                        print(check);
                                       }),
                                     ),
                               onTap: () => printme(index),
@@ -333,7 +325,6 @@ class _homepageState extends State<homepage> {
                             style: const TextStyle(
                                 fontSize: 10.0, fontWeight: FontWeight.bold),
                             controller: text,
-                            onChanged: (value) => print(value),
                             onFieldSubmitted: (value) {},
                             autocorrect: true,
                             autovalidateMode: AutovalidateMode.always,
@@ -364,7 +355,8 @@ class _homepageState extends State<homepage> {
                       return MaterialButton(
                         onPressed: () {
                           showDialog(
-                            context: context, // Provide the context of your widget
+                            context:
+                                context, // Provide the context of your widget
                             builder: (context) {
                               return AlertDialog(
                                 shape: RoundedRectangleBorder(
@@ -393,7 +385,7 @@ class _homepageState extends State<homepage> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => const fristpage()),
+                                builder: (context) => const Fristpage()),
                           );
                         },
                       );
@@ -478,6 +470,9 @@ class _homepageState extends State<homepage> {
             IconButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
+                  GoogleSignIn().currentUser == null
+                      ? null
+                      : GoogleSignIn().disconnect();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
                     return Page1();
@@ -485,14 +480,11 @@ class _homepageState extends State<homepage> {
                 },
                 icon: const Icon(Icons.exit_to_app)),
             PopupMenuButton(
-              onSelected: (value) => print(value),
-              onOpened: () => print("opened"),
               color: Colors.red,
               icon: const Icon(
                 Icons.laptop_mac_outlined,
                 color: Colors.white,
               ),
-              onCanceled: () => print("canceled"),
               itemBuilder: (context) => const [
                 PopupMenuItem(
                   value: "islam1",

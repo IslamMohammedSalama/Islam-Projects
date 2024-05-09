@@ -2,18 +2,41 @@
 
 import 'package:azkarapp/auth/singin.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
+import 'package:azkarapp/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Page1 extends StatelessWidget {
   Page1({super.key});
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
+  Future signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) return;
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
+        key: _formstate,
         child: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(10),
@@ -73,11 +96,33 @@ class Page1 extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Align(
+                  Align(
                     alignment: Alignment.topRight,
-                    child: Text(
-                      "Forget Password ?",
-                      style: TextStyle(color: Colors.blue),
+                    child: InkWell(
+                      onTap: () {
+                        if (email.text.isEmpty) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const AlertDialog(
+                                    title: Text("Error"),
+                                    content: Text(
+                                        "Enter Email and Press forget passweord"),
+                                  ));
+                        } else {
+                          FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
+                          showDialog(
+                              context: context,
+                              builder: (context) => const AlertDialog(
+                                    title: Text("Reset Password"),
+                                    content: Text(
+                                        "Go To Gmail TO Reset The Password"),
+                                  ));
+                        }
+                      },
+                      child: const Text(
+                        "Forget Password ?",
+                        style: TextStyle(color: Colors.blue),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -85,17 +130,40 @@ class Page1 extends StatelessWidget {
                   ),
                   MaterialButton(
                     onPressed: () async {
-                      print("${email.text} => ${password.text}");
-                      try {
-                        final credential = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: email.text, password: password.text);
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
-                        } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
+                      if (_formstate.currentState!.validate()) {
+                        print("${email.text} => ${password.text}");
+                        try {
+                          await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: email.text, password: password.text);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Homepage(),
+                              ),
+                              (route) => false);
+                        } on FirebaseAuthException catch (e) {
+                          print(e.code);
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Error"),
+                              content: Text(e.code),
+                            ),
+                          );
+
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email. ');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          } else if (e.code == 'invalid-email') {
+                            print("inv em");
+                          } else if (e.code == 'user-disabled') {
+                            print('The user account has been disabled.');
+                          }
                         }
+                      } else {
+                        print("not valid");
                       }
                     },
                     color: Colors.blue,
@@ -120,7 +188,11 @@ class Page1 extends StatelessWidget {
                           icon: const Icon(Icons.apple),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await signInWithGoogle();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const Homepage()));
+                          },
                           icon: const Icon(Icons.flutter_dash),
                         )
                       ]),

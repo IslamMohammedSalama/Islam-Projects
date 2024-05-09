@@ -1,20 +1,14 @@
-// ignore_for_file: unused_import, camel_case_types
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
-import 'package:azkarapp/homepage.dart';
-import 'package:flutter/material.dart';
-import 'package:azkarapp/secondpage.dart';
-import 'package:azkarapp/forth_page.dart';
-import 'package:http/http.dart';
 
-class Second_Page extends StatefulWidget {
-  const Second_Page({super.key});
+import 'package:flutter/material.dart';
+
+class SecondPage extends StatefulWidget {
+  const SecondPage({super.key});
 
   @override
-  State<Second_Page> createState() => _Second_PageState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
-class _Second_PageState extends State<Second_Page> {
+class _SecondPageState extends State<SecondPage> {
   bool loading = false;
   List date = [];
   @override
