@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:azkarapp/auth/page.dart';
 import 'package:azkarapp/fristpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -468,11 +470,11 @@ class _HomepageState extends State<Homepage> {
           ),
           actions: [
             IconButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  GoogleSignIn().currentUser == null
-                      ? null
-                      : GoogleSignIn().disconnect();
+                onPressed: () async{
+
+                  GoogleSignIn().currentUser != null
+                      ? GoogleSignIn().disconnect()
+                      : null;                  await FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
                     return Page1();

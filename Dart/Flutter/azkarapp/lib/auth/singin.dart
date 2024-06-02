@@ -5,6 +5,7 @@ import 'package:azkarapp/components/textfromfiled.dart';
 import 'package:azkarapp/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:azkarapp/components/customizedbutton.dart';
 
 class SingIn extends StatelessWidget {
   SingIn({super.key});
@@ -76,48 +77,45 @@ class SingIn extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              MaterialButton(
-                onPressed: () async {
-                  if (_formstate.currentState!.validate()) {                    try {
-                      await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                        email: email.text,
-                        password: password.text,
-                      );  
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Homepage()));
-                    } on FirebaseAuthException catch (e) {
-                      print("sdfas");
-                      if (e.code == 'weak-password') {
-                        print('The password provided is too weak.');
-                        showDialog(
-                            context: context,
-                            builder: (builder) => const AlertDialog(
-                                  title: Text("Error"),
-                                  content: Text(
-                                      "The password provided is too weak."),
-                                ));
-                      } else if (e.code == 'email-already-in-use') {
-                        print('The account already exists for that email.');
-                        showDialog(
-                            context: context,
-                            builder: (builder) => const AlertDialog(
-                                  title: Text("Error"),
-                                  content: Text("Email Already In Use"),
-                                ));
+              CustumizedButton(
+                  Function_to_use: () async {
+                    if (_formstate.currentState!.validate()) {
+                      try {
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: email.text,
+                          password: password.text,
+                        );
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Homepage()));
+                      } on FirebaseAuthException catch (e) {
+                        print("sdfas");
+                        if (e.code == 'weak-password') {
+                          print('The password provided is too weak.');
+                          showDialog(
+                              context: context,
+                              builder: (builder) => const AlertDialog(
+                                    title: Text("Error"),
+                                    content: Text(
+                                        "The password provided is too weak."),
+                                  ));
+                        } else if (e.code == 'email-already-in-use') {
+                          print('The account already exists for that email.');
+                          showDialog(
+                              context: context,
+                              builder: (builder) => const AlertDialog(
+                                    title: Text("Error"),
+                                    content: Text("Email Already In Use"),
+                                  ));
+                        }
+                      } catch (e) {
+                        print(e);
                       }
-                    } catch (e) {
-                      print(e);
                     }
-                  }
-                },
-                color: Colors.cyan,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
-                child: const Text("Register"),
-              ),
+                  },
+                  title: "Register",),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

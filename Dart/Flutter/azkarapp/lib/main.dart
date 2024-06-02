@@ -4,6 +4,7 @@ import 'package:azkarapp/auth/singin.dart';
 import 'package:azkarapp/firebase_options.dart';
 import 'package:azkarapp/homepage.dart';
 import 'package:azkarapp/auth/page.dart';
+import 'package:azkarapp/notehomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:azkarapp/fristpage.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute:
-          FirebaseAuth.instance.currentUser != null ? "page5" : "page1",
+          FirebaseAuth.instance.currentUser != null ? "page6" : "page1",
       theme: ThemeData(
           fontFamily: "Anta",
           appBarTheme: const AppBarTheme(
@@ -67,6 +68,7 @@ class _MyAppState extends State<MyApp> {
         "page4": (context) => const Forthpage(),
         "singin": (context) => SingIn(),
         "page5": (context) => const Homepage(),
+        "page6": (context) => const NoteHomePage(),
       },
       debugShowCheckedModeBanner: false,
       // home:  homepage()

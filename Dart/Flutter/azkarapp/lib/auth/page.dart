@@ -1,10 +1,11 @@
 // ignore_for_file: must_be_immutable, avoid_print, use_build_context_synchronously
 
 import 'package:azkarapp/auth/singin.dart';
+import 'package:azkarapp/components/customizedbutton.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
 import 'package:azkarapp/homepage.dart';
+import 'package:azkarapp/notehomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -128,9 +129,8 @@ class Page1 extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  MaterialButton(
-                    onPressed: () async {
-                      if (_formstate.currentState!.validate()) {
+                   CustumizedButton(Function_to_use: ()async{
+                          if (_formstate.currentState!.validate()) {
                         print("${email.text} => ${password.text}");
                         try {
                           await FirebaseAuth.instance
@@ -165,14 +165,7 @@ class Page1 extends StatelessWidget {
                       } else {
                         print("not valid");
                       }
-                    },
-                    color: Colors.blue,
-                    minWidth: double.infinity,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40)),
-                    height: 50,
-                    child: const Text("Login"),
-                  ),
+  },title: "Login"),
                   const SizedBox(height: 20),
                   const Align(child: Text("Or Login With ")),
                   Row(
@@ -190,8 +183,8 @@ class Page1 extends StatelessWidget {
                         IconButton(
                           onPressed: () async {
                             await signInWithGoogle();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const Homepage()));
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                builder: (context) => const  NoteHomePage()));
                           },
                           icon: const Icon(Icons.flutter_dash),
                         )

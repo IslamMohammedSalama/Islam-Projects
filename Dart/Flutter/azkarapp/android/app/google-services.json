@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "633568819720",
-    "project_id": "myapp-58c25",
-    "storage_bucket": "myapp-58c25.appspot.com"
+    "project_number": "553895322711",
+    "project_id": "iazkarapp",
+    "storage_bucket": "iazkarapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:633568819720:android:27ecf7393d97570684efbd",
+        "mobilesdk_app_id": "1:553895322711:android:33162b7f114d2db32d2f12",
         "android_client_info": {
           "package_name": "com.example.azkarapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD567KNZfHmgFgr2hom8QS5zfnI0qlLxxU"
+          "current_key": "AIzaSyBi-ZJGdLYgjoYnhnx90rNyRK7vcVKa4yA"
         }
       ],
       "services": {
