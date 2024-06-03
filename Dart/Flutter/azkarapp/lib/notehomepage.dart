@@ -51,9 +51,7 @@ class NoteHomePage extends StatelessWidget {
           const SizedBox(width: 10),
           IconButton(
             onPressed: () async {
-              GoogleSignIn().currentUser != null
-                  ? GoogleSignIn().disconnect()
-                  : null;
+              GoogleSignIn().disconnect();
               await FirebaseAuth.instance.signOut();
               Navigator.pushReplacement(
                 context,

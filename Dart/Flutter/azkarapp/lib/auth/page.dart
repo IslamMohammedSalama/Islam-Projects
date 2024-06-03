@@ -8,13 +8,14 @@ import 'package:azkarapp/notehomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quickalert/quickalert.dart';
 
 class Page1 extends StatelessWidget {
   Page1({super.key});
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
-  Future signInWithGoogle() async {
+  Future signInWithGoogle(BuildContext context) async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) return;
@@ -31,6 +32,7 @@ class Page1 extends StatelessWidget {
 
     // Once signed in, return the UserCredential
     await FirebaseAuth.instance.signInWithCredential(credential);
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const NoteHomePage()), (route) => false);
   }
 
   @override
@@ -110,7 +112,8 @@ class Page1 extends StatelessWidget {
                                         "Enter Email and Press forget passweord"),
                                   ));
                         } else {
-                          FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
+                          FirebaseAuth.instance
+                              .sendPasswordResetEmail(email: email.text);
                           showDialog(
                               context: context,
                               builder: (context) => const AlertDialog(
@@ -129,43 +132,73 @@ class Page1 extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                   CustumizedButton(Function_to_use: ()async{
-                          if (_formstate.currentState!.validate()) {
-                        print("${email.text} => ${password.text}");
-                        try {
-                          await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: email.text, password: password.text);
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Homepage(),
-                              ),
-                              (route) => false);
-                        } on FirebaseAuthException catch (e) {
-                          print(e.code);
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text("Error"),
-                              content: Text(e.code),
-                            ),
-                          );
+                  CustumizedButton(
+                      Function_to_use: () async {
+                        if (_formstate.currentState!.validate()) {
+                          print("${email.text} => ${password.text}");
+                          try {
+                            final credential = await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: email.text, password: password.text);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Homepage(),
+                                ),
+                                (route) => false);
+                          } on FirebaseAuthException catch (e) {
+                            print(e.code);
+                            QuickAlert.show(
+                                context: context,
+                                type: QuickAlertType.error,
+                                title: "error",
+                                text: e.code);
 
-                          if (e.code == 'user-not-found') {
-                            print('No user found for that email. ');
-                          } else if (e.code == 'wrong-password') {
-                            print('Wrong password provided for that user.');
-                          } else if (e.code == 'invalid-email') {
-                            print("inv em");
-                          } else if (e.code == 'user-disabled') {
-                            print('The user account has been disabled.');
+                            if (e.code == 'user-not-found') {
+                              print('No user found for that email. ');
+                              QuickAlert.show(
+                                context: context,
+                                title: "Error",
+                                text: "No user found for that email. ",
+                                type: QuickAlertType.error,
+                              );
+                            } else if (e.code == 'wrong-password') {
+                              print('Wrong password provided for that user.');
+                              QuickAlert.show(
+                                context: context,
+                                title: "Error",
+                                text: "Wrong password provided for that user.",
+                                type: QuickAlertType.error,
+                              );
+                            } else if (e.code == 'invalid-email') {
+                              print("invalit email");
+                              QuickAlert.show(
+                                context: context,
+                                title: "Error",
+                                text: "invalit email",
+                                type: QuickAlertType.error,
+                              );
+                            } else if (e.code == 'user-disabled') {
+                              print('The user account has been disabled.');
+                              QuickAlert.show(
+                                context: context,
+                                title: "Error",
+                                text: "The user account has been disabled.",
+                                type: QuickAlertType.error,
+                              );
+                            }
                           }
+                        } else {
+                          print("not valid");
+                          QuickAlert.show(
+                            context: context,
+                            title: "Error",
+                            text: "not valid",
+                            type: QuickAlertType.error,
+                          );
                         }
-                      } else {
-                        print("not valid");
-                      }
-  },title: "Login"),
+                      },
+                      title: "Login"),
                   const SizedBox(height: 20),
                   const Align(child: Text("Or Login With ")),
                   Row(
@@ -182,9 +215,8 @@ class Page1 extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () async {
-                            await signInWithGoogle();
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => const  NoteHomePage()));
+                            await signInWithGoogle(context);
+
                           },
                           icon: const Icon(Icons.flutter_dash),
                         )

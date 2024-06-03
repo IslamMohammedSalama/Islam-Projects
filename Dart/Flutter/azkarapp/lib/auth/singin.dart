@@ -2,10 +2,12 @@
 
 import 'package:azkarapp/auth/page.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
-import 'package:azkarapp/homepage.dart';
+import 'package:azkarapp/notehomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:azkarapp/components/customizedbutton.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class SingIn extends StatelessWidget {
   SingIn({super.key});
@@ -78,44 +80,42 @@ class SingIn extends StatelessWidget {
                 height: 20,
               ),
               CustumizedButton(
-                  Function_to_use: () async {
-                    if (_formstate.currentState!.validate()) {
-                      try {
-                        await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                          email: email.text,
-                          password: password.text,
-                        );
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Homepage()));
-                      } on FirebaseAuthException catch (e) {
-                        print("sdfas");
-                        if (e.code == 'weak-password') {
-                          print('The password provided is too weak.');
-                          showDialog(
-                              context: context,
-                              builder: (builder) => const AlertDialog(
-                                    title: Text("Error"),
-                                    content: Text(
-                                        "The password provided is too weak."),
-                                  ));
-                        } else if (e.code == 'email-already-in-use') {
-                          print('The account already exists for that email.');
-                          showDialog(
-                              context: context,
-                              builder: (builder) => const AlertDialog(
-                                    title: Text("Error"),
-                                    content: Text("Email Already In Use"),
-                                  ));
-                        }
-                      } catch (e) {
-                        print(e);
+                Function_to_use: () async {
+                  if (_formstate.currentState!.validate()) {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                        email: email.text,
+                        password: password.text,
+                      );
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NoteHomePage()));
+                    } on FirebaseAuthException catch (e) {
+                      print(e);
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                        QuickAlert.show(
+                            context: context,
+                            title: "Error",
+                            text: "The password provided is too weak.",
+                            type: QuickAlertType.error);
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                        QuickAlert.show(
+                            context: context,
+                            title: "Error",
+                            text: "The account already exists for that email.",
+                            type: QuickAlertType.error);
                       }
+                    } catch (e) {
+                      print(e);
                     }
-                  },
-                  title: "Register",),
+                  }
+                },
+                title: "Register",
+              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
