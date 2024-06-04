@@ -24,13 +24,15 @@ class _EditNoteeState extends State<EditNote> {
       FirebaseFirestore.instance.collection('categories');
   GlobalKey<FormState> fm = GlobalKey<FormState>();
   
+  
   Future<void> addcategorie(BuildContext context) async {
     // Call the user's CollectionReference to add a new user
     if (fm.currentState!.validate()) {
       try {
-        await categories.doc(widget.docid).update({
+        await categories.doc(widget.docid).set({
           'note_name': namecontroller.text,
-        });
+          'id' : FirebaseAuth.instance.currentUser!.uid
+        },SetOptions(merge: true)); 
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
             // ignore: use_build_context_synchronously
@@ -45,6 +47,12 @@ class _EditNoteeState extends State<EditNote> {
   initState() {
     super.initState();
     namecontroller.text = widget.oldname;
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    namecontroller.dispose();
   }
   @override
   Widget build(BuildContext context) {
