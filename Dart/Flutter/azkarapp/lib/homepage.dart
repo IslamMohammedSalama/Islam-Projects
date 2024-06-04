@@ -477,7 +477,7 @@ class _HomepageState extends State<Homepage> {
                       : null;                  await FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
-                    return Page1();
+                    return const Page1();
                   }));
                 },
                 icon: const Icon(Icons.exit_to_app)),

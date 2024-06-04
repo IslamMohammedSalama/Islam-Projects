@@ -1,1 +1,25 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"iazkarapp","appId":"1:553895322711:android:33162b7f114d2db32d2f12","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"iazkarapp","configurations":{"android":"1:553895322711:android:33162b7f114d2db32d2f12","ios":"1:553895322711:ios:e1b7a554f2bde63f2d2f12","macos":"1:553895322711:ios:e1b7a554f2bde63f2d2f12","web":"1:553895322711:web:ac5a84d25473015b2d2f12","windows":"1:553895322711:web:10d7ddc8de1172882d2f12"}}}}}}
+{
+    "flutter":{
+        "platforms":{
+            "android":{
+                "default":{
+                    "projectId":"iazkarapp",
+                    "appId":"1:553895322711:android:33162b7f114d2db32d2f12"
+                    ,"fileOutput":"android/app/google-services.json"
+                    }
+                    }
+                    ,"dart":{
+                        "lib/firebase_options.dart":{
+                            "projectId":"iazkarapp"
+                            ,"configurations":{
+                                "android":"1:553895322711:android:33162b7f114d2db32d2f12"
+                                ,"ios":"1:553895322711:ios:e1b7a554f2bde63f2d2f12",
+                                "macos":"1:553895322711:ios:e1b7a554f2bde63f2d2f12",
+                                "web":"1:553895322711:web:ac5a84d25473015b2d2f12"
+                                ,"windows":"1:553895322711:web:10d7ddc8de1172882d2f12"
+                    }
+                }
+            }
+        }
+    }
+}

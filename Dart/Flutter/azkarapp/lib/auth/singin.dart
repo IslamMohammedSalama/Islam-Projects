@@ -8,14 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:azkarapp/components/customizedbutton.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+class SingIn extends StatefulWidget {
+  const SingIn({super.key});
 
-class SingIn extends StatelessWidget {
-  SingIn({super.key});
+  @override
+  State<SingIn> createState() => _SingInState();
+}
+
+class _SingInState extends State<SingIn> {
   TextEditingController username = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confpass = TextEditingController();
   final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
+  bool _isloading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +88,8 @@ class SingIn extends StatelessWidget {
               CustumizedButton(
                 Function_to_use: () async {
                   if (_formstate.currentState!.validate()) {
+                    _isloading = true;
+                    setState(() {});
                     try {
                       final credential = await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
@@ -91,7 +99,7 @@ class SingIn extends StatelessWidget {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const NoteHomePage()));
+                              builder: (context) =>  const NoteHomePage()));
                     } on FirebaseAuthException catch (e) {
                       print(e);
                       if (e.code == 'weak-password') {
@@ -101,6 +109,8 @@ class SingIn extends StatelessWidget {
                             title: "Error",
                             text: "The password provided is too weak.",
                             type: QuickAlertType.error);
+                            _isloading = false;
+                            setState(() {});
                       } else if (e.code == 'email-already-in-use') {
                         print('The account already exists for that email.');
                         QuickAlert.show(
@@ -108,13 +118,22 @@ class SingIn extends StatelessWidget {
                             title: "Error",
                             text: "The account already exists for that email.",
                             type: QuickAlertType.error);
+                             _isloading = false;
+                        setState(() {});
                       }
                     } catch (e) {
                       print(e);
                     }
+                     _isloading = false;
+                    setState(() {});
                   }
                 },
-                title: "Register",
+                title: _isloading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ))
+                    : const  Text("Register"),
               ),
               const SizedBox(height: 20),
               Row(
@@ -126,7 +145,7 @@ class SingIn extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Page1()));
+                            MaterialPageRoute(builder: (context) =>const Page1()));
                       },
                       child: const Text(
                         "Login",

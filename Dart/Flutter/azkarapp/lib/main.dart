@@ -62,11 +62,11 @@ class _MyAppState extends State<MyApp> {
           )),
       routes: {
         "pageone": (context) => const Fristpage(),
-        "page1": (context) => Page1(),
+        "page1": (context) =>const  Page1(),
         "pagetwo": (context) => const SecondPage(),
         "page3": (context) => const MyApp(),
         "page4": (context) => const Forthpage(),
-        "singin": (context) => SingIn(),
+        "singin": (context) => const SingIn(),
         "page5": (context) => const Homepage(),
         "page6": (context) => const NoteHomePage(),
       },

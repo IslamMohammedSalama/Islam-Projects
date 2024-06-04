@@ -3,18 +3,23 @@
 import 'package:azkarapp/auth/singin.dart';
 import 'package:azkarapp/components/customizedbutton.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
-import 'package:azkarapp/homepage.dart';
 import 'package:azkarapp/notehomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quickalert/quickalert.dart';
+class Page1 extends StatefulWidget {
+  const Page1({super.key});
 
-class Page1 extends StatelessWidget {
-  Page1({super.key});
+  @override
+  State<Page1> createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
+  bool _isloading = false;
   Future signInWithGoogle(BuildContext context) async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -32,7 +37,7 @@ class Page1 extends StatelessWidget {
 
     // Once signed in, return the UserCredential
     await FirebaseAuth.instance.signInWithCredential(credential);
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const NoteHomePage()), (route) => false);
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>  const NoteHomePage()), (route) => false);
   }
 
   @override
@@ -132,9 +137,11 @@ class Page1 extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  CustumizedButton(
+                   CustumizedButton(
                       Function_to_use: () async {
                         if (_formstate.currentState!.validate()) {
+                          _isloading = true;
+                          setState(() {});
                           print("${email.text} => ${password.text}");
                           try {
                             final credential = await FirebaseAuth.instance
@@ -143,16 +150,11 @@ class Page1 extends StatelessWidget {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const Homepage(),
+                                  builder: (context) =>  const NoteHomePage(),
                                 ),
                                 (route) => false);
                           } on FirebaseAuthException catch (e) {
-                            print(e.code);
-                            QuickAlert.show(
-                                context: context,
-                                type: QuickAlertType.error,
-                                title: "error",
-                                text: e.code);
+                            
 
                             if (e.code == 'user-not-found') {
                               print('No user found for that email. ');
@@ -162,6 +164,8 @@ class Page1 extends StatelessWidget {
                                 text: "No user found for that email. ",
                                 type: QuickAlertType.error,
                               );
+                              _isloading = false;
+                              setState(() {});
                             } else if (e.code == 'wrong-password') {
                               print('Wrong password provided for that user.');
                               QuickAlert.show(
@@ -170,6 +174,8 @@ class Page1 extends StatelessWidget {
                                 text: "Wrong password provided for that user.",
                                 type: QuickAlertType.error,
                               );
+                              _isloading = false;
+                              setState(() {});
                             } else if (e.code == 'invalid-email') {
                               print("invalit email");
                               QuickAlert.show(
@@ -178,6 +184,8 @@ class Page1 extends StatelessWidget {
                                 text: "invalit email",
                                 type: QuickAlertType.error,
                               );
+                              _isloading = false;
+                              setState(() {});
                             } else if (e.code == 'user-disabled') {
                               print('The user account has been disabled.');
                               QuickAlert.show(
@@ -186,6 +194,8 @@ class Page1 extends StatelessWidget {
                                 text: "The user account has been disabled.",
                                 type: QuickAlertType.error,
                               );
+                              _isloading = false;
+                              setState(() {});
                             }
                           }
                         } else {
@@ -196,9 +206,18 @@ class Page1 extends StatelessWidget {
                             text: "not valid",
                             type: QuickAlertType.error,
                           );
+                                                    _isloading = false;setState(() {
+                                                      
+                                                    });
+
                         }
                       },
-                      title: "Login"),
+                      title: _isloading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ))
+                          : const Text ("Login")),
                   const SizedBox(height: 20),
                   const Align(child: Text("Or Login With ")),
                   Row(
@@ -233,7 +252,7 @@ class Page1 extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SingIn()));
+                                    builder: (context) =>const SingIn()));
                           },
                           child: const Text(
                             "Register",

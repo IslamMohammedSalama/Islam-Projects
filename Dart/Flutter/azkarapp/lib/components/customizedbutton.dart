@@ -8,7 +8,7 @@ class CustumizedButton extends StatelessWidget {
       required this.Function_to_use,
       required this.title,});
   VoidCallback? Function_to_use;
-  late String title;
+  late Widget title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class CustumizedButton extends StatelessWidget {
       minWidth: double.infinity,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       height: 50,
-      child: Text(title),
+      child: title,
     );
   }
 }
