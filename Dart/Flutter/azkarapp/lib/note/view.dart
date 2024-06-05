@@ -1,9 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:azkarapp/auth/page.dart';
-import 'package:azkarapp/components/addnote.dart';
- import 'package:azkarapp/components/editnote.dart';
-import 'package:azkarapp/note/view.dart';
+import 'package:azkarapp/note/add.dart';
+import 'package:azkarapp/note/edit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +10,23 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
-class NoteHomePage extends StatefulWidget {
-  const NoteHomePage({super.key});
+class ViewNotes extends StatefulWidget {
+  final String categorieid;
+  const ViewNotes({super.key, required this.categorieid});
 
   @override
-  State<NoteHomePage> createState() => _NoteHomePageState();
+  State<ViewNotes> createState() => _ViewNotesState();
 }
 
 // ignore: must_be_immutable
-class _NoteHomePageState extends State<NoteHomePage> {
+class _ViewNotesState extends State<ViewNotes> {
+
   List data = [];
   bool islooading = true;
   readDate() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection("categories").where('id' , isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("categories").doc(widget.categorieid).collection("note")
+        .get();
     data.addAll(querySnapshot.docs);
     islooading = false;
     setState(() {});
@@ -43,7 +45,7 @@ class _NoteHomePageState extends State<NoteHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const AddNote();
+            return  AddSubNote(subdocid: widget.categorieid,);
           }));
         },
         child: const Icon(Icons.add),
@@ -62,37 +64,33 @@ class _NoteHomePageState extends State<NoteHomePage> {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return  ViewNotes(categorieid: data[index].id,);
-                    }));
-                  },
                   borderRadius: BorderRadius.circular(10),
                   onLongPress: () => QuickAlert.show(
                       context: context,
                       showCancelBtn: true,
-                    
                       type: QuickAlertType.warning,
                       title: "What you want to do?",
                       confirmBtnText: "Edit",
-                      
                       cancelBtnText: "Remove",
-                      
                       confirmBtnColor: Colors.blue,
-                      onCancelBtnTap: () async{                        await FirebaseFirestore.instance
+                      onCancelBtnTap: () async {
+                                  await FirebaseFirestore.instance
                             .collection("categories")
-                            .doc(data[index].id)
-                            .delete();
-                        Navigator.pushAndRemoveUntil(context,
+                            .doc(widget.categorieid).collection("note").doc(data[index].id).delete();
+                        Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
-                          return const NoteHomePage();
-                        }), (route) => false);
-                        
+                          return  ViewNotes(categorieid: widget.categorieid,);
+                        }),);
                       },
-                      onConfirmBtnTap: ()  {
-Navigator.push(context, MaterialPageRoute(builder: (context) {
-  return  EditNote(docid: data[index].id,oldname: data[index]["note_name"],);
-}));
+                      onConfirmBtnTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return EditSubNote(
+                            docid: data[index].id,
+                            oldname: data[index]["note_name"],
+                            categoriid: widget.categorieid,
+                          );
+                        }));
                       }),
                   child: Card(
                     color: Colors.blue,
@@ -101,13 +99,14 @@ Navigator.push(context, MaterialPageRoute(builder: (context) {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Icon(
-                          Icons.folder,
+                          Icons.note,
                           color: Color.fromARGB(255, 65, 65, 65),
                           size: 80,
                         ),
                         Center(
                           child: Text(
-                            data[index]["note_name"],
+                            data[index]["note_name"]
+                            ,
                             style: const TextStyle(fontSize: 25),
                           ),
                         ),
@@ -120,7 +119,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context) {
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
         elevation: 0,
-        actions: [ 
+        actions: [
           const Icon(Icons.search),
           const SizedBox(width: 10),
           const Icon(Icons.more_vert),

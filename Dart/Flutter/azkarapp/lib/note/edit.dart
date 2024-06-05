@@ -2,58 +2,59 @@
 
 import 'package:azkarapp/components/customizedbutton.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
-import 'package:azkarapp/notehomepage.dart';
+import 'package:azkarapp/note/view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class EditNote extends StatefulWidget {
+class EditSubNote extends StatefulWidget {
   String docid;
+  String categoriid;
   final String oldname;
-  EditNote({super.key, required this.docid, required this.oldname});
+  EditSubNote({super.key, required this.docid, required this.oldname, required this.categoriid});
 
   @override
-  State<EditNote> createState() => _EditNoteeState();
+  State<EditSubNote> createState() => _EditSubNoteeState();
 }
 
 // ignore: must_be_immutable
-class _EditNoteeState extends State<EditNote> {
+class _EditSubNoteeState extends State<EditSubNote> {
   TextEditingController namecontroller = TextEditingController();
-  CollectionReference categories =
-      FirebaseFirestore.instance.collection('categories');
+
   GlobalKey<FormState> fm = GlobalKey<FormState>();
-  
-  
-  Future<void> addcategorie(BuildContext context) async {
+
+  Future<void> renamenote(BuildContext context) async {  CollectionReference categories =
+      FirebaseFirestore.instance.collection('categories').doc(widget.categoriid).collection('note');
     // Call the user's CollectionReference to add a new user
     if (fm.currentState!.validate()) {
       try {
         await categories.doc(widget.docid).set({
           'note_name': namecontroller.text,
-          'id' : FirebaseAuth.instance.currentUser!.uid
-        },SetOptions(merge: true)); 
+        }, SetOptions(merge: true));
         // ignore: use_build_context_synchronously
-        Navigator.pushAndRemoveUntil(
+        Navigator.pushReplacement(
             // ignore: use_build_context_synchronously
             context,
-            MaterialPageRoute(builder: (context) => const NoteHomePage()),
-            (route) => false);
+            MaterialPageRoute(builder: (context) =>  ViewNotes(categorieid: widget.categoriid,)),
+            );
       } catch (e) {
         print(e);
       }
     }
   }
+
   @override
   void initState() {
     super.initState();
     namecontroller.text = widget.oldname;
   }
+
   @override
   void dispose() {
     super.dispose();
     namecontroller.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +77,7 @@ class _EditNoteeState extends State<EditNote> {
               ),
               CustumizedButton(
                 Function_to_use: () {
-                  addcategorie(context);
+                  renamenote(context);
                 },
                 title: const Text("Edit Note"),
               )

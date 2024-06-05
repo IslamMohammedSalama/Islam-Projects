@@ -2,42 +2,47 @@
 
 import 'package:azkarapp/components/customizedbutton.dart';
 import 'package:azkarapp/components/textfromfiled.dart';
-import 'package:azkarapp/notehomepage.dart';
+import 'package:azkarapp/note/view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class AddNote extends StatefulWidget {
-  const AddNote({super.key});
+class AddSubNote extends StatefulWidget {
+  final String subdocid;
+  const AddSubNote({super.key, required this.subdocid});
 
   @override
-  State<AddNote> createState() => _AddNoteState();
+  State<AddSubNote> createState() => _AddSubNoteState();
 }
 
-
-
 // ignore: must_be_immutable
-class _AddNoteState extends State<AddNote> {
+class _AddSubNoteState extends State<AddSubNote> {
+  TextEditingController notecontroller = TextEditingController();
 
-  TextEditingController namecontroller = TextEditingController();
-  CollectionReference categories =
-      FirebaseFirestore.instance.collection('categories');
   GlobalKey<FormState> fm = GlobalKey<FormState>();
 
-  Future<void> renamecategorie(BuildContext context) async {
+  Future<void> addnote(BuildContext context) async {  CollectionReference collectionnotes =
+      FirebaseFirestore.instance.collection('categories').doc(widget.subdocid).collection('note');
     // Call the user's CollectionReference to add a new user
     if (fm.currentState!.validate()) {
       try {
-        DocumentReference docRef = await categories.add({
-          'note_name': namecontroller.text, // John Doe
-          'id' : FirebaseAuth.instance.currentUser!.uid
+        DocumentReference docRef = await collectionnotes.add({
+          'note_name': notecontroller.text, // John Doe
         });
         // ignore: use_build_context_synchronously
-        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => const NoteHomePage()), (route) => false);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) =>  ViewNotes(categorieid: widget.subdocid,)),
+            );
       } catch (e) {
         print(e);
       }
     }
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    notecontroller.dispose();
+
   }
 
   @override
@@ -56,14 +61,13 @@ class _AddNoteState extends State<AddNote> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: CustomizedTextField(
-                    controller: namecontroller,
+                    controller: notecontroller,
                     hintText: "Enter Your Note Name",
                     obscureText: false),
               ),
               CustumizedButton(
                 Function_to_use: () {
-                  renamecategorie(context);
-
+                  addnote(context);
                 },
                 title: const Text("Add Note"),
               )
