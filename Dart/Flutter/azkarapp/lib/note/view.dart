@@ -12,7 +12,7 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class ViewNotes extends StatefulWidget {
   final String categorieid;
-  const ViewNotes({super.key, required this.categorieid});
+  const ViewNotes({super.key, required this.categorieid,});
 
   @override
   State<ViewNotes> createState() => _ViewNotesState();
@@ -20,12 +20,13 @@ class ViewNotes extends StatefulWidget {
 
 // ignore: must_be_immutable
 class _ViewNotesState extends State<ViewNotes> {
-
   List data = [];
   bool islooading = true;
   readDate() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("categories").doc(widget.categorieid).collection("note")
+        .collection("categories")
+        .doc(widget.categorieid)
+        .collection("note")
         .get();
     data.addAll(querySnapshot.docs);
     islooading = false;
@@ -45,7 +46,9 @@ class _ViewNotesState extends State<ViewNotes> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return  AddSubNote(subdocid: widget.categorieid,);
+            return AddSubNote(
+              subdocid: widget.categorieid,
+            );
           }));
         },
         child: const Icon(Icons.add),
@@ -74,13 +77,20 @@ class _ViewNotesState extends State<ViewNotes> {
                       cancelBtnText: "Remove",
                       confirmBtnColor: Colors.blue,
                       onCancelBtnTap: () async {
-                                  await FirebaseFirestore.instance
+                        await FirebaseFirestore.instance
                             .collection("categories")
-                            .doc(widget.categorieid).collection("note").doc(data[index].id).delete();
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) {
-                          return  ViewNotes(categorieid: widget.categorieid,);
-                        }),);
+                            .doc(widget.categorieid)
+                            .collection("note")
+                            .doc(data[index].id)
+                            .delete();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return ViewNotes(
+                              categorieid: widget.categorieid,
+                            );
+                          }),
+                        );
                       },
                       onConfirmBtnTap: () {
                         Navigator.push(context,
@@ -105,8 +115,7 @@ class _ViewNotesState extends State<ViewNotes> {
                         ),
                         Center(
                           child: Text(
-                            data[index]["note_name"]
-                            ,
+                            data[index]["note_name"],
                             style: const TextStyle(fontSize: 25),
                           ),
                         ),

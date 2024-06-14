@@ -174,8 +174,7 @@ button = Button(root ,text='get \n information' ,
                 command=lambda : Thread(target=asyncio.run(ruun())).start(),
                 relief=GROOVE,
                 bd=0,foreground='black',background='white',
-                font='arial  16 bold'
-                ,foreground='white',background='black',
+                font='arial 16 bold',
                 border=0,cursor='hand2',)
 button.place(x=690,y=10)
 
