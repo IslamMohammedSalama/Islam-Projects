@@ -39,7 +39,7 @@ player2 = pygame.Rect(play_area.left + 25, play_area.centery - 40, 20, 120)
 # Speeds
 player1_speed = 0
 player2_speed = 0
-all_players_speed = 6
+all_players_speed = 5
 max_all_players_speed = 10
 # Font
 font = pygame.font.Font(None, 74)
@@ -127,6 +127,7 @@ while True:
                 player2_speed -= all_players_speed
             if event.key == pygame.K_s:
                 player2_speed += all_players_speed
+                
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 player1_speed += all_players_speed

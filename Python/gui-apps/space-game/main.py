@@ -94,7 +94,7 @@ class Ship:
             self.lasers.append(laser)
             self.frames_counter = self.FRAMES_BETWEEN_SHOTS
         else:
-            self.frames_counter -= 1.5
+            self.frames_counter -= 1
 
     # get width and height of the ship
     def get_width(self):
@@ -137,7 +137,7 @@ class Laser:
 
 # Player & Enemy Ships ===============================================
 class Player(Ship):
-    def __init__(self, x, y, health=100):
+    def __init__(self, x, y, health=200):
         super().__init__(x, y, health)
         self.ship_img = YELLOW_SPACE_SHIP
         self.laser_img = YELLOW_LASER
@@ -251,7 +251,7 @@ def main():
 
         if len(enemies) == 0:
             level += 1
-            player.health = 100
+            player.health = 200
             wave_length += 5
             for i in range(wave_length):
                 enemy = Enemy(random.randrange(
@@ -272,7 +272,12 @@ def main():
 
         # for shooting:
         if keys[pygame.K_SPACE]:
+            player.shoot() 
+        # Check if mouse button is pressed
+        mouse_pressed = pygame.mouse.get_pressed()
+        if mouse_pressed[0]:  # Left mouse button
             player.shoot()
+
 
         for enemy in enemies[:]:
             enemy.move(enemy_vel)
