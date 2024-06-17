@@ -137,8 +137,10 @@ class Laser:
 
 # Player & Enemy Ships ===============================================
 class Player(Ship):
-    def __init__(self, x, y, health=200):
+    def __init__(self, x, y, health=500):
+
         super().__init__(x, y, health)
+        self.FRAMES_BETWEEN_SHOTS = 15
         self.ship_img = YELLOW_SPACE_SHIP
         self.laser_img = YELLOW_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
@@ -251,7 +253,7 @@ def main():
 
         if len(enemies) == 0:
             level += 1
-            player.health = 200
+            player.health = 300
             wave_length += 5
             for i in range(wave_length):
                 enemy = Enemy(random.randrange(
