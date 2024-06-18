@@ -207,7 +207,7 @@ class Soldier(pygame.sprite.Sprite):
 			self.direction = 1
 
 		#jump
-		if self.jump == True and self.in_air == False:
+		if self.jump == True :# and self.in_air == False:
 			self.vel_y = -15
 			self.jump = False
 			self.in_air = True
@@ -385,7 +385,7 @@ class World():
 						decoration = Decoration(img, x * TILE_SIZE, y * TILE_SIZE)
 						decoration_group.add(decoration)
 					elif tile == 15:#create player
-						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 7, 20, 5,500)
+						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 5,500)
 						health_bar = HealthBar(10, 10, player.health, player.health)
 					elif tile == 16:#create enemies
 						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100)
@@ -516,7 +516,7 @@ class Bullet(pygame.sprite.Sprite):
 		for enemy in enemy_group:
 			if pygame.sprite.spritecollide(enemy, bullet_group, False):
 				if enemy.alive:
-					enemy.health -= 35
+					enemy.health -= 50
 					self.kill()
 
 
@@ -563,7 +563,7 @@ class Grenade(pygame.sprite.Sprite):
 		self.rect.y += dy
 
 		#countdown timer
-		self.timer -= 1
+		self.timer -= 3
 		if self.timer <= 0:
 			self.kill()
 			grenade_fx.play()
@@ -645,7 +645,7 @@ death_fade = ScreenFade(2, PINK, 4)
 #create buttons
 start_button = button.Button(SCREEN_WIDTH // 2 - 130, SCREEN_HEIGHT // 2 - 150, start_img, 1)
 exit_button = button.Button(SCREEN_WIDTH // 2 - 110, SCREEN_HEIGHT // 2 + 50, exit_img, 1)
-restart_button = button.Button(SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 - 50, restart_img, 2)
+restart_button = button.Button(SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 - 50, restart_img,2)
 
 #create sprite groups
 enemy_group = pygame.sprite.Group()
@@ -763,7 +763,12 @@ while run:
 				start_intro = True
 				level += 1
 				bg_scroll = 0
+
 				world_data = reset_level()
+				for row in range(ROWS):
+					r = [-1] * COLS
+					world_data.append(r)
+				# world_data = reset_level()
 				if level <= MAX_LEVELS:
 					#load in level data and create world
 					with open(f'level{level}_data.csv', newline='') as csvfile:
@@ -801,7 +806,7 @@ while run:
 				moving_left = True
 			if event.key == pygame.K_d:
 				moving_right = True
-			if event.key == pygame.K_SPACE:
+			if event.key == pygame.K_SPACE :
 				shoot = True
 			if event.key == pygame.K_q:
 				grenade = True
