@@ -26,7 +26,7 @@ paddle = pygame.Rect(350, 550, paddle_width, paddle_height)
 ball_size = 15
 ball_speed = [5, -5]
 ball = pygame.Rect(395, 540, ball_size, ball_size)
-
+max_ball_speed = [10,-10]
 # Set up the bricks
 brick_width = 70
 brick_height = 20
@@ -35,6 +35,7 @@ brick_offset_x = 35  # Offset from the left edge
 brick_offset_y = 45  # Offset from the top edge
 
 special_brick = None
+add_score = 10
 
 def create_bricks(level):
     global special_brick
@@ -92,6 +93,9 @@ def game_over_screen():
                 if event.button == 1:
                     waiting = False
                     return True
+            if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
     return False
 
 def level_up_screen():
@@ -118,10 +122,13 @@ def level_up_screen():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     waiting = False
+            if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
 
 # Main game loop
 def main():
-    global score, lives, level, ball_speed, ball, paddle, special_brick
+    global score, lives, level, ball_speed, ball, paddle, special_brick , paddle_speed , add_score
 
     score = 0
     lives = 5
@@ -146,7 +153,9 @@ def main():
             paddle.left -= paddle_speed
         if keys[pygame.K_RIGHT] and paddle.right < screen.get_width():
             paddle.left += paddle_speed
-
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit()
         # Move the ball
         ball.left += ball_speed[0]
         ball.top += ball_speed[1]
@@ -163,41 +172,49 @@ def main():
         for brick in bricks[:]:
             if brick.colliderect(paddle):
                 bricks.remove(brick)
-                score += 10  # Increase score for each brick hit
+                score += add_score  # Increase score for each brick hit
                 if brick == special_brick:
                     lives = 5  # Reset lives to 5
+                    score += add_score  * 50
             if ball.colliderect(brick):
                 ball_speed[1] = -ball_speed[1]
                 bricks.remove(brick)
-                score += 10  # Increase score for each brick hit
+                score += add_score  # Increase score for each brick hit
                 if brick == special_brick:
                     lives = 5  # Reset lives to 5
+                    score += add_score  * 50
 
         # Check for level completion
         if not bricks:
             level_up_screen()  # waiting...Press SPACE to Continue or Quit
-            lives = 5
-            ball_speed = [ball_speed[0] + 2, ball_speed[1] + 2]
-
             level += 1
+            # ball_speed = [ball_speed[0] + 1, ball_speed[1] + 1]  # Increase ball speed
+            paddle_speed += 1
+            add_score = add_score * level
             bricks = create_bricks(level)  # Start new level
             # Reset ball & paddle positions and directions
             ball.left = 395
             ball.top = 540
-            ball_speed = [5, -5]
+            ball_speed = [abs(ball_speed[0] ) , -abs(ball_speed[1])]  # Ensure the ball moves up initially
+            if ball_speed != max_ball_speed:
+                ball_speed = [ball_speed[0] + 1, ball_speed[1] - 1]
+                print(ball_speed)
             paddle.left = 350
+            lives = 5
 
         # Check for game over
         if ball.top >= screen.get_height():
             lives -= 1  # Decrease lives
             if lives == 0:
+                add_score = 10
                 running = False  # End game if no lives left
+                
             else:
                 # Reset ball and paddle position
-                ball.left = 395
+                ball.center = paddle.center
                 ball.top = 540
-                ball_speed = [5, -5]
-                paddle.left = 350
+                ball_speed = [abs(ball_speed[0] ) , -abs(ball_speed[1])]  # Ensure the ball moves up initially
+                # paddle.left = 350
 
         # Fill the screen with black
         screen.fill(BLACK)
@@ -234,3 +251,4 @@ def main():
 
 main()
 pygame.quit()
+sys.exit()
