@@ -385,7 +385,7 @@ class World():
 						decoration = Decoration(img, x * TILE_SIZE, y * TILE_SIZE)
 						decoration_group.add(decoration)
 					elif tile == 15:#create player
-						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 5,500)
+						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 1000,500)
 						health_bar = HealthBar(10, 10, player.health, player.health)
 					elif tile == 16:#create enemies
 						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100)
@@ -502,16 +502,18 @@ class Bullet(pygame.sprite.Sprite):
 		self.rect.x += (self.direction * self.speed) + screen_scroll
 		#check if bullet has gone off screen
 		if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
-			self.kill()
+				# self.direction = self.direction * -1
+				self.kill()
+
 		#check for collision with level
 		for tile in world.obstacle_list:
 			if tile[1].colliderect(self.rect):
+				# self.direction = self.direction * -1
 				self.kill()
-
 		#check collision with characters
 		if pygame.sprite.spritecollide(player, bullet_group, False):
 			if player.alive:
-				player.health -= 5
+				player.health -= 50
 				self.kill()
 		for enemy in enemy_group:
 			if pygame.sprite.spritecollide(enemy, bullet_group, False):
@@ -563,20 +565,31 @@ class Grenade(pygame.sprite.Sprite):
 		self.rect.y += dy
 
 		#countdown timer
-		self.timer -= 3
-		if self.timer <= 0:
-			self.kill()
+		self.timer -= 4
+		if   self.timer <= 0:
+			# self.kill()
 			grenade_fx.play()
+			self.direction = self.direction * 1
 			explosion = Explosion(self.rect.x, self.rect.y, 0.5)
 			explosion_group.add(explosion)
 			#do damage to anyone that is nearby
 			if abs(self.rect.centerx - player.rect.centerx) < TILE_SIZE * 2 and \
 				abs(self.rect.centery - player.rect.centery) < TILE_SIZE * 2:
-				player.health -= 50
+				# player.health -= 50
+				# self.kill()
+				pass
 			for enemy in enemy_group:
 				if abs(self.rect.centerx - enemy.rect.centerx) < TILE_SIZE * 2 and \
 					abs(self.rect.centery - enemy.rect.centery) < TILE_SIZE * 2:
 					enemy.health -= 100
+					# self.kill()
+					#check for collision with level
+			for tile in world.obstacle_list:
+				if tile[1].colliderect(self.rect):
+					self.kill()
+
+			
+		
 
 
 
@@ -593,6 +606,7 @@ class Explosion(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.center = (x, y)
 		self.counter = 0
+
 
 
 	def update(self):
@@ -704,6 +718,9 @@ while run:
 		draw_text('GRENADES: ', font, WHITE, 10, 60)
 		for x in range(player.grenades):
 			screen.blit(grenade_img, (135 + (x * 15), 60))
+		draw_text('GRENADES: ', font, WHITE, 10, 60)
+		for x in range(player.grenades):
+			screen.blit(grenade_img, (135 + (x * 15), 60))
 
 
 		player.update()
@@ -750,6 +767,7 @@ while run:
 				#reduce grenades
 				player.grenades -= 1
 				grenade_thrown = True
+				
 			if player.in_air:
 				player.update_action(2)#2: jump
 			elif moving_left or moving_right:
