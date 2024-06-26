@@ -5,12 +5,14 @@ import random
 import csv
 import button
 
-mixer.init()
+# mixer.init()
 pygame.init()
 
-
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = int(SCREEN_WIDTH * 0.8)
+SCREEN_WIDTH = pygame.display.Info().current_w
+SCREEN_HEIGHT = pygame.display.Info().current_h - 30
+print(f'Screen: {SCREEN_WIDTH}x{SCREEN_HEIGHT}')
+# SCREEN_WIDTH = 1250
+# SCREEN_HEIGHT = int(SCREEN_WIDTH * 0.6)
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Shooter')
@@ -33,7 +35,6 @@ level = 1
 start_game = False
 start_intro = False
 
-
 #define player action variables
 moving_left = False
 moving_right = False
@@ -46,12 +47,12 @@ grenade_thrown = False
 #pygame.mixer.music.load('audio/music2.mp3')
 #pygame.mixer.music.set_volume(0.3)
 #pygame.mixer.music.play(-1, 0.0, 5000)
-jump_fx = pygame.mixer.Sound('audio/jump.wav')
-jump_fx.set_volume(0.05)
-shot_fx = pygame.mixer.Sound('audio/shot.wav')
-shot_fx.set_volume(0.05)
-grenade_fx = pygame.mixer.Sound('audio/grenade.wav')
-grenade_fx.set_volume(0.05)
+# jump_fx = pygame.mixer.Sound('audio/jump.wav')
+# jump_fx.set_volume(0.05)
+# shot_fx = pygame.mixer.Sound('audio/shot.wav')
+# shot_fx.set_volume(0.05)
+# grenade_fx = pygame.mixer.Sound('audio/grenade.wav')
+# grenade_fx.set_volume(0.05)
 
 
 #load images
@@ -208,7 +209,7 @@ class Soldier(pygame.sprite.Sprite):
 
 		#jump
 		if self.jump == True :# and self.in_air == False:
-			self.vel_y = -15
+			self.vel_y = -20
 			self.jump = False
 			self.in_air = True
 
@@ -281,7 +282,7 @@ class Soldier(pygame.sprite.Sprite):
 			bullet_group.add(bullet)
 			#reduce ammo
 			self.ammo -= 1
-			shot_fx.play()
+			# shot_fx.play()
 
 
 	def ai(self):
@@ -385,7 +386,7 @@ class World():
 						decoration = Decoration(img, x * TILE_SIZE, y * TILE_SIZE)
 						decoration_group.add(decoration)
 					elif tile == 15:#create player
-						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 1000,500)
+						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 5,500)
 						health_bar = HealthBar(10, 10, player.health, player.health)
 					elif tile == 16:#create enemies
 						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100)
@@ -513,12 +514,14 @@ class Bullet(pygame.sprite.Sprite):
 		#check collision with characters
 		if pygame.sprite.spritecollide(player, bullet_group, False):
 			if player.alive:
-				player.health -= 50
+				player.health -= 25
+				# self.direction = self.direction * -1
 				self.kill()
 		for enemy in enemy_group:
 			if pygame.sprite.spritecollide(enemy, bullet_group, False):
 				if enemy.alive:
 					enemy.health -= 50
+					# self.direction = self.direction * -1
 					self.kill()
 
 
@@ -527,8 +530,8 @@ class Grenade(pygame.sprite.Sprite):
 	def __init__(self, x, y, direction):
 		pygame.sprite.Sprite.__init__(self)
 		self.timer = 100
-		self.vel_y = -11
-		self.speed = 7
+		self.vel_y = -12.5
+		self.speed = 8
 		self.image = grenade_img
 		self.rect = self.image.get_rect()
 		self.rect.center = (x, y)
@@ -565,18 +568,18 @@ class Grenade(pygame.sprite.Sprite):
 		self.rect.y += dy
 
 		#countdown timer
-		self.timer -= 4
+		self.timer -= 5
 		if   self.timer <= 0:
 			# self.kill()
-			grenade_fx.play()
+			# grenade_fx.play()
 			self.direction = self.direction * 1
 			explosion = Explosion(self.rect.x, self.rect.y, 0.5)
 			explosion_group.add(explosion)
 			#do damage to anyone that is nearby
 			if abs(self.rect.centerx - player.rect.centerx) < TILE_SIZE * 2 and \
 				abs(self.rect.centery - player.rect.centery) < TILE_SIZE * 2:
-				# player.health -= 50
-				# self.kill()
+				player.health -= 50
+				self.kill()
 				pass
 			for enemy in enemy_group:
 				if abs(self.rect.centerx - enemy.rect.centerx) < TILE_SIZE * 2 and \
@@ -587,6 +590,7 @@ class Grenade(pygame.sprite.Sprite):
 			for tile in world.obstacle_list:
 				if tile[1].colliderect(self.rect):
 					self.kill()
+					# pass
 
 			
 		
@@ -692,7 +696,7 @@ player, health_bar = world.process_data(world_data)
 run = True
 while run:
 
-	clock.tick(FPS)
+	clock.tick(pygame.time.Clock().get_fps())
 
 	if start_game == False:
 		#draw menu
@@ -720,7 +724,7 @@ while run:
 			screen.blit(grenade_img, (135 + (x * 15), 60))
 		draw_text('GRENADES: ', font, WHITE, 10, 60)
 		for x in range(player.grenades):
-			screen.blit(grenade_img, (135 + (x * 15), 60))
+			screen.blit(grenade_img, (135 + (x * 15), 60))		
 
 
 		player.update()
@@ -830,7 +834,7 @@ while run:
 				grenade = True
 			if event.key == pygame.K_w and player.alive:
 				player.jump = True
-				jump_fx.play()
+				# jump_fx.play()
 			if event.key == pygame.K_ESCAPE:
 				run = False
 			if event.key == pygame.K_LEFT:
@@ -839,7 +843,7 @@ while run:
 				moving_right = True
 			if event.key == pygame.K_UP:
 				player.jump = True
-				jump_fx.play()
+				# jump_fx.play()
 
 
 		#keyboard button released
