@@ -211,11 +211,12 @@ def main():
     wave_length = 5
     enemy_vel = 1
 
-    player_vel = 5
+    player_vel = 20
     laser_vel = 5
 
-    player = Player(250, 450)
-
+    player = Player(250, 450,health=1000)
+    # print(player.health)
+# 
     clock = pygame.time.Clock()
 
     lost = False
@@ -240,6 +241,7 @@ def main():
     while run:
         clock.tick(FPS)
         redraw_window()
+        # print(player.health)
 
         if lives <= 0 or player.health <= 0:
             lost = True
@@ -253,7 +255,7 @@ def main():
 
         if len(enemies) == 0:
             level += 1
-            player.health = 300
+            player.health = 1000
             wave_length += 5
             for i in range(wave_length):
                 enemy = Enemy(random.randrange(
