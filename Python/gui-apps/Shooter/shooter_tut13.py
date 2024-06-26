@@ -208,8 +208,8 @@ class Soldier(pygame.sprite.Sprite):
 			self.direction = 1
 
 		#jump
-		if self.jump == True :# and self.in_air == False:
-			self.vel_y = -20
+		if self.jump == True and self.in_air == False:
+			self.vel_y = -15
 			self.jump = False
 			self.in_air = True
 
@@ -568,7 +568,7 @@ class Grenade(pygame.sprite.Sprite):
 		self.rect.y += dy
 
 		#countdown timer
-		self.timer -= 5
+		self.timer -= 3
 		if   self.timer <= 0:
 			# self.kill()
 			# grenade_fx.play()
