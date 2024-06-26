@@ -501,10 +501,6 @@ class Bullet(pygame.sprite.Sprite):
 	def update(self):
 		#move bullet
 		self.rect.x += (self.direction * self.speed) + screen_scroll
-		#check if bullet has gone off screen
-		if self.rect.right < 0 or self.rect.left > SCREEN_WIDTH:
-				# self.direction = self.direction * -1
-				self.kill()
 
 		#check for collision with level
 		for tile in world.obstacle_list:
