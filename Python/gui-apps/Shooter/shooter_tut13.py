@@ -384,29 +384,36 @@ class World():
 					img_rect.x = x * TILE_SIZE
 					img_rect.y = y * TILE_SIZE
 					tile_data = (img, img_rect)
+					if tile == random.choice([9,11,12,13,14,17,18,19]) and random.choice([True,False,True]):
+						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+						item_box_group.add(item_box)
 					if tile >= 0 and tile <= 8:
 						self.obstacle_list.append(tile_data)
+						# item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+						# item_box_group.add(item_box)
 					elif tile >= 9 and tile <= 10:
 						water = Water(img, x * TILE_SIZE, y * TILE_SIZE)
 						water_group.add(water)
 					elif tile >= 11 and tile <= 14:
 						decoration = Decoration(img, x * TILE_SIZE, y * TILE_SIZE)
 						decoration_group.add(decoration)
+						# item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+						# item_box_group.add(item_box)
 					elif tile == 15:#create player
 						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 5,500,5)
 						health_bar = HealthBar(10, 10, player.health, player.health)
 					elif tile == 16:#create enemies
 						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100,0)
 						enemy_group.add(enemy)
-					elif tile == 17:#create ammo box
-						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
-						item_box_group.add(item_box)
-					elif tile == 18:#create grenade box
-						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
-						item_box_group.add(item_box)
-					elif tile == 19:#create health box
-						item_box =random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
-						item_box_group.add(item_box)
+					# elif tile == 17:#create ammo box
+					# 	item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+					# 	item_box_group.add(item_box)
+					# elif tile == 18:#create grenade box
+					# 	item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+					# 	item_box_group.add(item_box)
+					# elif tile == 19:#create health box
+					# 	item_box =random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+					# 	item_box_group.add(item_box)
 					elif tile == 20:#create exit
 						exit = Exit(img, x * TILE_SIZE, y * TILE_SIZE)
 						exit_group.add(exit)
@@ -525,7 +532,7 @@ class Bullet(pygame.sprite.Sprite):
 		for enemy in enemy_group:
 			if pygame.sprite.spritecollide(enemy, bullet_group, False):
 				if enemy.alive:
-					enemy.health -= 50
+					enemy.health -= 25
 					# self.direction = self.direction * -1
 					self.kill()
 
