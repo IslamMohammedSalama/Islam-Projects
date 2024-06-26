@@ -208,7 +208,7 @@ class Soldier(pygame.sprite.Sprite):
 			self.direction = 1
 
 		#jump
-		if self.jump == True and self.in_air == False:
+		if self.jump == True: #  and self.in_air == False:
 			self.vel_y = -15
 			self.jump = False
 			self.in_air = True
