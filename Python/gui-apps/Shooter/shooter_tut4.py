@@ -58,6 +58,8 @@ class Soldier(pygame.sprite.Sprite):
 		self.frame_index = 0
 		self.action = 0
 		self.update_time = pygame.time.get_ticks()
+		self.killed_message_printed = False  # Flag to track if kill message printed
+
 		
 		#load all images for the players
 		animation_types = ['Idle', 'Run', 'Jump', 'Death']
@@ -165,6 +167,10 @@ class Soldier(pygame.sprite.Sprite):
 			self.speed = 0
 			self.alive = False
 			self.update_action(3)
+			if not self.killed_message_printed:  # Check if message not printed
+				print(f"Enemy killed!")
+				self.killed_message_printed = True  # Set flag to True after printing
+
 
 
 	def draw(self):

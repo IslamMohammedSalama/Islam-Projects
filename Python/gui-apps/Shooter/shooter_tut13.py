@@ -34,7 +34,10 @@ bg_scroll = 0
 level = 1
 start_game = False
 start_intro = False
-
+enemy_lenth = 0
+player_speed = 10
+null_exit_img = pygame.image.load('img/tile/20-2.png').convert_alpha()
+exit_img = pygame.image.load('img/tile/20.png').convert_alpha()
 #define player action variables
 moving_left = False
 moving_right = False
@@ -85,11 +88,13 @@ health_box_img = pygame.image.load('img/icons/health_box.png').convert_alpha()
 ammo_box_img = pygame.image.load('img/icons/ammo_box.png').convert_alpha()
 grenade_box_img = pygame.image.load('img/icons/grenade_box.png').convert_alpha()
 fire_box_img = pygame.image.load('img/icons/fire_box.png').convert_alpha()
+speeder_box_img = pygame.image.load('img/icons/speeder_box.png').convert_alpha()
 item_boxes = {
 	'Health'	: health_box_img,
 	'Ammo'		: ammo_box_img,
 	'Grenade'	: grenade_box_img,
-	'Fire'	: fire_box_img
+	'Fire'	: fire_box_img,
+	'Speeder' : speeder_box_img
 }
 
 
@@ -169,6 +174,7 @@ class Soldier(pygame.sprite.Sprite):
 		self.vision = pygame.Rect(0, 0, 150, 20)
 		self.idling = False
 		self.idling_counter = 0
+		self.killed = False
 		
 		#load all images for the players
 		animation_types = ['Idle', 'Run', 'Jump', 'Death']
@@ -215,11 +221,14 @@ class Soldier(pygame.sprite.Sprite):
 			self.direction = 1
 
 		#jump
-		if self.jump == True: #  and self.in_air == False:
-			self.vel_y = -20
-			self.jump = False
-			self.in_air = True
+		if self.jump == True and self.in_air == False:
 
+			if self.rect.top + dy > SCREEN_HEIGHT  :
+				dy = 0
+			else : 
+				self.vel_y = -(player_speed + 5 if player_speed != 20 else player_speed)
+				self.jump = False
+				self.in_air = True
 		#apply gravity
 		self.vel_y += GRAVITY
 		if self.vel_y > 10:
@@ -234,6 +243,7 @@ class Soldier(pygame.sprite.Sprite):
 				#if the ai has hit a wall then make it turn around
 				if self.char_type == 'enemy':
 					self.direction *= -1
+					# self.vel_y = -20
 					self.move_counter = 0
 			#check for collision in the y direction
 			if tile[1].colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
@@ -241,6 +251,8 @@ class Soldier(pygame.sprite.Sprite):
 				if self.vel_y < 0:
 					self.vel_y = 0
 					dy = tile[1].bottom - self.rect.top
+					# Add this line to make the player fall when hitting the ceiling
+					
 				#check if above the ground, i.e. falling
 				elif self.vel_y >= 0:
 					self.vel_y = 0
@@ -266,6 +278,9 @@ class Soldier(pygame.sprite.Sprite):
 		if self.char_type == 'player':
 			if self.rect.left + dx < 0 or self.rect.right + dx > SCREEN_WIDTH:
 				dx = 0
+			if self.rect.top + dy < 0 or self.rect.bottom + dy < 0 > SCREEN_HEIGHT  :
+				dy = 0
+
 
 		#update rectangle position
 		self.rect.x += dx
@@ -358,11 +373,15 @@ class Soldier(pygame.sprite.Sprite):
 
 
 	def check_alive(self):
+		global enemy_lenth
 		if self.health <= 0:
 			self.health = 0
 			self.speed = 0
 			self.alive = False
 			self.update_action(3)
+			if not self.killed and self.char_type == 'enemy':
+				enemy_lenth -= 1
+				self.killed = True
 
 
 	def draw(self):
@@ -374,6 +393,7 @@ class World():
 		self.obstacle_list = []
 
 	def process_data(self, data):
+		global enemy_lenth
 		self.level_length = len(data[0])
 		#iterate through each value in level data file
 		for y, row in enumerate(data):
@@ -384,12 +404,18 @@ class World():
 					img_rect.x = x * TILE_SIZE
 					img_rect.y = y * TILE_SIZE
 					tile_data = (img, img_rect)
-					if tile == random.choice([9,11,12,13,14,17,18,19]) and random.choice([True,False,True]):
-						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+					# if True:
+					# 	enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100,0)
+					# 	enemy_group.add(enemy)
+					if tile == random.choice([9,11,12,13,14,17,18,19,11,12,13,14,]):#  and random.choice([True,False]):
+						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
 						item_box_group.add(item_box)
+						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100,0)
+						enemy_group.add(enemy)
+						enemy_lenth += 1
 					if tile >= 0 and tile <= 8:
 						self.obstacle_list.append(tile_data)
-						# item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+						# item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
 						# item_box_group.add(item_box)
 					elif tile >= 9 and tile <= 10:
 						water = Water(img, x * TILE_SIZE, y * TILE_SIZE)
@@ -397,25 +423,27 @@ class World():
 					elif tile >= 11 and tile <= 14:
 						decoration = Decoration(img, x * TILE_SIZE, y * TILE_SIZE)
 						decoration_group.add(decoration)
-						# item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
+						# item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
 						# item_box_group.add(item_box)
 					elif tile == 15:#create player
-						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 5,500,5)
+						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 2, player_speed, 20, 5,1000,5) # 1.65
 						health_bar = HealthBar(10, 10, player.health, player.health)
-					elif tile == 16:#create enemies
+					elif tile == random.choice([16,11,12,13,14,0,1,2,3,4,5,6,7,8]) or tile == 16 or tile == 0:#create enemies
 						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100,0)
 						enemy_group.add(enemy)
-					# elif tile == 17:#create ammo box
-					# 	item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
-					# 	item_box_group.add(item_box)
-					# elif tile == 18:#create grenade box
-					# 	item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
-					# 	item_box_group.add(item_box)
-					# elif tile == 19:#create health box
-					# 	item_box =random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE)]) 
-					# 	item_box_group.add(item_box)
+						enemy_lenth += 1
+					
+					elif tile == 17:#create ammo box
+						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
+						item_box_group.add(item_box)
+					elif tile == 18:#create grenade box
+						item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
+						item_box_group.add(item_box)
+					elif tile == 19:#create health box
+						item_box =random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
+						item_box_group.add(item_box)
 					elif tile == 20:#create exit
-						exit = Exit(img, x * TILE_SIZE, y * TILE_SIZE)
+						exit = Exit(img if enemy_lenth == 0 else  null_exit_img, x * TILE_SIZE, y * TILE_SIZE)
 						exit_group.add(exit)
 
 		return player, health_bar
@@ -469,6 +497,7 @@ class ItemBox(pygame.sprite.Sprite):
 
 
 	def update(self):
+		global player_speed
 		#scroll
 		self.rect.x += screen_scroll
 		#check if the player has picked up the box
@@ -484,7 +513,10 @@ class ItemBox(pygame.sprite.Sprite):
 				player.grenades += 3
 			elif self.item_type == 'Fire':
 				player.fires += 3
-							#delete the item box
+			elif self.item_type == 'Speeder':
+				player_speed += 5
+				player.speed = player_speed
+			#delete the item box
 			self.kill()
 
 
@@ -532,7 +564,7 @@ class Bullet(pygame.sprite.Sprite):
 		for enemy in enemy_group:
 			if pygame.sprite.spritecollide(enemy, bullet_group, False):
 				if enemy.alive:
-					enemy.health -= 25
+					enemy.health -= 20
 					# self.direction = self.direction * -1
 					self.kill()
 
@@ -667,6 +699,7 @@ class Fire(pygame.sprite.Sprite):
 		for tile in world.obstacle_list:
 			#check collision with walls
 			if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
+				self.kill()
 				self.direction *= -1
 				dx = self.direction * self.speed
 			#check for collision in the y direction
@@ -810,6 +843,8 @@ while run:
 		draw_text('FIRES: ', font, WHITE, 10, 80)
 		for x in range(player.fires):
 			screen.blit(fire_img, (85 + (x * 15), 80))
+		draw_text(f'ENEMEYS: {enemy_lenth}', font, WHITE, 10, 100)
+		
 
 		player.update()
 		player.draw()
@@ -873,9 +908,10 @@ while run:
 			screen_scroll, level_complete = player.move(moving_left, moving_right)
 			bg_scroll -= screen_scroll
 			#check if player has completed the level
-			if level_complete:
+			if level_complete and enemy_lenth == 0:
 				start_intro = True
 				level += 1
+				enemy_lenth = 0
 				bg_scroll = 0
 
 				world_data = reset_level()
@@ -962,7 +998,10 @@ while run:
 			if event.key == pygame.K_UP:
 				player.jump = False
 
-
+	if enemy_lenth == 0 :
+		null_exit_img = exit_img
+	else:
+		null_exit_img = pygame.image.load('img/tile/20-2.png').convert_alpha()
 	pygame.display.update()
 
 pygame.quit()
