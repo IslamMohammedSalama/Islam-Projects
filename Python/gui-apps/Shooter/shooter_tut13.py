@@ -16,7 +16,6 @@ print(f'Screen: {SCREEN_WIDTH}x{SCREEN_HEIGHT}')
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Shooter')
-
 #set framerate
 clock = pygame.time.Clock()
 FPS = 60
@@ -36,8 +35,9 @@ start_game = False
 start_intro = False
 enemy_lenth = 0
 player_speed = 10
-null_exit_img = pygame.image.load('img/tile/20-2.png').convert_alpha()
-exit_img = pygame.image.load('img/tile/20.png').convert_alpha()
+null_exit_imag = pygame.image.load('img/tile/20-2.png').convert_alpha()
+exit_imag = pygame.image.load('img/tile/20.png').convert_alpha()
+currnt_exit_image = null_exit_imag
 #define player action variables
 moving_left = False
 moving_right = False
@@ -97,7 +97,7 @@ item_boxes = {
 	'Speeder' : speeder_box_img
 }
 
-
+text_of_task = 'Kill All Enemies To Open The Next Level '
 #define colours
 BG = (144, 201, 120)
 RED = (255, 0, 0)
@@ -226,7 +226,7 @@ class Soldier(pygame.sprite.Sprite):
 			if self.rect.top + dy > SCREEN_HEIGHT  :
 				dy = 0
 			else : 
-				self.vel_y = -(player_speed + 5 if player_speed != 20 else player_speed)
+				self.vel_y = -(player_speed + 5 if player_speed <= 20 else player_speed)
 				self.jump = False
 				self.in_air = True
 		#apply gravity
@@ -243,6 +243,7 @@ class Soldier(pygame.sprite.Sprite):
 				#if the ai has hit a wall then make it turn around
 				if self.char_type == 'enemy':
 					self.direction *= -1
+
 					# self.vel_y = -20
 					self.move_counter = 0
 			#check for collision in the y direction
@@ -250,14 +251,15 @@ class Soldier(pygame.sprite.Sprite):
 				#check if below the ground, i.e. jumping
 				if self.vel_y < 0:
 					self.vel_y = 0
-					dy = tile[1].bottom - self.rect.top
+					dy = tile[1].bottom - self.rect.top 
+					
 					# Add this line to make the player fall when hitting the ceiling
 					
 				#check if above the ground, i.e. falling
 				elif self.vel_y >= 0:
 					self.vel_y = 0
 					self.in_air = False
-					dy = tile[1].top - self.rect.bottom
+					dy = tile[1].top - self.rect.bottom 
 
 
 		#check for collision with water
@@ -278,8 +280,10 @@ class Soldier(pygame.sprite.Sprite):
 		if self.char_type == 'player':
 			if self.rect.left + dx < 0 or self.rect.right + dx > SCREEN_WIDTH:
 				dx = 0
-			if self.rect.top + dy < 0 or self.rect.bottom + dy < 0 > SCREEN_HEIGHT  :
-				dy = 0
+		if self.rect.top + dy < 0 or self.rect.bottom + dy < 0 > SCREEN_HEIGHT  :
+			# dy = 0
+			self.vel_y = 0
+			dy = self.vel_y
 
 
 		#update rectangle position
@@ -428,7 +432,7 @@ class World():
 					elif tile == 15:#create player
 						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 2, player_speed, 20, 5,1000,5) # 1.65
 						health_bar = HealthBar(10, 10, player.health, player.health)
-					elif tile == random.choice([16,11,12,13,14,0,1,2,3,4,5,6,7,8]) or tile == 16 or tile == 0:#create enemies
+					elif tile == random.choice([16,11,12,13,14, 0,1,2,3,4,5,6,7,8]) or tile == 16 or tile == 0:#create enemies
 						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100,0)
 						enemy_group.add(enemy)
 						enemy_lenth += 1
@@ -443,7 +447,7 @@ class World():
 						item_box =random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)]) 
 						item_box_group.add(item_box)
 					elif tile == 20:#create exit
-						exit = Exit(img if enemy_lenth == 0 else  null_exit_img, x * TILE_SIZE, y * TILE_SIZE)
+						exit = Exit(currnt_exit_image, x * TILE_SIZE, y * TILE_SIZE)
 						exit_group.add(exit)
 
 		return player, health_bar
@@ -478,13 +482,23 @@ class Water(pygame.sprite.Sprite):
 
 class Exit(pygame.sprite.Sprite):
 	def __init__(self, img, x, y):
-		pygame.sprite.Sprite.__init__(self)
+		super().__init__()
 		self.image = img
 		self.rect = self.image.get_rect()
 		self.rect.midtop = (x + TILE_SIZE // 2, y + (TILE_SIZE - self.image.get_height()))
+		self.image_changed = False
 
 	def update(self):
+		global currnt_exit_image
 		self.rect.x += screen_scroll
+		if enemy_lenth == 0 and not self.image_changed:
+			currnt_exit_image = exit_imag
+			self.image_changed = True
+		elif enemy_lenth != 0 and self.image_changed:
+			currnt_exit_image = null_exit_imag
+			self.image_changed = False
+		self.image = currnt_exit_image
+
 
 
 class ItemBox(pygame.sprite.Sprite):
@@ -769,8 +783,8 @@ class ScreenFade():
 
 
 #create screen fades
-intro_fade = ScreenFade(1, BLACK, 4)
-death_fade = ScreenFade(2, PINK, 4)
+intro_fade = ScreenFade(1, BLACK, 15)
+death_fade = ScreenFade(2, PINK,15)
 
 
 #create buttons
@@ -811,6 +825,7 @@ run = True
 while run:
 
 	clock.tick(pygame.time.Clock().get_fps())
+	
 
 	if start_game == False:
 		#draw menu
@@ -844,6 +859,8 @@ while run:
 		for x in range(player.fires):
 			screen.blit(fire_img, (85 + (x * 15), 80))
 		draw_text(f'ENEMEYS: {enemy_lenth}', font, WHITE, 10, 100)
+		draw_text(f'LEVEL: {level}', font, WHITE, 10, 120)
+		draw_text(text_of_task, font, WHITE, SCREEN_WIDTH // 3, 15)
 		
 
 		player.update()
@@ -997,11 +1014,15 @@ while run:
 				moving_right = False
 			if event.key == pygame.K_UP:
 				player.jump = False
+		if enemy_lenth == 0 and level != MAX_LEVELS :
+			text_of_task = 'Go To New Level Indicator to Continue '
+		elif enemy_lenth != 0 and level == MAX_LEVELS :
+			text_of_task = 'Kill All Enemies To Complate The Game '
+		elif enemy_lenth == 0 and level == MAX_LEVELS :
+			text_of_task = 'You Have Completed The Game '
+		else:
+			text_of_task = 'Kill All Enemies To Open The Next Level '
 
-	if enemy_lenth == 0 :
-		null_exit_img = exit_img
-	else:
-		null_exit_img = pygame.image.load('img/tile/20-2.png').convert_alpha()
 	pygame.display.update()
 
 pygame.quit()
