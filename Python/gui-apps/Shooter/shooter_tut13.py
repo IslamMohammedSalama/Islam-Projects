@@ -1026,3 +1026,4 @@ while run:
 	pygame.display.update()
 
 pygame.quit()
+print('exited')
