@@ -27,10 +27,10 @@ ROWS = 16
 COLS = 150
 TILE_SIZE = SCREEN_HEIGHT // ROWS
 TILE_TYPES = 21
-MAX_LEVELS = 4
+MAX_LEVELS = 6
 screen_scroll = 0
 bg_scroll = 0
-level = 1
+level = 5
 start_game = False
 start_intro = False
 enemy_lenth = 0
@@ -394,7 +394,7 @@ class World():
     def __init__(self):
         self.obstacle_list = []
 
-    def process_data(self, data):
+    def process_data(self, data,ammo_count,grenade_count,fire_count):
         global enemy_lenth
         self.level_length = len(data[0])
         # iterate through each value in level data file
@@ -433,7 +433,7 @@ class World():
                         # item_box_group.add(item_box)
                     elif tile == 15:  # create player
                         player = Soldier(
-                            'player', x * TILE_SIZE, y * TILE_SIZE, 2, player_speed, 20, 5, 1000, 5)  # 1.65
+                            'player', x * TILE_SIZE, y * TILE_SIZE, 1.5, player_speed, ammo_count, grenade_count, 1000, fire_count)  # 1.65
                         health_bar = HealthBar(
                             100, 10, player.health, player.health)
                     # create enemies
@@ -835,7 +835,7 @@ with open(f'level{level}_data.csv', newline='') as csvfile:
         for y, tile in enumerate(row):
             world_data[x][y] = int(tile)
 world = World()
-player, health_bar = world.process_data(world_data)
+player, health_bar = world.process_data(world_data,20,5,5)
 
 run = True
 while run:
@@ -945,6 +945,7 @@ while run:
             if level_complete and enemy_lenth == 0:
                 start_intro = True
                 level += 1
+                player_speed = player_speed // 2 + 3
                 enemy_lenth = 0
                 bg_scroll = 0
                 currnt_exit_image = null_exit_imag
@@ -962,7 +963,7 @@ while run:
                             for y, tile in enumerate(row):
                                 world_data[x][y] = int(tile)
                     world = World()
-                    player, health_bar = world.process_data(world_data)
+                    player, health_bar = world.process_data(world_data,player.ammo + 10,player.grenades + 5,player.fires+5)
         else:
             screen_scroll = 0
             if death_fade.fade():
@@ -970,6 +971,7 @@ while run:
                     death_fade.fade_counter = 0
                     start_intro = True
                     bg_scroll = 0
+                    player_speed = player_speed // 2 + 3
                     currnt_exit_image = null_exit_imag
                     world_data = reset_level()
                     # load in level data and create world
@@ -979,7 +981,7 @@ while run:
                             for y, tile in enumerate(row):
                                 world_data[x][y] = int(tile)
                     world = World()
-                    player, health_bar = world.process_data(world_data)
+                    player, health_bar = world.process_data(world_data,20,5,5)
 
     for event in pygame.event.get():
         # quit game
