@@ -30,7 +30,7 @@ TILE_TYPES = 21
 MAX_LEVELS = 6
 screen_scroll = 0
 bg_scroll = 0
-level = 5
+level = 1
 start_game = False
 start_intro = False
 enemy_lenth = 0
@@ -433,7 +433,7 @@ class World():
                         # item_box_group.add(item_box)
                     elif tile == 15:  # create player
                         player = Soldier(
-                            'player', x * TILE_SIZE, y * TILE_SIZE, 1.5, player_speed, ammo_count, grenade_count, 1000, fire_count)  # 1.65
+                            'player', x * TILE_SIZE, y * TILE_SIZE, 1.65, player_speed, ammo_count, grenade_count, 1000, fire_count)  # 1.65
                         health_bar = HealthBar(
                             100, 10, player.health, player.health)
                     # create enemies
