@@ -28,6 +28,7 @@ COLS = 150
 TILE_SIZE = SCREEN_HEIGHT // ROWS
 TILE_TYPES = 21
 MAX_LEVELS = 6
+
 screen_scroll = 0
 bg_scroll = 0
 level = 1
@@ -99,7 +100,7 @@ item_boxes = {
 }
 
 text_of_task = 'Kill All Enemies To Open The Next Level '
-# define colours
+# define colors
 BG = (144, 201, 120)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
@@ -164,7 +165,7 @@ class Soldier(pygame.sprite.Sprite):
         self.grenades = grenades
         self.fires = fires
         self.health = health
-        self.max_health = self.health
+        self.MAX_HEALTH = self.health
         self.direction = 1
         self.vel_y = 0
         self.jump = False
@@ -180,6 +181,8 @@ class Soldier(pygame.sprite.Sprite):
         self.idling = False
         self.idling_counter = 0
         self.killed = False
+        self.MAX_AMMOS , self.MAX_GRENADES , self.MAX_FIRES = 125,80,60
+
 
         # load all images for the players
         animation_types = ['Idle', 'Run', 'Jump', 'Death']
@@ -208,7 +211,7 @@ class Soldier(pygame.sprite.Sprite):
         self.check_alive()
         # update cooldown
         if self.shoot_cooldown > 0:
-            self.shoot_cooldown -= 1
+            self.shoot_cooldown -= 4
 
     def move(self, moving_left, moving_right):
         # reset movement variables
@@ -433,9 +436,9 @@ class World():
                         # item_box_group.add(item_box)
                     elif tile == 15:  # create player
                         player = Soldier(
-                            'player', x * TILE_SIZE, y * TILE_SIZE, 1.65, player_speed, ammo_count, grenade_count, 1000, fire_count)  # 1.65
+                            'player', x * TILE_SIZE, y * TILE_SIZE, 1.65, player_speed, ammo_count, grenade_count, 2500, fire_count)  # 1.65
                         health_bar = HealthBar(
-                            100, 10, player.health, player.health)
+                            220, 10, player.health, player.health)
                     # create enemies
                     elif tile == random.choice([16, 11, 12, 13, 14, 0, 1, 2, 3, 4, 5, 6, 7, 8]) or tile == 16 or tile == 0:
                         enemy = Soldier('enemy', x * TILE_SIZE,
@@ -532,15 +535,40 @@ class ItemBox(pygame.sprite.Sprite):
         if pygame.sprite.collide_rect(self, player):
             # check what kind of box it was
             if self.item_type == 'Health':
-                player.health += 100
-                if player.health > player.max_health:
-                    player.health = player.max_health
+                player.health += 500
+                if player.health > player.MAX_HEALTH:
+                    player.health = player.MAX_HEALTH
             elif self.item_type == 'Ammo':
+                # print('ammo 1')
+                # if  player.ammo > player.MAX_AMMOS:
+                #     player.ammo = player.MAX_AMMOS
+
+                #     print('ammo 2')
+                # else :
                 player.ammo += 15
+                if  player.ammo > player.MAX_AMMOS:
+                    player.ammo = player.MAX_AMMOS
+                # print('ammo 3')
             elif self.item_type == 'Grenade':
+                # print('grenade 1')
+                # if  player.grenades > player.MAX_GRENADES:
+                #     player.grenades = player.MAX_GRENADES
+                #     print('grenade 2')
+                # else :
                 player.grenades += 3
+                if  player.grenades > player.MAX_GRENADES:
+                    player.grenades = player.MAX_GRENADES
+                    # print('grenade 3')
             elif self.item_type == 'Fire':
+                # print('fire 1')
+                # if  player.fires > player.MAX_FIRES:
+                #     player.fires = player.MAX_FIRES
+                #     print('fire 2')
+                # else :
                 player.fires += 3
+                if  player.fires > player.MAX_FIRES:
+                    player.fires = player.MAX_FIRES
+                # print('fire 3')
             elif self.item_type == 'Speeder':
                 player_speed += 5
                 player.speed = player_speed
@@ -773,9 +801,9 @@ class Fire(pygame.sprite.Sprite):
 
 
 class ScreenFade():
-    def __init__(self, direction, colour, speed):
+    def __init__(self, direction, color, speed):
         self.direction = direction
-        self.colour = colour
+        self.color = color
         self.speed = speed
         self.fade_counter = 0
 
@@ -784,15 +812,15 @@ class ScreenFade():
         self.fade_counter += self.speed
         if self.direction == 1:  # whole screen fade
             pygame.draw.rect(
-                screen, self.colour, (0 - self.fade_counter, 0, SCREEN_WIDTH // 2, SCREEN_HEIGHT))
-            pygame.draw.rect(screen, self.colour, (SCREEN_WIDTH //
+                screen, self.color, (0 - self.fade_counter, 0, SCREEN_WIDTH // 2, SCREEN_HEIGHT))
+            pygame.draw.rect(screen, self.color, (SCREEN_WIDTH //
                              2 + self.fade_counter, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
-            pygame.draw.rect(screen, self.colour, (0, 0 -
+            pygame.draw.rect(screen, self.color, (0, 0 -
                              self.fade_counter, SCREEN_WIDTH, SCREEN_HEIGHT // 2))
-            pygame.draw.rect(screen, self.colour, (0, SCREEN_HEIGHT //
+            pygame.draw.rect(screen, self.color, (0, SCREEN_HEIGHT //
                              2 + self.fade_counter, SCREEN_WIDTH, SCREEN_HEIGHT))
         if self.direction == 2:  # vertical screen fade down
-            pygame.draw.rect(screen, self.colour,
+            pygame.draw.rect(screen, self.color,
                              (0, 0, SCREEN_WIDTH, 0 + self.fade_counter))
         if self.fade_counter >= SCREEN_WIDTH:
             fade_complete = True
@@ -857,24 +885,21 @@ while run:
         # draw world map
         world.draw()
         # show player health
-        draw_text('HEALTH: ', font, WHITE, 10, 10)
+        draw_text(f'HEALTH: {player.health}/{player.MAX_HEALTH} , ', font, WHITE, 10, 10)
 
         health_bar.draw(player.health)
         # show ammo
-        draw_text('AMMO: ', font, WHITE, 10, 35)
+        draw_text(f'AMMO: {player.ammo}/{player.MAX_AMMOS} , ', font, WHITE, 10, 35)
         for x in range(player.ammo):
-            screen.blit(bullet_img, (90 + (x * 10), 40))
+            screen.blit(bullet_img, (170 + (x * 10), 40))
         # show grenades
-        draw_text('GRENADES: ', font, WHITE, 10, 60)
+        draw_text(f'GRENADES: {player.grenades}/{player.MAX_GRENADES} , ', font, WHITE, 10, 60)
         for x in range(player.grenades):
-            screen.blit(grenade_img, (135 + (x * 15), 60))
-        draw_text('GRENADES: ', font, WHITE, 10, 60)
-        for x in range(player.grenades):
-            screen.blit(grenade_img, (135 + (x * 15), 60))
-        # show grenades
-        draw_text('FIRES: ', font, WHITE, 10, 80)
+            screen.blit(grenade_img, (200 + (x * 15), 60))
+        # show fires
+        draw_text(f'FIRES: {player.fires}/{player.MAX_FIRES} , ', font, WHITE, 10, 80)
         for x in range(player.fires):
-            screen.blit(fire_img, (85 + (x * 15), 80))
+            screen.blit(fire_img, (140 + (x * 15), 80))
         draw_text(f'ENEMEYS: {enemy_lenth}', font, WHITE, 10, 100)
         draw_text(f'LEVEL: {level}', font, WHITE, 10, 120)
         draw_text(text_of_task, font, RED if enemy_lenth !=

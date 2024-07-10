@@ -47,7 +47,7 @@ save_img = pygame.image.load('img/save_btn.png').convert_alpha()
 load_img = pygame.image.load('img/load_btn.png').convert_alpha()
 
 
-#define colours
+#define colors
 GREEN = (144, 201, 120)
 WHITE = (255, 255, 255)
 RED = (200, 25, 25)
