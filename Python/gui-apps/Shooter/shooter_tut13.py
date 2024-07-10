@@ -863,7 +863,7 @@ with open(f'level{level}_data.csv', newline='') as csvfile:
         for y, tile in enumerate(row):
             world_data[x][y] = int(tile)
 world = World()
-player, health_bar = world.process_data(world_data,125,80,60)
+player, health_bar = world.process_data(world_data,25,5,5)
 
 run = True
 while run:
