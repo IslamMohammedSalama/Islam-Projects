@@ -863,7 +863,7 @@ with open(f'level{level}_data.csv', newline='') as csvfile:
         for y, tile in enumerate(row):
             world_data[x][y] = int(tile)
 world = World()
-player, health_bar = world.process_data(world_data,20,5,5)
+player, health_bar = world.process_data(world_data,125,80,60)
 
 run = True
 while run:
@@ -891,15 +891,15 @@ while run:
         # show ammo
         draw_text(f'AMMO: {player.ammo}/{player.MAX_AMMOS} , ', font, WHITE, 10, 35)
         for x in range(player.ammo):
-            screen.blit(bullet_img, (170 + (x * 10), 40))
+            screen.blit(bullet_img, (175 + (x * 10), 40))
         # show grenades
         draw_text(f'GRENADES: {player.grenades}/{player.MAX_GRENADES} , ', font, WHITE, 10, 60)
         for x in range(player.grenades):
-            screen.blit(grenade_img, (200 + (x * 15), 60))
+            screen.blit(grenade_img, (205 + (x * 15), 60))
         # show fires
         draw_text(f'FIRES: {player.fires}/{player.MAX_FIRES} , ', font, WHITE, 10, 80)
         for x in range(player.fires):
-            screen.blit(fire_img, (140 + (x * 15), 80))
+            screen.blit(fire_img, (145 + (x * 15), 80))
         draw_text(f'ENEMEYS: {enemy_lenth}', font, WHITE, 10, 100)
         draw_text(f'LEVEL: {level}', font, WHITE, 10, 120)
         draw_text(text_of_task, font, RED if enemy_lenth !=
