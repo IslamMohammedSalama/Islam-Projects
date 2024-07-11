@@ -62,9 +62,9 @@ fire_thrown = False
 
 # load images
 # button images
-start_img = pygame.image.load('img/start_btn.png').convert_alpha()
-exit_img = pygame.image.load('img/exit_btn.png').convert_alpha()
-restart_img = pygame.image.load('img/restart_btn.png').convert_alpha()
+start_img = pygame.image.load('img/btns/start_btn.png').convert_alpha()
+exit_img = pygame.image.load('img/btns/exit_btn.png').convert_alpha()
+restart_img = pygame.image.load('img/btns/restart_btn.png').convert_alpha()
 # background
 pine1_img = pygame.image.load('img/background/pine1.png').convert_alpha()
 pine2_img = pygame.image.load('img/background/pine2.png').convert_alpha()
@@ -536,7 +536,7 @@ class ItemBox(pygame.sprite.Sprite):
             # check what kind of box it was
             if self.item_type == 'Health':
                 player.health += 500
-                if player.health > player.MAX_HEALTH:
+                if player.health >= player.MAX_HEALTH:
                     player.health = player.MAX_HEALTH
             elif self.item_type == 'Ammo':
                 # print('ammo 1')
@@ -546,7 +546,7 @@ class ItemBox(pygame.sprite.Sprite):
                 #     print('ammo 2')
                 # else :
                 player.ammo += 15
-                if  player.ammo > player.MAX_AMMOS:
+                if  player.ammo >= player.MAX_AMMOS:
                     player.ammo = player.MAX_AMMOS
                 # print('ammo 3')
             elif self.item_type == 'Grenade':
@@ -556,7 +556,7 @@ class ItemBox(pygame.sprite.Sprite):
                 #     print('grenade 2')
                 # else :
                 player.grenades += 3
-                if  player.grenades > player.MAX_GRENADES:
+                if  player.grenades >= player.MAX_GRENADES:
                     player.grenades = player.MAX_GRENADES
                     # print('grenade 3')
             elif self.item_type == 'Fire':
@@ -566,7 +566,7 @@ class ItemBox(pygame.sprite.Sprite):
                 #     print('fire 2')
                 # else :
                 player.fires += 3
-                if  player.fires > player.MAX_FIRES:
+                if  player.fires >= player.MAX_FIRES:
                     player.fires = player.MAX_FIRES
                 # print('fire 3')
             elif self.item_type == 'Speeder':
@@ -857,7 +857,7 @@ for row in range(ROWS):
     r = [-1] * COLS
     world_data.append(r)
 # load in level data and create world
-with open(f'level{level}_data.csv', newline='') as csvfile:
+with open(f'levels/level{level}_data.csv', newline='') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     for x, row in enumerate(reader):
         for y, tile in enumerate(row):
@@ -982,13 +982,15 @@ while run:
                 # world_data = reset_level()
                 if level <= MAX_LEVELS:
                     # load in level data and create world
-                    with open(f'level{level}_data.csv', newline='') as csvfile:
+                    with open(f'levels/level{level}_data.csv', newline='') as csvfile:
                         reader = csv.reader(csvfile, delimiter=',')
                         for x, row in enumerate(reader):
                             for y, tile in enumerate(row):
                                 world_data[x][y] = int(tile)
                     world = World()
-                    player, health_bar = world.process_data(world_data,player.ammo + 10,player.grenades + 5,player.fires+5)
+                    player, health_bar = world.process_data(world_data,player.ammo + 10 if not player.ammo >= player.MAX_AMMOS else player.MAX_AMMOS
+                                                            ,player.grenades + 5 if not player.grenades >= player.MAX_GRENADES else player.MAX_GRENADES,
+                                                            player.fires + 5 if not player.fires >= player.MAX_FIRES else player.MAX_FIRES)
         else:
             screen_scroll = 0
             if death_fade.fade():
@@ -1000,7 +1002,7 @@ while run:
                     currnt_exit_image = null_exit_imag
                     world_data = reset_level()
                     # load in level data and create world
-                    with open(f'level{level}_data.csv', newline='') as csvfile:
+                    with open(f'levels/level{level}_data.csv', newline='') as csvfile:
                         reader = csv.reader(csvfile, delimiter=',')
                         for x, row in enumerate(reader):
                             for y, tile in enumerate(row):
