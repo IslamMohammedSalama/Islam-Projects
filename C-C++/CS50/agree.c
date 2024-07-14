@@ -12,4 +12,5 @@ int main(void) {
     {
         printf("You Are Not Agreed ! \n");
     }
+    return 0;
 }

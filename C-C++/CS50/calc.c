@@ -19,6 +19,8 @@ float main(void){
     printf("%.4f\n", dev(
                     (float)x,(float)y
                        ));
+    return 0;
+    
 }
 
 

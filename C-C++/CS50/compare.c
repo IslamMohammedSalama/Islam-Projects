@@ -36,4 +36,6 @@ int main(void) {
     else {
         printf("a = b\n");
     }
+    return 0;
+
 }

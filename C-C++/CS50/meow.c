@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <cs50.h>
 
-int main(void){
+void meow(int count, string type);
+int main(void)
+{
     int max_count = get_int("How many meows? ");
     meow(max_count,"for");
     meow(max_count,"while");
