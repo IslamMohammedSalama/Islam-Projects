@@ -4,7 +4,14 @@ body.style.width = '100%';
 body.style.height = '100%';
 body.style.padding = '35px 15px';
 body.style.borderTop = '1px solid #ddd';
-// body.style.margin = "0";
+
+let egypt_flag = document.createElement('img');
+egypt_flag.src = 'images/egypt-flag.svg';
+egypt_flag.style.width = '100%';
+egypt_flag.style.height = '100vh';
+egypt_flag.style.marginTop = "10px"
+
+body.appendChild(egypt_flag);
 
 let container = document.createElement('div');
 
@@ -37,3 +44,4 @@ red.style.borderColor = 'transparent transparent transparent red';
 red.style.borderWidth = '50vh';
 
 container.appendChild(red);
+
