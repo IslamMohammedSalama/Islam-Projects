@@ -295,7 +295,10 @@ nav p {
     width: 330px;
     margin-bottom: 40px;
     cursor: pointer;
-
+}
+.video:hover {
+    background-color: #e5e5e5;
+    border-radius: 12px;
 }
 .thumbnail {
     width: 100%;
