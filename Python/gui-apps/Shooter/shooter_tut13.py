@@ -35,6 +35,7 @@ level = 1
 start_game = False
 start_intro = False
 enemy_lenth = 0
+max_enemey_lenth = 0
 player_speed = 10
 null_exit_imag = pygame.image.load('img/tile/20-2.png').convert_alpha()
 exit_imag = pygame.image.load('img/tile/20.png').convert_alpha()
@@ -398,7 +399,7 @@ class World():
         self.obstacle_list = []
 
     def process_data(self, data,ammo_count,grenade_count,fire_count):
-        global enemy_lenth
+        global enemy_lenth , max_enemey_lenth
         self.level_length = len(data[0])
         # iterate through each value in level data file
         for y, row in enumerate(data):
@@ -413,7 +414,7 @@ class World():
                     # 	enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 2, 20, 0,100,0)
                     # 	enemy_group.add(enemy)
                     # and random.choice([True,False]):
-                    if tile == random.choice([9, 11, 12, 13, 14, 17, 18, 19, 11, 12, 13, 14,]):
+                    if tile == random.choice([11, 12, 13, 14, 17, 18, 19, 11, 12, 13, 14,]):
                         item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox(
                             'Health', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)])
                         item_box_group.add(item_box)
@@ -421,6 +422,7 @@ class World():
                                         y * TILE_SIZE, 1.65, 2, 20, 0, 100, 0)
                         enemy_group.add(enemy)
                         enemy_lenth += 1
+                        max_enemey_lenth = enemy_lenth
                     if tile >= 0 and tile <= 8:
                         self.obstacle_list.append(tile_data)
                         # item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Health', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Grenade', x * TILE_SIZE, y * TILE_SIZE),ItemBox('Speeder', x * TILE_SIZE, y * TILE_SIZE)])
@@ -440,11 +442,13 @@ class World():
                         health_bar = HealthBar(
                             220, 10, player.health, player.health)
                     # create enemies
-                    elif tile == random.choice([16, 11, 12, 13, 14, 0, 1, 2, 3, 4, 5, 6, 7, 8]) or tile == 16 or tile == 0:
+                    elif tile == random.choice([ 11, 12, 13, 14, ]) or tile == 16 :
                         enemy = Soldier('enemy', x * TILE_SIZE,
                                         y * TILE_SIZE, 1.65, 2, 20, 0, 100, 0)
                         enemy_group.add(enemy)
                         enemy_lenth += 1
+                        max_enemey_lenth = enemy_lenth
+
 
                     elif tile == 17:  # create ammo box
                         item_box = random.choice([ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE), ItemBox('Fire', x * TILE_SIZE, y * TILE_SIZE), ItemBox(
@@ -508,11 +512,11 @@ class Exit(pygame.sprite.Sprite):
         global currnt_exit_image
         self.rect.x += screen_scroll
         if enemy_lenth == 0 and not self.image_changed:
-            print('yes')
+            # print('yes')
             currnt_exit_image = exit_imag
             self.image_changed = True
         elif enemy_lenth != 0 and self.image_changed:
-            print('no')
+            # print('no')
             currnt_exit_image = null_exit_imag
             self.image_changed = False
         self.image = currnt_exit_image
@@ -900,8 +904,8 @@ while run:
         draw_text(f'FIRES: {player.fires}/{player.MAX_FIRES} , ', font, WHITE, 10, 80)
         for x in range(player.fires):
             screen.blit(fire_img, (145 + (x * 15), 80))
-        draw_text(f'ENEMEYS: {enemy_lenth}', font, WHITE, 10, 100)
-        draw_text(f'LEVEL: {level}', font, WHITE, 10, 120)
+        draw_text(f'ENEMEYS: {enemy_lenth}/{max_enemey_lenth}', font, WHITE, 10, 100)
+        draw_text(f'LEVEL: {level}/{MAX_LEVELS}', font, WHITE, 10, 120)
         draw_text(text_of_task, font, RED if enemy_lenth !=
                   0 else BLUE, 10, 140)
 
@@ -972,6 +976,7 @@ while run:
                 level += 1
                 player_speed = player_speed // 2 + 3
                 enemy_lenth = 0
+                max_enemey_lenth = 0
                 bg_scroll = 0
                 currnt_exit_image = null_exit_imag
 
