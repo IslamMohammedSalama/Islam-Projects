@@ -186,19 +186,19 @@ class Player(Entity):
         if not self.sliding:
             movement = 10 if y_ray.distance < 5 and not self.rope.can_rope else 5
 
-            if held_keys["w"]:
+            if held_keys["w"] or held_keys["up arrow"]:
                 self.velocity_z += movement * time.dt
             else:
                 self.velocity_z = lerp(self.velocity_z, 0 if y_ray.distance < 5 else 1, time.dt * 3)
-            if held_keys["a"]:
+            if held_keys["a"] or held_keys["left arrow"]:
                 self.velocity_x += movement * time.dt
             else:
                 self.velocity_x = lerp(self.velocity_x, 0 if y_ray.distance < 5 else 1, time.dt * 3)
-            if held_keys["s"]:
+            if held_keys["s"] or held_keys["down arrow"]:
                 self.velocity_z -= movement * time.dt
             else:
                 self.velocity_z = lerp(self.velocity_z, 0 if y_ray.distance < 5 else 1, time.dt * 3)
-            if held_keys["d"]:
+            if held_keys["d"] or held_keys["right arrow"]:
                 self.velocity_x -= movement * time.dt
             else:
                 self.velocity_x = lerp(self.velocity_x, 0 if y_ray.distance < 5 else -1, time.dt * 3)
