@@ -5,6 +5,7 @@ from player import Player
 from enemy import Enemy, BigEnemy
 
 from mainmenu import MainMenu
+import time
 
 from maps import FloatingIslands, DesertedSands, MountainousValley
 
@@ -16,13 +17,34 @@ Text.default_resolution = Text.size * 1080
 app = Ursina()
 window.fullscreen = False
 window.borderless = False
+window.windowed_size = window.size * 0.75
 window.cog_button.disable()
+
+# window.size = window.screen_resolution
+print(f'--------------{window.size}------------')
+
+
 # window.collider_counter.disable()
 # window.entity_counter.disable()
 window.fps_counter.enable()
 window.exit_button.disable()
 
 scene.fog_density = 0.001
+window.size = window.screen_resolution
+
+def toggle_fullscreen():
+    window.fullscreen = not window.fullscreen
+
+
+def toggle_maxmize():
+    if window.size == (1280, 720):
+        window.size = window.screen_resolution
+    else :
+        window.size = (1280, 720)
+
+# Bind the 'f' key to toggle fullscreen
+key_handler = Entity(ignore_paused=True)
+key_handler.input = lambda key: toggle_fullscreen() if key == 'f' else toggle_maxmize() if key == 'm' else None
 
 # Starting new thread for assets
 def load_assets():
