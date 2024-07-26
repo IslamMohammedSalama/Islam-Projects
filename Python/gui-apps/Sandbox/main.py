@@ -79,7 +79,7 @@ player.map = floating_islands
 player.maps = [floating_islands, deserted_sands, mountainous_valley]
 
 # Enemy
-for enemy in range(10):
+for enemy in range(20):
     i = random.randint(0, 2)
     if i == 0:
         e = BigEnemy(player, position = Vec3(random.randint(-50, 50)))

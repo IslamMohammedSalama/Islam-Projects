@@ -14,7 +14,7 @@ def y_dir(y): return -1 if y < 0 else (1 if y > 0 else -1)
 
 
 class Player(Entity):
-    def __init__(self, position, speed=5, jump_height=14):
+    def __init__(self, position, speed=5, jump_height=20):
         super().__init__(
             model="cube",
             position=position,
@@ -34,7 +34,7 @@ class Player(Entity):
         # self.crosshair = Entity(model="quad", color=color.black, parent=camera, rotation_z=45, position=(
         #     0, 0, 1), scale=1, z=100, always_on_top=True,)
         crosshair_texture = load_texture('crosshair.png')
-        
+
         # Create the crosshair entity
         self.crosshair = Entity(model="quad", color=color.black, parent=camera, position=(
             0, 0, 1), scale=5, z=100, always_on_top=True, texture=crosshair_texture)
@@ -101,7 +101,7 @@ class Player(Entity):
         self.healthbar = HealthBar(1000, bar_color=color.hex(
             "#ff1e1e"), roundness=0, y=window.bottom_left[1] + 0.1, scale_y=0.03, scale_x=0.3)
         self.healthbar.text_entity.disable()
-        self.ability_bar = HealthBar(10, bar_color=color.hex(
+        self.ability_bar = HealthBar(50, bar_color=color.hex(
             "#50acff"), roundness=0, position=window.bottom_left + (0.12, 0.05), scale_y=0.007, scale_x=0.2)
         self.ability_bar.text_entity.disable()
         self.ability_bar.animation_duration = 0
@@ -124,8 +124,11 @@ class Player(Entity):
             with open(self.highscore_path, "r") as hs:
                 highscore_file = json.load(hs)
                 self.highscore = highscore_file["highscore"]
+                print("-------------------- 1 ---------")
         except FileNotFoundError:
             with open(self.highscore_path, "w+") as hs:
+                print("-------------------- 2 ---------")
+
                 json.dump({"highscore": 0}, hs, indent=4)
                 self.highscore = 0
 
@@ -281,8 +284,8 @@ class Player(Entity):
         n = clamp(self.ability_bar.value, 0, self.ability_bar.max_value)
         self.ability_bar.bar.scale_x = n / self.ability_bar.max_value
 
-        if not self.using_ability and self.ability_bar.value < 10:
-            self.ability_bar.value += 5 * time.dt
+        if not self.using_ability and self.ability_bar.value < 50:
+            self.ability_bar.value += 7.5 * time.dt
         if self.ability_bar.value <= 0:
             self.rope.rope_pivot.position = self.rope.position
             self.rope.rope.disable()
@@ -369,7 +372,7 @@ class Player(Entity):
         self.velocity_z = 0
         self.health = 1000
         self.healthbar.value = self.health
-        self.ability_bar.value = 10
+        self.ability_bar.value = 50
         self.dead = False
         self.score = 0
         self.score_text.text = self.score
@@ -390,6 +393,7 @@ class Player(Entity):
         if self.score > self.highscore:
             self.highscore = self.score
             with open(self.highscore_path, "w") as hs:
+                print("-------------------- 3 ---------")
                 json.dump({"highscore": int(self.highscore)}, hs, indent=4)
 
     def animate_text(self, text, top=1.2, bottom=0.6):
