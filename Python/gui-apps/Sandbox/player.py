@@ -103,7 +103,7 @@ class Player(Entity):
         self.healthbar = HealthBar(1000, bar_color=color.hex(
             "#ff1e1e"), roundness=0, y=window.bottom_left[1] + 0.1, scale_y=0.03, scale_x=0.3)
         self.healthbar.text_entity.disable()
-        self.ability_bar = HealthBar(50, bar_color=color.hex(
+        self.ability_bar = HealthBar(25, bar_color=color.hex(
             "#50acff"), roundness=0, position=window.bottom_left + (0.12, 0.05), scale_y=0.007, scale_x=0.2)
         self.ability_bar.text_entity.disable()
         self.ability_bar.animation_duration = 0
@@ -286,7 +286,7 @@ class Player(Entity):
         self.ability_bar.bar.scale_x = n / self.ability_bar.max_value
 
         if not self.using_ability and self.ability_bar.value < 25:
-            self.ability_bar.value += 7.5 * time.dt
+            self.ability_bar.value += 10 * time.dt
         if self.ability_bar.value <= 0:
             self.rope.rope_pivot.position = self.rope.position
             self.rope.rope.disable()
