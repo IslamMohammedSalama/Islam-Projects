@@ -137,6 +137,16 @@ class DashAbility(Ability):
                     self.player.using_ability = True
                     invoke(setattr, self.player, "using_ability", False, delay = 2)
                 invoke(setattr, self, "shift_count", 0, delay = 0.2)
+            if key == "tab":
+                self.shift_count += 1
+                if self.shift_count >= 1 and self.player.ability_bar.value >= 10 :
+                    self.player.health += 200 
+                    self.player.ability_bar.value -= 10
+                    self.player.using_ability = True
+                    if self.player.health > self.player.max_health :
+                        self.player.health = 1000
+                    invoke(setattr, self.player,
+                           "using_ability", False, delay=2)
 
 class SlowMotion(Ability):
     def __init__(self, player, enabled = True):

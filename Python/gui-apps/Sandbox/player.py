@@ -98,6 +98,8 @@ class Player(Entity):
         self.enemies = []
 
         # Health
+        self.health = 1000
+        self.max_health = 1000
         self.healthbar = HealthBar(1000, bar_color=color.hex(
             "#ff1e1e"), roundness=0, y=window.bottom_left[1] + 0.1, scale_y=0.03, scale_x=0.3)
         self.healthbar.text_entity.disable()
@@ -106,7 +108,6 @@ class Player(Entity):
         self.ability_bar.text_entity.disable()
         self.ability_bar.animation_duration = 0
 
-        self.health = 1000
         self.using_ability = False
         self.dead = False
 
@@ -285,7 +286,7 @@ class Player(Entity):
         self.ability_bar.bar.scale_x = n / self.ability_bar.max_value
 
         if not self.using_ability and self.ability_bar.value < 50:
-            self.ability_bar.value += 7.5 * time.dt
+            self.ability_bar.value += 10 * time.dt
         if self.ability_bar.value <= 0:
             self.rope.rope_pivot.position = self.rope.position
             self.rope.rope.disable()

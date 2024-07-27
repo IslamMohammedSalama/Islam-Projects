@@ -15,7 +15,7 @@ Text.default_font = "./assets/Roboto.ttf"
 Text.default_resolution = Text.size * 1080
 
 app = Ursina()
-window.fullscreen = False
+window.fullscreen = True
 window.borderless = False
 window.windowed_size = window.size * 0.75
 window.cog_button.disable()

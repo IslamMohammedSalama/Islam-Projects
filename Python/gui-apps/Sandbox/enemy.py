@@ -15,7 +15,7 @@ class Enemy(Entity):
         self.player = player
         self.move_speed = move_speed
         self.health = 2
-        self.damage = 1
+        self.damage = 2
 
         # Pivots
         self.thruster1 = Entity(parent = self, position = (-0.4, -2, 0))
