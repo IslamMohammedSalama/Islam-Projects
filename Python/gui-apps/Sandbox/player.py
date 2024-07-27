@@ -285,8 +285,8 @@ class Player(Entity):
         n = clamp(self.ability_bar.value, 0, self.ability_bar.max_value)
         self.ability_bar.bar.scale_x = n / self.ability_bar.max_value
 
-        if not self.using_ability and self.ability_bar.value < 50:
-            self.ability_bar.value += 10 * time.dt
+        if not self.using_ability and self.ability_bar.value < 25:
+            self.ability_bar.value += 7.5 * time.dt
         if self.ability_bar.value <= 0:
             self.rope.rope_pivot.position = self.rope.position
             self.rope.rope.disable()
@@ -373,7 +373,7 @@ class Player(Entity):
         self.velocity_z = 0
         self.health = 1000
         self.healthbar.value = self.health
-        self.ability_bar.value = 50
+        self.ability_bar.value = 25
         self.dead = False
         self.score = 0
         self.score_text.text = self.score

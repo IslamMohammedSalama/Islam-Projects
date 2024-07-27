@@ -75,5 +75,5 @@ class BigEnemy(Enemy):
 
         self.model = "bigenemy"
         self.cooldown_length = 3
-        self.damage = 2
+        self.damage = 4
         self.health = 4
