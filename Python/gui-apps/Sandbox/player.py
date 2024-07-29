@@ -14,7 +14,7 @@ def y_dir(y): return -1 if y < 0 else (1 if y > 0 else -1)
 
 
 class Player(Entity):
-    def __init__(self, position, speed=5, jump_height=2000):
+    def __init__(self, position, speed=5, jump_height=20):
         super().__init__(
             model="cube",
             position=position,
