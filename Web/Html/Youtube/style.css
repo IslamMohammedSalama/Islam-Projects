@@ -54,7 +54,7 @@ header {
     height: 45px;
     color: black;
     border-radius: 50%;
-    box-shadow: -600px -90px 0 0 currentColor, -575.5px -90px 0 0 currentColor;
+    box-shadow: 240px 0px 0 0 currentColor, 270px 0px 0 0 currentColor;
 }
 
 .shanab::before {
@@ -65,8 +65,8 @@ header {
     height: 30px;
     border-bottom: 45px solid currentColor;
     border-radius: 0 0 0 100%;
-    left: -630px;
-    top: -120px;
+    left: 210px;
+    top: -30px;
     transform: rotate(-40deg);
     transform-origin: right 52.5px;
 }
@@ -79,8 +79,8 @@ header {
     height: 30px;
     border-bottom: 45px solid currentColor;
     border-radius: 0 0 100% 0;
-    left: -555px;
-    top: -120px;
+    left: 292.3px;
+    top: -30px;
     transform: rotate(40deg);
     transform-origin: left 52.5px;
 }
