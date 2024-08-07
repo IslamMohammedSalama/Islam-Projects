@@ -66,8 +66,7 @@ class Rope(Ability):
                     self.player.ability_bar.value -= 3 * time.dt
 
     def input(self, key):
-        if self.ability_enabled:
-            if key == "right mouse down" and self.player.ability_bar.value > 0:
+            if key == "right mouse down" and self.player.ability_bar.value > 0 and held_keys['shift'] or held_keys['control']:
                 rope_ray = raycast(camera.world_position, camera.forward, distance = 100, traverse_target = self.player.map, ignore = [self, camera, ])
                 if rope_ray.hit:
                     self.can_rope = True
@@ -154,6 +153,7 @@ class SlowMotion(Ability):
         
         self.slow_motion = False
         self.start_slow_motion = False
+        self.zoomed = False
         self.vignette = Entity(model = "quad", texture = "vignette.png", parent = camera.ui, scale_x = 2, enabled = False)
     
     def update(self):
@@ -175,6 +175,22 @@ class SlowMotion(Ability):
                 self.shift_count = 0
 
     def input(self, key):
+        if key == "right mouse down" and not held_keys['shift'] :
+            if not self.zoomed :
+                camera.fov = 30
+                self.zoomed = True 
+                self.player.crosshair.scale = 1
+
+            else :
+                if self.zoomed:
+                    camera.fov = 90
+                    self.zoomed = False
+                self.player.crosshair.scale = 4
+        if key == "right mouse up":
+            if self.zoomed :
+                camera.fov = 90
+                self.zoomed = False 
+                self.player.crosshair.scale = 4
         if self.ability_enabled:
             if key == "left shift":
                 self.shift_count += 1

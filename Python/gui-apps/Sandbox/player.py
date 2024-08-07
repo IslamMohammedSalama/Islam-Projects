@@ -37,7 +37,7 @@ class Player(Entity):
 
         # Create the crosshair entity
         self.crosshair = Entity(model="quad", color=color.black, parent=camera, position=(
-            0, 0, 1), scale=5, z=100, always_on_top=True, texture=crosshair_texture)
+            0, 0, 1), scale=4, z=100, always_on_top=True, texture=crosshair_texture)
 
         # Player values
         self.speed = speed
