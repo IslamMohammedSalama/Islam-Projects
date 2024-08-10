@@ -178,7 +178,7 @@ class SlowMotion(Ability):
         if key == "right mouse down" and not held_keys['shift'] :
             if not self.zoomed :
                 camera.animate("fov", 35,
-                                duration=0.125, delay=0, auto_destroy=True)
+                               duration=0.0625, delay=0, auto_destroy=True)
                         
                 # camera.fov = 50
                 self.zoomed = True 
@@ -188,14 +188,14 @@ class SlowMotion(Ability):
                 if self.zoomed:
                     # camera.fov = 100
                     camera.animate("fov", 100,
-                                duration=0.125, delay=0, auto_destroy=True)
+                                   duration=0.0625, delay=0, auto_destroy=True)
                     self.zoomed = False
                     self.player.crosshair.scale = 5
         if key == "right mouse up":
             if self.zoomed :
                 # camera.fov = 100
                 camera.animate("fov", 100,
-                                duration=0.125, delay=0, auto_destroy=True)
+                               duration=0.0625, delay=0, auto_destroy=True)
                 self.zoomed = False 
                 self.player.crosshair.scale = 5
         if self.ability_enabled:

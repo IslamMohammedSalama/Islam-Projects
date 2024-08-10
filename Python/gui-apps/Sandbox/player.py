@@ -68,7 +68,7 @@ class Player(Entity):
         self.movementX = 0
         self.movementZ = 0
 
-        self.mouse_sensitivity = 100
+        self.mouse_sensitivity = 50
 
         # Map
         self.map = None
