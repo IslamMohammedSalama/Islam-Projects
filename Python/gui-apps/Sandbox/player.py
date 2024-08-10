@@ -22,7 +22,18 @@ class Player(Entity):
             visible_self=False,
             rotation_y=-270
         )
-
+        """
+            super().__init__(
+            position=position,
+            model="enemy.obj",
+            texture="level.png",
+            collider="box",
+            origin=(0.50,0,0),
+            scale=(1.3, 1, 1.3),
+            visible_self=True,
+            rotation_y=-270
+        )"""
+        print(self.origin)
         # Camera
         mouse.locked = True
         camera.parent = self
@@ -37,7 +48,7 @@ class Player(Entity):
 
         # Create the crosshair entity
         self.crosshair = Entity(model="quad", color=color.black, parent=camera, position=(
-            0, 0, 1), scale=4, z=100, always_on_top=True, texture=crosshair_texture)
+            0, 0, 1), scale=5, z=100, always_on_top=True, texture=crosshair_texture)
 
         # Player values
         self.speed = speed
@@ -57,7 +68,7 @@ class Player(Entity):
         self.movementX = 0
         self.movementZ = 0
 
-        self.mouse_sensitivity = 50
+        self.mouse_sensitivity = 100
 
         # Map
         self.map = None
@@ -75,6 +86,7 @@ class Player(Entity):
         self.pistol = Pistol(self, True, enabled=False)
         self.minigun = MiniGun(self, True, enabled=False)
         self.rocket_launcher = RocketLauncher(self, True, enabled=False)
+        
 
         self.guns = [self.rifle, self.shotgun, self.pistol,
                      self.minigun, self.rocket_launcher]

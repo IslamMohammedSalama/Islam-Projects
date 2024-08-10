@@ -367,7 +367,7 @@ class Shotgun(Gun):
         self.pos_x = 0.6
         self.pos_y = -0.5
 
-        self.damage = 1
+        self.damage = 4
 
         self.shake_divider = 40
         self.cooldown_length = 0.8

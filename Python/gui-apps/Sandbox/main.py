@@ -5,7 +5,7 @@ from player import Player
 from enemy import Enemy, BigEnemy
 
 from mainmenu import MainMenu
-import time
+# import time
 
 from maps import FloatingIslands, DesertedSands, MountainousValley
 
@@ -13,7 +13,11 @@ from scene_lighting import SceneLighting
 
 Text.default_font = "./assets/Roboto.ttf"
 Text.default_resolution = Text.size * 1080
+# Set the desired frame rate
+target_fps = 60
 
+# Adjust the time.dt value to achieve the target frame rate
+time.dt = 1 / target_fps
 app = Ursina()
 window.fullscreen = True
 window.borderless = False
