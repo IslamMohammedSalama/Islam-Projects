@@ -30,8 +30,7 @@ class Gun(Entity):
         self.started_shooting = False
 
         # Damage
-        self.damage = 1
-
+        self.damage = 2
         # Spring
         self.spring = Spring()
         self.start_spring = False

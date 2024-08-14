@@ -10,7 +10,7 @@ from mainmenu import MainMenu
 from maps import FloatingIslands, DesertedSands, MountainousValley
 
 from scene_lighting import SceneLighting
-
+mouse.locked = False
 Text.default_font = "./assets/Roboto.ttf"
 Text.default_resolution = Text.size * 1080
 # Set the desired frame rate
@@ -25,7 +25,6 @@ window.windowed_size = window.size * 0.75
 window.cog_button.disable()
 
 # window.size = window.screen_resolution
-print(f'--------------{window.size}------------')
 
 
 # window.collider_counter.disable()
