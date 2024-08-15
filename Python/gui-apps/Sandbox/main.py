@@ -14,10 +14,10 @@ mouse.locked = False
 Text.default_font = "./assets/Roboto.ttf"
 Text.default_resolution = Text.size * 1080
 # Set the desired frame rate
-target_fps = 60
+target_fps = 10000
 
 # Adjust the time.dt value to achieve the target frame rate
-time.dt = 1 / target_fps
+time.dt = target_fps
 app = Ursina()
 window.fullscreen = True
 window.borderless = False
@@ -29,6 +29,7 @@ window.cog_button.disable()
 
 # window.collider_counter.disable()
 # window.entity_counter.disable()
+window.fps_counter.scale = (2,2,2)
 window.fps_counter.enable()
 window.exit_button.disable()
 

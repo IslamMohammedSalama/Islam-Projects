@@ -44,10 +44,10 @@ class Gun(Entity):
         self.equipped = equipped
 
         # Audio
-        self.gun_sound = Audio("pistol.wav", False)
-        self.destroyed_enemy = Audio("destroyed.wav", False)
-        self.gun_sound.volume = 0.8
-        self.destroyed_enemy.volume = 0.1
+        # self.gun_sound = Audio("pistol.wav", False)
+        # self.destroyed_enemy = Audio("destroyed.wav", False)
+        # self.gun_sound.volume = 0.8
+        # self.destroyed_enemy.volume = 0.1
 
     def update(self):
         if self.player.enabled:
@@ -84,30 +84,30 @@ class Gun(Entity):
             if self.gun_type == "pistol":
                 Bullet(self, self.tip.world_position)
                 
-                self.gun_sound.clip = "pistol.wav"
-                self.gun_sound.volume = 0.8
-                self.gun_sound.play()
+                # self.gun_sound.clip = "pistol.wav"
+                # self.gun_sound.volume = 0.8
+                # self.gun_sound.play()
 
             elif self.gun_type == "shotgun":
-                for i in range(random.randint(2, 4)):
-                    b = Bullet(self, self.tip.world_position, randomness = 10)
+                # for i in range(random.randint(2, 4)):
+                b = Bullet(self, self.tip.world_position, randomness = 10)
 
-                self.gun_sound.clip = "shotgun.wav"
-                self.gun_sound.volume = 0.8
-                self.gun_sound.play()
+                # self.gun_sound.clip = "shotgun.wav"
+                # self.gun_sound.volume = 0.8
+                # self.gun_sound.play()
             elif self.gun_type == "rifle":
                 Bullet(self, self.tip.world_position)
 
-                self.gun_sound.clip = "rifle.wav"
-                self.gun_sound.volume = 0.8
-                self.gun_sound.play()
+                # self.gun_sound.clip = "rifle.wav"
+                # self.gun_sound.volume = 0.8
+                # self.gun_sound.play()
             elif self.gun_type == "minigun":
                 Bullet(self, self.tip.world_position)
 
                 self.shooting = True
-                self.gun_sound.clip = "minigun.wav"
-                self.gun_sound.volume = 0.8
-                self.gun_sound.play()
+                # self.gun_sound.clip = "minigun.wav"
+                # self.gun_sound.volume = 0.8
+                # self.gun_sound.play()
 
             # Animate the gun
             if self.gun_type == "pistol" or self.gun_type == "shotgun":
@@ -191,7 +191,6 @@ class Bullet(Entity):
         self.hit_player = False
         self.randomness = Vec3(random.randint(-10, 10) * random.randint(-1, 1), random.randint(-10, 10) * random.randint(-1, 1), random.randint(-10, 10) * random.randint(-1, 1)) * Vec3(randomness)
         self.enemy = None
-
         self.trail_thickness = 8
         self.trail = TrailRenderer(self.trail_thickness, trail_colour, color.clear, 5, parent = self)
 
@@ -235,7 +234,7 @@ class Bullet(Entity):
                             self.hovered_point.reset_pos()
                             self.hovered_point.health = 2
                             self.gun.player.shot_enemy()
-                            self.gun.destroyed_enemy.play() 
+                            # self.gun.destroyed_enemy.play() 
                         
                         destroy(self)
                 else:
@@ -326,7 +325,7 @@ class Rocket(Entity):
                                 enemy.reset_pos()
                                 enemy.health = 2
                                 self.gun.player.shot_enemy()
-                                self.gun.destroyed_enemy.play() 
+                                # self.gun.destroyed_enemy.play() 
                     
                     destroy(self)
             else:
@@ -461,8 +460,8 @@ class RocketLauncher(Gun):
             self.player.shake_camera(0.1, self.shake_divider)
             invoke(self.reload, delay = 3)
 
-            self.gun_sound.clip = "rocket_launcher.wav"
-            self.gun_sound.play()
+            # self.gun_sound.clip = "rocket_launcher.wav"
+            # self.gun_sound.play()
 
     def reload(self):
         self.rocket = Rocket(self, (0, 0, 0))

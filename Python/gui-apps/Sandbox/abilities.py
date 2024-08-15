@@ -26,7 +26,7 @@ class Rope(Ability):
         self.below_rope = False
 
         # Audio
-        self.rope_sound = Audio("rope.wav", False)
+        # self.rope_sound = Audio("rope.wav", False)
 
     def update(self):
         if self.ability_enabled:
@@ -74,8 +74,8 @@ class Rope(Ability):
                     self.rope_entity = rope_ray.entity
                     self.rope_pivot.position = rope_point
                     self.rope_position = self.position
-                    self.rope_sound.pitch = random.uniform(0.7, 1)
-                    self.rope_sound.play()
+                    # self.rope_sound.pitch = random.uniform(0.7, 1)
+                    # self.rope_sound.play()
             elif key == "right mouse up":
                 self.rope_pivot.position = self.position
                 if self.can_rope and self.player.ability_bar.value > 0:
@@ -93,18 +93,18 @@ class DashAbility(Ability):
         self.dashing = False
 
         # Audio
-        self.dash_sound = Audio("dash.wav", False)
-        self.dash_sound.volume = 0.8
+        # self.dash_sound = Audio("dash.wav", False)
+        # self.dash_sound.volume = 0.8
 
     def update(self):
         if self.ability_enabled:
             if self.dashing and not held_keys["right mouse"]:
                 if held_keys["a"]:
-                    self.player.animate_position(self.player.position + (camera.left * 40), duration = 0.2, curve = curve.in_out_quad)
+                    self.player.animate_position(self.player.position + (camera.left * 50), duration = 0.2, curve = curve.in_out_quad)
                 elif held_keys["d"]:
-                    self.player.animate_position(self.player.position + (camera.right * 40), duration = 0.2, curve = curve.in_out_quad)
-                else:
-                    self.player.animate_position(self.player.position + (camera.forward * 40), duration = 0.2, curve = curve.in_out_quad)
+                    self.player.animate_position(self.player.position + (camera.right * 50), duration = 0.2, curve = curve.in_out_quad)
+                else :
+                    self.player.animate_position(self.player.position + (camera.forward * 50), duration = 0.2, curve = curve.in_out_quad)
                 
                 camera.animate("fov", 110, duration = 0.2, curve = curve.in_quad)
                 camera.animate("fov", 100, curve = curve.out_quad, delay = 0.2)
@@ -114,7 +114,7 @@ class DashAbility(Ability):
 
                 self.player.shake_camera(0.3, 100)
 
-                self.dash_sound.play()
+                # self.dash_sound.play()
 
                 self.player.movementX = (self.player.forward[0] * self.player.velocity_z + 
                     self.player.left[0] * self.player.velocity_x + 

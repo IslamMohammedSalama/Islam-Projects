@@ -37,7 +37,7 @@ class Player(Entity):
 
         # Create the crosshair entity
         self.crosshair = Entity(model="quad", color=color.black, parent=camera, position=(
-            0, 0, 1), scale=5, z=100, always_on_top=True, texture=crosshair_texture)
+            0, 0, 1), scale=5.5, z=100, always_on_top=True, texture=crosshair_texture)
 
         # Player values
         self.speed = speed
@@ -133,7 +133,7 @@ class Player(Entity):
                 self.highscore = 0
 
         # Audio
-        self.fall_sound = Audio("fall.wav", False)
+        # self.fall_sound = Audio("fall.wav", False)
 
     def jump(self):
         self.jumping = True
@@ -154,7 +154,7 @@ class Player(Entity):
             if not self.grounded:
                 self.velocity_y = 0
                 self.grounded = True
-                self.fall_sound.play()
+                # self.fall_sound.play()
 
             # Check if hitting a wall or steep slope
             if y_dir(self.velocity_y) == -1:
