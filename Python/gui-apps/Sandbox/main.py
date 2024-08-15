@@ -1,6 +1,7 @@
+import multiprocessing.process
 from ursina import *
-from direct.stdpy import thread
-
+# from direct.stdpy import thread
+import multiprocessing , threading
 from player import Player
 from enemy import Enemy, BigEnemy
 
@@ -68,7 +69,10 @@ def load_assets():
         load_texture(t)
 
 try:
-    thread.start_new_thread(function = load_assets, args = "")
+    # thread.start_new_thread(function = load_assets, args = "")
+    tt = threading.Thread(target=load_assets,args=[])
+    tt.start()
+    # tt.join()
 except Exception as e:
     print("error starting thread", e)
 
@@ -104,5 +108,5 @@ def input(key):
 
 # def update():
 #     print(player.position)
-
-app.run()
+if __name__ == "__main__":
+    app.run()
