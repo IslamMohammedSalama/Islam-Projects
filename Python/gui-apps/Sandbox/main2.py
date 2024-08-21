@@ -1016,6 +1016,7 @@ class MainMenu(Entity):
 
             # End Screen
             if self.player.health <= 0:
+                mouse.locked = True
                 self.end_screen.disable()
                 self.enable_end_screen = True
                 self.player.reset()

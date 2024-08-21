@@ -24,15 +24,15 @@ window.fullscreen = True
 window.borderless = False
 window.windowed_size = window.size * 0.75
 window.cog_button.disable()
+# window.cog_button.enable()
 
 # window.size = window.screen_resolution
-
 
 # window.collider_counter.disable()
 # window.entity_counter.disable()
 window.fps_counter.scale = (2,2,2)
 window.fps_counter.enable()
-window.exit_button.disable()
+# window.exit_button.disable()
 
 scene.fog_density = 0.001
 window.size = window.screen_resolution
@@ -63,16 +63,30 @@ def load_assets():
     ]
 
     for i, m in enumerate(models_to_load):
-        load_model(m)
+        # threading.Thread(target=lambda : load_model(m)).start()
+        # multiprocessing.Process(target=lambda : load_model(m)).start()
+
+
+        threading.Thread(
+            target=load_model(m), args=[]).start()
+        # load_model(m)
 
     for i, t in enumerate(textures_to_load):
-        load_texture(t)
+        # threading.Thread(target=lambda:load_texture(t)).start()
+        # multiprocessing.Process(target=lambda:load_texture(t)).start()
+
+        threading.Thread(
+            target=load_texture(t), args=[]).start()
+        # load_texture(t)
 
 try:
     # thread.start_new_thread(function = load_assets, args = "")
-    tt = threading.Thread(target=load_assets,args=[])
+    tt = multiprocessing.Process(target=lambda: threading.Thread(
+        target=load_assets, args=[]), args=[])
+    # tt = threading.Thread(target=load_assets,args=[])
+    # tt = multiprocessing.Process(target=load_assets,args=[])
     tt.start()
-    # tt.join()
+    tt.join()
 except Exception as e:
     print("error starting thread", e)
 
@@ -87,15 +101,19 @@ player.map = floating_islands
 player.maps = [floating_islands, deserted_sands, mountainous_valley]
 
 # Enemy
-for enemy in range(20):
+for enemy in range(15):
     i = random.randint(0, 2)
     if i == 0:
         e = BigEnemy(player, position = Vec3(random.randint(-50, 50)))
     else:
         e = Enemy(player, position = Vec3(random.randint(-50, 50)))
 
-    e.disable()
-    player.enemies.append(e)
+    threading.Thread(target=e.disable).start()
+    
+    threading.Thread(
+        target=lambda:player.enemies.append(e)).start()
+    # e.disable()
+    # player.enemies.append(e)
 
 mainmenu = MainMenu(player, floating_islands, deserted_sands, mountainous_valley)
 

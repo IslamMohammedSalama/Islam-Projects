@@ -106,8 +106,8 @@ class DashAbility(Ability):
                 else :
                     self.player.animate_position(self.player.position + (camera.forward * 50), duration = 0.2, curve = curve.in_out_quad)
                 
-                camera.animate("fov", 110, duration = 0.2, curve = curve.in_quad)
-                camera.animate("fov", 100, curve = curve.out_quad, delay = 0.2)
+                camera.animate("fov", 100, duration = 0.2, curve = curve.in_quad)
+                camera.animate("fov", 120, curve = curve.out_quad, delay = 0.2)
 
                 self.dashing = False
                 self.player.velocity_y = 0
@@ -177,27 +177,36 @@ class SlowMotion(Ability):
     def input(self, key):
         if key == "right mouse down" and not held_keys['shift'] :
             if not self.zoomed :
-                camera.animate("fov", 35,
-                               duration=0.0625, delay=0, auto_destroy=True)
-                        
-                # camera.fov = 50
-                self.zoomed = True 
-                self.player.crosshair.scale = 1.5
+                if held_keys['z'] : 
+                    print('pressed')
+                    camera.animate("fov", 20,
+                                   duration=0.0625, delay=0, auto_destroy=True)
+
+                    # camera.fov = 50
+                    self.zoomed = True
+                    self.player.crosshair.scale = 1
+                else:
+                    camera.animate("fov", 35,
+                                duration=0.0625, delay=0, auto_destroy=True)
+                            
+                    # camera.fov = 50
+                    self.zoomed = True 
+                    self.player.crosshair.scale = 2
 
             else :
                 if self.zoomed:
                     # camera.fov = 100
-                    camera.animate("fov", 110,
+                    camera.animate("fov", 120,
                                    duration=0.0625, delay=0, auto_destroy=True)
                     self.zoomed = False
-                    self.player.crosshair.scale = 5
+                    self.player.crosshair.scale = 10
         if key == "right mouse up":
             if self.zoomed :
                 # camera.fov = 100
-                camera.animate("fov", 110,
+                camera.animate("fov", 120,
                                duration=0.0625, delay=0, auto_destroy=True)
                 self.zoomed = False 
-                self.player.crosshair.scale = 5
+                self.player.crosshair.scale = 10
         if self.ability_enabled:
             if key == "left shift":
                 self.shift_count += 1

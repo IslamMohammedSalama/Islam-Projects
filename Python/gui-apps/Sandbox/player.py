@@ -1,6 +1,6 @@
 from ursina import *
 from ursina import curve
-
+import multiprocessing ,  threading
 from ursina.prefabs.health_bar import HealthBar
 
 from guns import *
@@ -14,7 +14,7 @@ def y_dir(y): return -1 if y < 0 else (1 if y > 0 else -1)
 
 
 class Player(Entity):
-    def __init__(self, position, speed=5, jump_height=20):
+    def __init__(self, position, speed=5, jump_height=25):
         super().__init__(
             model="cube",
             position=position,
@@ -28,7 +28,7 @@ class Player(Entity):
         camera.parent = self
         camera.position = (0, 2, 0)
         camera.rotation = (0, 0, 0)
-        camera.fov = 110
+        camera.fov = 115
 
         # Crosshair
         # self.crosshair = Entity(model="quad", color=color.black, parent=camera, rotation_z=45, position=(
@@ -37,8 +37,7 @@ class Player(Entity):
 
         # Create the crosshair entity
         self.crosshair = Entity(model="quad", color=color.black, parent=camera, position=(
-            0, 0, 1), scale=5.5, z=100, always_on_top=True, texture=crosshair_texture)
-
+            0, 0, 1), scale=10, z=100, always_on_top=True, texture=crosshair_texture)
         # Player values
         self.speed = speed
         self.jump_count = 0
@@ -57,7 +56,7 @@ class Player(Entity):
         self.movementX = 0
         self.movementZ = 0
 
-        self.mouse_sensitivity = 50
+        self.mouse_sensitivity = 100
 
         # Map
         self.map = None
@@ -342,17 +341,22 @@ class Player(Entity):
             self.current_gun = (self.current_gun - 1) % len(self.guns)
             for i, gun in enumerate(self.guns):
                 if i == self.current_gun:
-                    gun.enable()
+                    threading.Thread(target=gun.enable).start()
+                    # gun.enable()
+                    
                 else:
-                    gun.disable()
+                    threading.Thread(target=gun.disable).start()
+                    # gun.disable()
 
         if key == "scroll down":
             self.current_gun = (self.current_gun + 1) % len(self.guns)
             for i, gun in enumerate(self.guns):
                 if i == self.current_gun:
-                    gun.enable()
+                    threading.Thread(target=gun.enable).start()
+                    # gun.enable()
                 else:
-                    gun.disable()
+                    threading.Thread(target=gun.disable).start()
+                    # gun.disable()
 
     def shot_enemy(self):
         if not self.dead:
@@ -371,6 +375,11 @@ class Player(Entity):
         self.velocity_y = 0
         self.velocity_z = 0
         self.health = 1000
+        self.current_gun =  0 
+        if not self.rifle.enabled:
+            for gun in self.guns:
+                gun.disable()
+            self.rifle.enable()
         self.healthbar.value = self.health
         self.ability_bar.value = 30
         self.dead = False

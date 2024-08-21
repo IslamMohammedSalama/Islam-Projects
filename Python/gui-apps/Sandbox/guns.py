@@ -90,7 +90,7 @@ class Gun(Entity):
 
             elif self.gun_type == "shotgun":
                 # for i in range(random.randint(2, 4)):
-                b = Bullet(self, self.tip.world_position, randomness = 10)
+                Bullet(self, self.tip.world_position)
 
                 # self.gun_sound.clip = "shotgun.wav"
                 # self.gun_sound.volume = 0.8
