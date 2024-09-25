@@ -55,6 +55,19 @@
     <label> => for make a label
     <audio> => for make an audio
     <video> => for make a video
+    <select> => for make a combo box
+    <option> => for make an option
+    <optgroup> => for make an option group
+    <textarea> => for make a text area
+    <datalist> => for make a data list
+    <button> => for make a button
+    <q> => for make a quote
+    <blockquote> => for make a block quote
+    <bdi> => for make a bdi
+    <blockquote> => for make a block quote
+    <code> => for make a code
+    <pre> => for make a preformatted text
+    <iframe> => for make an iframe
 -->
 
 <!DOCTYPE html>
@@ -286,8 +299,8 @@
     </audio>
     <br>
     <hr>
-    <br>  
-    <form action="" method="post">
+    <br>
+    <form action="" novalidate target="_blank" method="post">
         <br>
         <div>
             <label for="username">UserName : </label>
@@ -306,7 +319,8 @@
         <br>
         <div>
             <label for="mail">new Email : </label>
-            <input id="mail" type="email" required value="ss@gmail.com" placeholder="write a new Email : " name="mail" disabled>
+            <input id="mail" type="email" required value="ss@gmail.com" placeholder="write a new Email : " name="mail"
+                disabled>
         </div>
         <br>
         <input type="hidden" value="ss" name="hide">
@@ -321,7 +335,7 @@
         </div>
         <br>
         <div>
-            <label for="num" >New Number : </label>
+            <label for="num">New Number : </label>
             <input id="num" type="number" name="number" min="10" max="100" step="10" value="50">
         </div>
 
@@ -332,16 +346,132 @@
             <label for="windows">Windows</label>
         </div>
         <div>
-            <input type="radio" id="linux" name="os" value="linux" checked>
+            <input type="radio" id="linux" name="os" value="linux">
             <label for="linux">Linux</label>
         </div>
         <div>
-            <input type="radio" id="mac" name="os" value="mac" checked>
+            <input type="radio" id="mac" name="os" value="mac">
             <label for="mac">Mac</label>
         </div>
+
+        <!-- ===== -->
+
+        <div>
+            <input type="checkbox" id="windows2" name="os" value="windows">
+            <label for="windows2">Windows</label>
+        </div>
+        <div>
+            <input type="checkbox" id="linux2" name="os" value="linux">
+            <label for="linux2">Linux</label>
+        </div>
+        <div>
+            <input type="checkbox" id="mac2" name="os" value="mac">
+            <label for="mac2">Mac</label>
+        </div>
+
+        <div>
+            <label for="books">Books : </label>
+            <select name="books" id="Books">
+                <optgroup label="Front-end WebDev Books">
+                    <option value="1" selected>html book</option>
+                    <option value="2">css book</option>
+                    <option value="3">js book</option>
+                </optgroup>
+                <optgroup label="back-end WebDev Books">
+                    <option value="4">php book</option>
+                    <option value="5">java book</option>
+                    <option value="6">c# book</option>
+                </optgroup>
+            </select>
+        </div>
+        <textarea name="subjectss" id="123" cols="30" rows="10" placeholder="write a new Email : ">
+
+        </textarea>
+        <br>
+        <div>
+            <label for="upload">Upload :</label>
+            <input type="file">
+        </div>
+        <br>
+        <div>
+            <label for="search">search :</label>
+            <input type="search">
+        </div>
+        <br>
+        <div>
+            <label for="url">URL :</label>
+            <input type="url">
+        </div>
+        <br>
+        <div>
+            <label for="date">Datr :</label>
+            <input type="date">
+        </div>
+        <br>
+        <div>
+            <label for="month">Month :</label>
+            <input type="month">
+        </div>
+        <br>
+        <div>
+            <label for="time">Time :</label>
+            <input type="time">
+        </div>
+        <br>
+        <input list="browsers" name="bro">
+        <br>
+        <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Safari">
+            <option value="Opera">
+            <option value="Edge">
+            <option value="Internet Explorer">
+            <option value="Vivaldi">
+            <option value="Brave">
+            <option value="Chromium">
+            <option value="Sleipnir">
+            <option value="Sputnik">
+            <option value="Spartan">
+
+        </datalist>
         <input type="reset">
         <input type="submit" value="save">
+
     </form>
+    <button>HI I Am Crezy</button>
+    <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit numquam dicta neque eos minima quaerat ratione
+        vel architecto optio at, asperiores incidunt soluta voluptas, accusamus a, ab repellendus ducimus
+        dignissimos!</q>
+    <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat alias natus beatae dolorum
+        exercitationem maxime repellendus illum in. Repellendus praesentium libero vitae possimus culpa hic, ab rerum
+        amet sequi iste.</blockquote>
+    <p><bdi>السلام</bdi> 2 welcome</p>
+
+    <div>
+        <p>
+            https://www.youtube.com/watch?v=<wbr>AzjtVtxoBLc<wbr>&list=<wbr>PLDoPjvoNmBAw_t_XWUFbBX-c9MafPk9ji&index=33
+        </p>
+    </div>
+    <code>
+        var a = 1;
+        var b = 2;
+        console.log(a + b);
+    </code>
+    <pre>
+                this is a 
+        bazengan
+    </pre>
+    <pre>
+        <code>
+            var a = 1;
+            var b = 2;
+            console.log(a + b);
+        </code>
+
+    </pre>
+    <iframe src="https://elzero.org" frameborder="0" width="800" height="400"></iframe>
+    
 </body>
 
 </html>

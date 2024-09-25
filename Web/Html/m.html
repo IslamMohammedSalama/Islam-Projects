@@ -138,6 +138,106 @@
     <nav></nav>
     <section></section>
     <footer></footer>
+
+    <form action="m.html" method="get" novalidate target="_blank">
+        <input type="hidden" name="token" value="b92f1fc2fce391ad7af633723afd3055">
+        <br>
+        <div>
+            <label for="username">User Name :</label>
+            <input type="text" name="username" id="username" placeholder="User Name" autofocus min="5" max="20" required>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" placeholder="Email" value="o@o.com" readonly>
+        </div>
+        <br>
+        <div>
+            <label for="skills">Programming Skill</label>
+            <select name="skill" id="skills">
+                <option value="1">Planning</option>
+                <option value="2">Analysis</option>
+                <option value="3">Advanced Search</option>
+                <option value="4">Logical Thinking</option>
+                <option value="5">Problem Solving</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="job">Programming jobs</label>
+            <select name="job" id="jobs">
+                <option value="1">Scrum Master</option>
+                <option value="2">Project Manager,</option>
+                <option value="3">Business Analyst</option>
+                <option value="4">Back-End Developer</option>
+                <option value="5">Front-End Developer</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="books">Choose Book : </label>
+            <select name="books" id="books">
+                <optgroup label="PHP">
+                    <option value="1">v5.0</option>
+                    <option value="2">v7.0</option>
+                    <option value="3">v9.0</option>
+                </optgroup>
+                <optgroup label="Python">
+                    <option value="4">v2.0</option>
+                    <option value="5">v3.0</option>
+                    <option value="6">v3.9</option>
+                </optgroup>
+            </select>
+            <br>
+            <textarea name="bookss" id="bookss" placeholder="Write Here Why You Want To Learn Programming" cols="40" rows="20"></textarea>
+        </div>
+        <br>
+        <div>
+            <label for="upload">Upload :</label>
+            <input type="file" >
+        </div>
+        <br>
+        <div>
+            <label for="search">search :</label>
+            <input type="search" >
+        </div>
+        <br>
+        <div>
+            <label for="date">Datr :</label>
+            <input type="date" >
+        </div>
+        <br>
+        <div>
+            <label for="month">Month :</label>
+            <input type="month" >
+        </div>
+        <br>
+        <div>
+            <label for="time">Time :</label>
+            <input type="time" >
+        </div>
+        <br>
+        <input list="browsers" name="bro">
+        <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Safari">
+            <option value="Opera">
+            <option value="Edge">
+            <option value="Internet Explorer">
+            <option value="Vivaldi">
+            <option value="Brave">
+            <option value="Chromium">
+            <option value="Sleipnir">
+            <option value="Sputnik">
+            <option value="Spartan">
+            
+        </datalist>
+        <br>
+        <input type="reset" value="Empty" >
+        <input type="submit" value="Send">
+
+    </form>
 </body>
 
 </html>

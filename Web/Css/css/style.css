@@ -1,0 +1,32 @@
+/* 
+    color => to change a color of any thing
+    font-size => to change the size of font of any thing
+    background-color => to change the background color of any thing : hex code , rgb code , rgba code  name of color
+
+
+*/
+div {
+    background-color: red;
+    background-image: url("../image/52936848_533359779200449_6863327968119641215_n.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-position: 50px 50px;
+    background-size: contain;
+    background-size: 100px 100px;
+}
+
+/* p {
+    color: aqua;
+    font-size: 100px;
+
+} */
+/* .text {
+    color: orange;
+    font-size: 75px;
+    background-color: rgb(50 135 120 / 0.5);
+}
+#txt {
+    color: red;
+    font-size: 50px;
+} */
