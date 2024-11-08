@@ -11,18 +11,24 @@ from mainmenu import MainMenu
 from maps import FloatingIslands, DesertedSands, MountainousValley
 
 from scene_lighting import SceneLighting
+
+from ursina import texture
+texture.default_filtering = 'nearest' 
+
+window.render_mode = 'flat'
+camera.clip_plane_far = 50  # Reduce far clipping distance (default is often 1000+)
+window.vsync = False
 mouse.locked = False
 Text.default_font = "./assets/Roboto.ttf"
 Text.default_resolution = Text.size * 1080
-# Set the desired frame rate
-target_fps = 10000
 
-# Adjust the time.dt value to achieve the target frame rate
-time.dt = target_fps
-app = Ursina()
+app = Ursina(headless=True)
 window.fullscreen = True
+window.size = (854,480)
+# window.aspect_ratio = 16/9  # Set a custom aspect ratio if needed
+
 window.borderless = False
-window.windowed_size = window.size * 0.75
+# window.windowed_size = window.size * 0.75
 window.cog_button.disable()
 # window.cog_button.enable()
 
@@ -35,21 +41,21 @@ window.fps_counter.enable()
 # window.exit_button.disable()
 
 scene.fog_density = 0.001
-window.size = window.screen_resolution
+# window.size = window.screen_resolution
 
-def toggle_fullscreen():
-    window.fullscreen = not window.fullscreen
+# def toggle_fullscreen():
+#     window.fullscreen = not window.fullscreen
 
 
-def toggle_maxmize():
-    if window.size == (1280, 720):
-        window.size = window.screen_resolution
-    else :
-        window.size = (1280, 720)
+# def toggle_maxmize():
+#     if window.size == (1280, 720):
+#         window.size = window.screen_resolution
+#     else :
+#         window.size = (1280, 720)
 
 # Bind the 'f' key to toggle fullscreen
-key_handler = Entity(ignore_paused=True)
-key_handler.input = lambda key: toggle_fullscreen() if key == 'f' else toggle_maxmize() if key == 'm' else None
+# key_handler = Entity(ignore_paused=True)
+# key_handler.input = lambda key: toggle_fullscreen() if key == 'f' else toggle_maxmize() if key == 'm' else None
 
 # Starting new thread for assets
 def load_assets():
@@ -123,7 +129,7 @@ scene_lighting = SceneLighting(ursina = app, player = player, sun_direction = (-
 def input(key):
     if key == "g":
         player.reset()
-
+light = DirectionalLight(shadow_map_resolution=(512, 512))
 # def update():
 #     print(player.position)
 if __name__ == "__main__":

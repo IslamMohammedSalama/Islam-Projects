@@ -5,22 +5,22 @@
 
 
 */
-div {
+/* div {
     background-color: red;
     background-image: url("../image/52936848_533359779200449_6863327968119641215_n.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    background-position: 50px 50px;
+    background-position: 100px 100px;
     background-size: contain;
-    background-size: 100px 100px;
-}
+    /* background-size: 300px 300px; */
+/* } */
 
 /* p {
     color: aqua;
-    font-size: 100px;
+    font-size: 48px;
 
-} */
+} */ 
 /* .text {
     color: orange;
     font-size: 75px;
@@ -30,3 +30,15 @@ div {
     color: red;
     font-size: 50px;
 } */
+
+.learn {
+    
+    border-color: red green cyan aquamarine;
+    border-width: 10px;
+    border-style: solid dashed dotted double;
+    background-color: #DDD;
+    outline-width: 5px;
+    outline-style: solid;
+    outline-color: black;
+
+}
