@@ -1,16 +1,17 @@
-
 .assign-1-shape-1 {
     background-color: rgb(138, 43, 226);
     width: 500px;
     margin-bottom: 10px;
 }
+
 .assign-1-shape-2 {
     background-color: #8a2be250;
     width: 500px;
     margin-bottom: 10px;
 }
+
 .assign-1-shape-3 {
-    background-color: hsla(271.15,75.93%, 52.75%,10%);
+    background-color: hsla(271.15, 75.93%, 52.75%, 10%);
     width: 500px;
     margin-bottom: 10px;
 }
@@ -62,6 +63,7 @@
     background-color: darkolivegreen;
     margin-bottom: 10px;
 }
+
 .assign-3-shape-2 {
 
     width: 400px;
@@ -83,6 +85,7 @@
     background-color: darkolivegreen;
     margin-bottom: 10px;
 }
+
 .assign-3-shape-4 {
 
     width: 400px;
@@ -97,17 +100,18 @@
 
     width: 400px;
     height: 400px;
-    background-size: 80% ;
+    background-size: 80%;
     background-image: url("https://elzero.org/wp-content/uploads/2021/02/css-assignment-5-8.png");
     background-repeat: no-repeat;
     background-color: darkolivegreen;
     margin-bottom: 10px;
 }
+
 .assign-4-shape-2 {
 
     width: 400px;
     height: 400px;
-    background-size: 80% 100% ;
+    background-size: 80% 100%;
     background-position: right;
     background-image: url("https://elzero.org/wp-content/uploads/2021/02/css-assignment-5-8.png");
     background-repeat: no-repeat;
@@ -119,7 +123,7 @@
 
     width: 400px;
     height: 400px;
-    background-size:  100% 80% ;
+    background-size: 100% 80%;
     background-position: bottom;
     background-image: url("https://elzero.org/wp-content/uploads/2021/02/css-assignment-5-8.png");
     background-repeat: no-repeat;
@@ -131,7 +135,7 @@
 
     width: 400px;
     height: 400px;
-    background-size:  50% ;
+    background-size: 50%;
     background-position: right bottom;
     background-image: url("https://elzero.org/wp-content/uploads/2021/02/css-assignment-5-8.png");
     background-repeat: no-repeat;
@@ -151,6 +155,7 @@
     border-color: red;
     margin-bottom: 20px;
 }
+
 .e2 {
     padding: 10px;
 
@@ -163,6 +168,7 @@
     border-color: blue green;
     margin-bottom: 20px;
 }
+
 .e3 {
     padding: 10px;
 
@@ -176,39 +182,134 @@
     margin-bottom: 20px;
 }
 
-.e1 , .e2 , .e3 {
+.e1,
+.e2,
+.e3 {
     margin-left: 10px;
     display: inline-block
-
 }
 
-.element.element-1{
+.element.element-1 {
     border-color: red;
     border-style: solid;
-    width : 400px;
+    width: 400px;
     border-width: 0 0 0 5px;
     padding-left: 10px;
     margin-bottom: 10px;
 
 
 }
-.element.element-2{
+
+.element.element-2 {
     border-color: cyan;
     border-style: solid;
-    width : 400px;
+    width: 400px;
     border-width: 0 0 0 5px;
     padding-left: 10px;
     margin-bottom: 10px;
     visibility: hidden;
 
 }
-.element.element-3{
+
+.element.element-3 {
     border-color: green;
     border-style: solid;
-    width : 400px;
+    width: 400px;
     border-width: 0 0 0 5px;
     padding-left: 10px;
     margin-bottom: 10px;
 
 
+}
+
+
+div div .title {
+    color: red;
+}
+
+div .title {
+    color: blue;
+}
+
+div p,
+.title {
+    color: green;
+}
+
+/* #A52A2A */
+
+.overflow-and-w-a-h.one,
+.overflow-and-w-a-h.two,
+.overflow-and-w-a-h.three,
+.overflow-and-w-a-h.four {
+    background-color: #A52A2A;
+    width: fit-content;
+    max-width: 400px;
+    margin-bottom: 10px;
+    max-height: 70px;
+    padding: 1px;
+    overflow: hidden;
+}
+
+
+/* #000000 , #F24133 , #2493EE , #942EB4 ,  */
+
+.shdow-text {
+    font-size: 40px;
+    text-shadow: 1px 1px 0 #F24133,
+        2px 2px 0 #2493EE,
+        3px 3px 0 #942EB4;
+}
+
+
+.one {
+    text-transform: uppercase;
+}
+
+.two {
+    text-transform: capitalize;
+}
+
+.one {
+    text-transform: lowercase;
+}
+
+.one-lorem,
+.two-lorem,
+.three-lorem {
+    background-color: darkkhaki;
+    width: 400px;
+}
+
+.two-lorem {
+    white-space: nowrap;
+    ;
+    /* text-overflow: ellipsis; */
+    overflow: hidden;
+}
+
+.three-lorem {
+    white-space: nowrap;
+    ;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+a {
+    text-align: center;
+    display: block;
+    text-decoration-line: none;
+    text-transform: capitalize;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #009688;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+    border-bottom: 10px #00514A solid;
+    border-radius: 50px;
+}
+
+a:hover {
+    border-bottom: 10px #009688 solid;
 }
