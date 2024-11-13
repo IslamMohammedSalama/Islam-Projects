@@ -1,0 +1,56 @@
+/* #DDDDDD */
+.perant-of-elments {
+    width: 1000px;
+    background-color: #EEEEEE;
+    overflow: hidden;
+    margin: auto;
+}
+
+.perant-of-elments div {
+    padding: 20px 0 20px 0;
+    text-align: center;
+    background-color: #DDDDDD;
+    float: left;
+}
+
+.perant-of-elments .row-1 {
+    width: calc(100% - 30px);
+    margin: 15px;
+    margin-bottom: 15px;
+}
+.perant-of-elments .row-2 {
+    width: calc((100% - (4*15px))/ 3);
+    margin: 0px 0px 15px 15px;
+}
+.perant-of-elments .row-3 {
+    width: calc((100% - (3*15px))/ 2);
+    margin: 0px 0px 15px 15px;
+}
+
+.perant-of-elments .row-4 {
+    width: calc( (100% - (5*15px))/ 4);
+    margin: 0px 0px 15px 15px;
+}
+.perant-of-elments p {
+    clear: left;
+}
+
+
+/* #B3B3B3 */
+
+.normal-1 , .one-1 , .two-1 {
+    margin: 20px auto;
+    width: 300px;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 20px;
+    background-color: #b3b3b3; /* Get The Background From Image */
+    color: black;
+  }
+
+.one-1 {
+    background-color: #B3B3B31A;
+}
+.two-1 {
+    opacity: 0.1;
+}

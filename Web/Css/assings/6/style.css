@@ -1,0 +1,45 @@
+
+.p-in {
+    padding: 10px;
+    border-color: red;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+
+}
+
+p {
+    background-color: #EEE;
+    padding: inherit;
+    border: inherit;
+
+}
+
+.open-sans-it-300 {
+    font-style: italic;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+}
+
+.cairo-700 {
+    font-family: "Cairo", sans-serif;
+    font-weight: 700;
+}
+
+.jomhuria-400 {
+    font-family: "Jomhuria", serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.rem-1 {
+    font-size: 2.5rem;
+}
+
+.rem-2 {
+    font-size: 2rem;
+}
+
+.rem-3 {
+    font-size: 1.5rem;
+}

@@ -1,0 +1,61 @@
+/* #000000 , #F24133 , #2493EE , #942EB4 ,  */
+
+.shdow-text {
+    font-size: 40px;
+    text-shadow: 1px 1px 0 #F24133,
+        2px 2px 0 #2493EE,
+        3px 3px 0 #942EB4;
+}
+
+
+.one {
+    text-transform: uppercase;
+}
+
+.two {
+    text-transform: capitalize;
+}
+
+.one {
+    text-transform: lowercase;
+}
+
+.one-lorem,
+.two-lorem,
+.three-lorem {
+    background-color: darkkhaki;
+    width: 400px;
+}
+
+.two-lorem {
+    white-space: nowrap;
+    ;
+    /* text-overflow: ellipsis; */
+    overflow: hidden;
+}
+
+.three-lorem {
+    white-space: nowrap;
+    ;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+a {
+    text-align: center;
+    display: block;
+    text-decoration-line: none;
+    text-transform: capitalize;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #009688;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+    border-bottom: 10px #00514A solid;
+    border-radius: 50px;
+}
+
+a:hover {
+    border-bottom: 10px #009688 solid;
+}

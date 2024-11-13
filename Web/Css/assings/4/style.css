@@ -1,0 +1,28 @@
+div div .title {
+    color: red;
+}
+
+div .title {
+    color: blue;
+}
+
+div p,
+.title {
+    color: green;
+}
+
+/* #A52A2A */
+
+.overflow-and-w-a-h.one,
+.overflow-and-w-a-h.two,
+.overflow-and-w-a-h.three,
+.overflow-and-w-a-h.four {
+    background-color: #A52A2A;
+    width: fit-content;
+    max-width: 400px;
+    margin-bottom: 10px;
+    max-height: 70px;
+    padding: 1px;
+    overflow: hidden;
+}
+
