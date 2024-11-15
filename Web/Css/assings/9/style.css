@@ -1,3 +1,79 @@
-body {
-    
+.one div {
+    width: 300px;
+    height: 60px;
+    margin: 10px auto ;
+    text-align: center;
+    background-color: #eee;
+    line-height: 55px;
+}
+
+.one div:empty {
+    background-color: red;
+}
+
+.two div {
+    background-color: #eee;
+    margin: auto;
+    padding: 20px;
+    font-size: 20px;
+    width: fit-content;
+    position: relative;
+}
+.two ::first-letter {
+    position: absolute;
+    background-color: red;
+    text-align: center;
+    padding: 10px;
+    top: 50%;
+    float: left;
+    margin-left: -40px;
+    margin-top: -10px;
+}
+
+.three p {
+    background-color: #eee;
+    width: fit-content;
+    padding: 20px;
+    font-size: 20px;
+    margin: 20px auto;
+    position: relative;
+    border-left: 5px solid #E91E63;
+}
+
+.three p::before {
+    content: attr(data-person);
+    position: absolute;
+    background-color: #eee;
+    left: -100px;
+    top: 11px;
+    padding: 10px;
+}
+
+.three p::after {
+    content: "";
+    border-color: transparent #E91E63 transparent transparent;
+    border-width: 10px;
+    border-style: solid;
+    position: absolute;
+    left: -25px;
+}
+
+.four p {
+    width: 500px;
+    padding: 20px;
+    background-color: #eee;
+    font-size: 25px;
+    border-right: 5px solid orangered;
+    counter-increment: pragraph-counter;
+    position: relative;
+    margin: 20px auto;
+}
+
+.four p::before {
+    content: counter(pragraph-counter);
+    background-color: orangered;
+    padding: 20px;
+    position: absolute;
+    left: -54px;
+    top: 0px;
 }
