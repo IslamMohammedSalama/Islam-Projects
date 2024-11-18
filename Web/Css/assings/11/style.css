@@ -1,0 +1,72 @@
+.one {
+    background-color: #eee;
+    width: 800px;
+    height: 400px;
+    text-align: center;
+    margin: 60px auto;
+    font-size: 30px;
+    box-sizing: border-box;
+    padding: 30px;
+    transition-duration: 0.5s;
+    transition-property: margin;
+    transition-timing-function: ease;
+
+}
+
+
+.one:hover {
+    margin-top: 20px;
+}
+
+.one .down {
+    background-color: #c7c7c7;
+    padding: 30px;
+    margin-top: 10px;
+    transition-duration: 0.5s;
+    transition-property: margin;
+    transition-delay: 0.5s;
+    transition-timing-function: linear;
+}
+
+.one:hover .down {
+    margin-top: 100px;
+}
+
+
+
+.two {
+    background-color: #eee !important;
+    border: none !important;
+    text-align: center;
+    font-size: 30px !important;
+    color: transparent !important;
+    padding: 30px !important;
+    width: 400px;
+    margin: auto;
+    font-weight: bold;
+    /* text-indent: -2000; */
+    position: relative;
+}
+
+.two::before {
+    content: "Elzero";
+    color: black;
+    position: absolute;
+    text-indent: 0px;
+    left: 200px;
+}
+
+:root {
+    --mainColor: #009688;
+    --mainPadding: 10px;
+  }
+
+
+.three {
+    border: 4px solid var(--mainColor , black);
+    margin: 20px auto;
+    padding: 20px;
+    font-size: 20px;
+    color: var(--mainColor , red);
+    width: 400px;
+}
