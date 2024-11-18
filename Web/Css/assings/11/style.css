@@ -69,4 +69,5 @@
     font-size: 20px;
     color: var(--mainColor , red);
     width: 400px;
+    text-align: center;
 }
