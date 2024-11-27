@@ -1,0 +1,167 @@
+:root {
+    --mainColor : #ff5722;
+}
+
+.one {
+    background-color: red;
+    width: 150px;
+    height:  75px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    color: white;
+}
+
+.one::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: var(--mainColor);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: skew(10deg ,10deg);
+}
+
+.one::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: var(--mainColor);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: skew(-10deg ,-10deg);
+}
+
+.two {
+    font-size: 30px;
+    color: white;
+    background-color:#009688;
+    width: fit-content;
+    padding: 20px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.two::before {
+    content: "";
+    position: absolute;
+    background-color: #009688;
+    width: 20px;
+    height: 100%;
+    top: 0;
+    left: -10px;
+    z-index: 0;
+    transform: skew(15deg , 0deg);
+}
+.two::after {
+    content: "";
+    position: absolute;
+    background-color: #009688;
+    width: 20px;
+    height: 100%;
+    top: 0;
+    left: -40px;
+    z-index: 0;
+    transform: skew(15deg , 0deg);
+}
+
+.class {
+    /* matrix(3, 0.2679, 0, 3, 20, 100); */
+    transform: translateX(20) translateY(100) scaleX(3) skewY(15deg) skewX(0) scaleY(3) ;
+  }
+
+.four {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    position: relative;
+    /* position: absolute; */
+    /* left: 50%; */
+    /* top: 50%; */
+    /* transform: translate(-50% , -50%); */
+    margin: 220px auto 20px;
+    background-color: #607d8b;
+    border-bottom: 5px solid black;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.four::before {
+    content: "Elzero";
+    color: white;
+    font-size: 20px;
+}
+
+.four::after {
+    content: "";
+    background-color: black;
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: -140px;
+    left: 58px;
+    transform: rotate(45deg);
+    border-right: 5px solid white;
+    border-bottom: 5px solid white;
+}
+.box {
+    perspective: 1000px;
+}
+.five {
+    margin: 50px auto;
+    width: 200px;
+    height: 200px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    transition-duration: 1s;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    transform-origin: right center;
+}
+
+.five-2{
+    transform-origin: right bottom;
+
+}
+.five::before {
+    content: "Front";
+    background-color: #ea2264;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.five::after {
+    content: "Back";
+    background-color: #1692fc;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+.five-2::after {
+    transform: rotateX(180deg);
+}
+
+.five:hover {
+    transform:  translateX(-100%) rotateY(180deg);
+}
+.five-2:hover {
+    transform:  translateY(-100%) rotateX(180deg);
+
+}
