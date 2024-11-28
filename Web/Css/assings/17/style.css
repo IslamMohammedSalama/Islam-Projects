@@ -1,0 +1,195 @@
+* {
+    box-sizing: border-box;
+}
+
+@keyframes rotateing {
+    from {
+        transform: translate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.one {
+    position: relative;
+
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fc2455;
+    margin: 100px auto;
+    border-radius: 50%;
+    border-color: transparent #fc2455 #fc2455 #fc2455;
+    animation-name: rotateing;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}
+
+.one:hover {
+    animation-play-state: paused;
+
+}
+
+.one::before {
+    content: "";
+    width: calc(100% + 15px);
+    height: calc(100% + 15px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #24b4ff;
+    border-radius: 50%;
+    border-color: #24b4ff #24b4ff transparent #24b4ff;
+}
+
+.one::after {
+    content: "";
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #fc9000;
+    border-radius: 50%;
+    border-color: #fc9000 #fc9000 #fc9000 transparent;
+}
+
+.two {
+    width: 50px;
+    height: 50px;
+    margin: 50px auto;
+    border: 5px solid #2490ff;
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    position: relative;
+    animation-name: rotateing;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+.two::before {
+    content: "";
+    width: calc(100% + 15px);
+    height: calc(100% + 15px);
+    position: absolute;
+    left: -13px;
+    top: -13px;
+    border: 5px solid #fcb400;
+    border-radius: 50%;
+    border-color: #fcb400 #fcb400 transparent #fcb400;
+    animation-name: rotateing;
+    animation-timing-function: linear;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+.two::after {
+    content: "";
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    border: 5px solid #000;
+    border-radius: 50%;
+    border-color: #000 #000 transparent #000;
+    animation-name: rotateing;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+    animation-duration: 10s;
+}
+
+.two:hover,
+.two:hover::before,
+.two:hover::after {
+    animation-play-state: running;
+}
+
+
+.three {
+    display: block;
+    margin: 20px auto;
+    background-color: #eee;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #000;
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    animation-name: rotateing;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+}
+
+.parent {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-areas:
+        "one one one . l . ."
+        "two . . . l . ."
+        "three three three . l . ."
+        "four . . . l . ."
+        "five five five . l l l"
+    ;
+    margin: 20px auto;
+}
+
+.parent div {
+    background-color: #323234;
+
+}
+
+.frist {
+    grid-area: one;
+    grid-column: 1 / span 3;
+    grid-row: 1 / 2;
+}
+
+.second {
+    grid-area: two;
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+
+.third {
+    grid-area: three;
+    grid-column: 1 / span 3;
+    grid-row: 4 / 5;
+
+}
+
+.forth {
+    grid-area: four;
+    grid-column: 1 / 2;
+    grid-row: 5 / 7;
+}
+
+.fivth {
+    grid-area: five;
+    grid-column: 1 / span 3;
+    grid-row: 7 / -1;
+}
+
+
+.l-frist {
+    grid-column: 5 / 6;
+    grid-row : 1 / 7;
+}
+
+.l-second {
+    grid-column: 5 / -1;
+    grid-row: 7 / -1;
+}
