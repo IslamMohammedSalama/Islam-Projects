@@ -133,16 +133,19 @@
 
 .parent {
     display: grid;
+    position: relative;
     width: 500px;
     height: 500px;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(7, 1fr);
     grid-template-areas:
-        "one one one . l . ."
-        "two . . . l . ."
-        "three three three . l . ."
-        "four . . . l . ."
-        "five five five . l l l"
+        "one one one . l-frist . ."
+        "two . . . l-frist . ."
+        "two . . . l-frist . ."
+        "three three three . l-frist . ."
+        "four . . . l-frist . ."
+        "four . . . l-frist . ."
+        "five five five . l-second l-second l-second"
     ;
     margin: 20px auto;
 }
@@ -154,42 +157,151 @@
 
 .frist {
     grid-area: one;
-    grid-column: 1 / span 3;
-    grid-row: 1 / 2;
+    /* grid-column: 1 / span 3;
+    grid-row: 1 / 2; */
 }
 
 .second {
     grid-area: two;
-    grid-column: 1 / 2;
-    grid-row: 2 / 4;
+    /* grid-column: 1 / 2;
+    grid-row: 2 / 4; */
 }
 
 .third {
     grid-area: three;
-    grid-column: 1 / span 3;
-    grid-row: 4 / 5;
+    /* grid-column: 1 / span 3;
+    grid-row: 4 / 5; */
 
 }
 
 .forth {
     grid-area: four;
-    grid-column: 1 / 2;
-    grid-row: 5 / 7;
+    /* grid-column: 1 / 2;
+    grid-row: 5 / 7; */
 }
 
 .fivth {
     grid-area: five;
-    grid-column: 1 / span 3;
-    grid-row: 7 / -1;
+    /* grid-column: 1 / span 3;
+    grid-row: 7 / -1; */
 }
 
 
 .l-frist {
-    grid-column: 5 / 6;
-    grid-row : 1 / 7;
+    grid-area: l-frist;
+    /* grid-column: 5 / 6;
+    grid-row : 1 / 7; */
 }
 
 .l-second {
-    grid-column: 5 / -1;
-    grid-row: 7 / -1;
+    grid-area: l-second;
+    /* grid-column: 5 / -1;
+    grid-row: 7 / -1; */
+}
+
+.parent::before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #fea604;
+    top: 10px;
+    left: 150px;
+    animation-name: e-move;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+}
+.parent::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #fea604;
+    top: 440px;
+    left: 440px;
+    opacity: 0;
+    animation-name: l-move;
+    animation-duration: 2s;
+    animation-delay: 4s;
+    animation-timing-function: linear;
+}
+
+/* 
+    left: 297px;
+
+*/
+@keyframes e-move {
+    0% {
+        top: 10px;
+        left: 150px;
+    }
+    10% {
+        top: 10px;
+        left: 10px;
+    }
+    20% {
+        left: 10px;
+        top: 225px;
+    }
+    30% {
+        top: 225px;
+        left: 150px;
+    }
+    40% {
+        left: 10px;
+        top: 225px;
+    }
+    50% {
+        left: 10px;
+        top: 440px;
+    }
+    60% {
+        left: 150px;
+        top: 440px;
+    }
+    70% {
+        left: 10px;
+        top: 440px;
+    }
+    80% {
+        left: 10px;
+        top: 10px;
+    }
+    90% {
+        top: 10px;
+        left: 150px;
+    }
+    100% {
+        top: 10px;
+        left: 150px;
+    }
+}
+
+@keyframes l-move {
+    0% {
+        top: 440px;
+        left: 440px;
+        opacity: 0;
+    }
+    5% {
+        top: 440px;
+        left: 440px;
+        opacity: 1;
+    }
+    40% {
+        top: 440px;
+        left: 295px;
+        opacity: 1;
+
+    }
+    60% {
+        top: 10px;
+        left: 295px;
+        opacity: 1;
+    }
+    100% {
+        top: 10px;
+        left: 295px;
+        opacity: 0;
+    }
 }
