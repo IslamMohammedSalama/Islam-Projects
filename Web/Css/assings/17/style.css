@@ -132,71 +132,23 @@
 }
 
 .parent {
-    display: grid;
     position: relative;
     width: 500px;
     height: 500px;
+    margin: 20px auto;
+    background-color: #eee;
+    display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(7, 1fr);
-    grid-template-areas:
-        "one one one . l-frist . ."
-        "two . . . l-frist . ."
-        "two . . . l-frist . ."
-        "three three three . l-frist . ."
-        "four . . . l-frist . ."
-        "four . . . l-frist . ."
-        "five five five . l-second l-second l-second"
+    grid-template-areas: 
+    "one one one . l-one . ." 
+    "two  .   .  . l-one . ." 
+    "two  .   .  . l-one . ." 
+    "three three three . l-one . ." 
+    "four  .   .  . l-one . ." 
+    "four  .   .  . l-one . ." 
+    "five five five . l-two l-two l-two"
     ;
-    margin: 20px auto;
-}
-
-.parent div {
-    background-color: #323234;
-
-}
-
-.frist {
-    grid-area: one;
-    /* grid-column: 1 / span 3;
-    grid-row: 1 / 2; */
-}
-
-.second {
-    grid-area: two;
-    /* grid-column: 1 / 2;
-    grid-row: 2 / 4; */
-}
-
-.third {
-    grid-area: three;
-    /* grid-column: 1 / span 3;
-    grid-row: 4 / 5; */
-
-}
-
-.forth {
-    grid-area: four;
-    /* grid-column: 1 / 2;
-    grid-row: 5 / 7; */
-}
-
-.fivth {
-    grid-area: five;
-    /* grid-column: 1 / span 3;
-    grid-row: 7 / -1; */
-}
-
-
-.l-frist {
-    grid-area: l-frist;
-    /* grid-column: 5 / 6;
-    grid-row : 1 / 7; */
-}
-
-.l-second {
-    grid-area: l-second;
-    /* grid-column: 5 / -1;
-    grid-row: 7 / -1; */
 }
 
 .parent::before {
@@ -206,97 +158,131 @@
     height: 50px;
     background-color: #fea604;
     top: 10px;
-    left: 150px;
+    left: 155px;
     animation-name: e-move;
     animation-duration: 4s;
     animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
 }
+
 .parent::after {
     content: "";
     position: absolute;
     width: 50px;
     height: 50px;
     background-color: #fea604;
-    top: 440px;
-    left: 440px;
+    bottom: 10px;
+    right: 10px;
     opacity: 0;
     animation-name: l-move;
-    animation-duration: 2s;
+    animation-duration: 4.1s;
     animation-delay: 4s;
     animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
 }
+
+.parent div {
+    background-color: #323234;
+}
+.parent .frist {
+    grid-area: one;
+}
+.parent .second {
+    grid-area: two;
+}
+.parent .third {
+    grid-area: three;
+}
+.parent .forth {
+    grid-area: four;
+}
+.parent .fivth {
+    grid-area: five;
+}
+.parent .l-frist {
+    grid-area: l-one;
+}
+.parent .l-second {
+    grid-area: l-two;
+}
+
+.parent:hover::before , .parent:hover::after {
+    animation-play-state: running;
+}
+
 @keyframes e-move {
-    0% {
+    0%{
         top: 10px;
-        left: 150px;
+        left: 155px;
     }
     10% {
         top: 10px;
         left: 10px;
     }
     20% {
-        left: 10px;
         top: 225px;
+        left: 10px;
     }
     30% {
         top: 225px;
-        left: 150px;
+        left: 155px;
     }
     40% {
-        left: 10px;
         top: 225px;
+        left: 10px;
     }
     50% {
-        left: 10px;
         top: 440px;
+        left: 10px;
     }
     60% {
-        left: 150px;
         top: 440px;
+        left: 155px;
     }
     70% {
-        left: 10px;
         top: 440px;
+        left: 10px;
     }
     80% {
+        top: 10px;
         left: 10px;
-        top: 10px;
     }
-    90% {
+    90%{
         top: 10px;
-        left: 150px;
+        left: 155px;
     }
-    100% {
+    100%{
         top: 10px;
-        left: 150px;
+        left: 155px;
     }
 }
 
 @keyframes l-move {
     0% {
-        top: 440px;
-        left: 440px;
+        bottom: 10px;
+        right: 10px;
         opacity: 0;
     }
-    5% {
-        top: 440px;
-        left: 440px;
+    20% {
+        bottom: 10px;
+        right: 10px;
         opacity: 1;
     }
-    30% {
-        top: 440px;
-        left: 295px;
+    40% {
+        bottom: 10px;
+        right: 155px;
         opacity: 1;
-
     }
-    60% {
-        top: 10px;
-        left: 295px;
+    80% {
+        bottom: 440px;
+        right: 155px;
         opacity: 1;
     }
     100% {
-        top: 10px;
-        left: 295px;
+        bottom: 440px;
+        right: 155px;
         opacity: 0;
     }
 }
