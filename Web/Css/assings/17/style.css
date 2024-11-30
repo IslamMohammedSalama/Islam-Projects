@@ -225,11 +225,6 @@
     animation-delay: 4s;
     animation-timing-function: linear;
 }
-
-/* 
-    left: 297px;
-
-*/
 @keyframes e-move {
     0% {
         top: 10px;
@@ -288,7 +283,7 @@
         left: 440px;
         opacity: 1;
     }
-    40% {
+    30% {
         top: 440px;
         left: 295px;
         opacity: 1;
