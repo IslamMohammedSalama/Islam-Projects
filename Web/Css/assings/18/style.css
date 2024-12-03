@@ -11,7 +11,7 @@ hr {
     color: red;
 }
 
-.two .parent>div.child:last-child {
+.two .parent > div.child:last-child {
     color: red;
 }
 
@@ -23,11 +23,11 @@ hr {
     color: red;
 }
 
-.five > div:nth-child(2)>div[title="Elzero"] {
+.five > div:nth-child(2) > div[title="Elzero"] {
     color: red;
 }
 
-.six > div:not(.no-need)>div:nth-last-of-type(2) {
+.six > div:not(.no-need) > div:nth-last-of-type(2) {
     color: red;
 }
 
