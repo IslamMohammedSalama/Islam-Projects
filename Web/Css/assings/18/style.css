@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+}
+
+
+hr {
+    margin: 20px;
+}
+
+.one div.main.red {
+    color: red;
+}
+
+.two .parent>div.child:last-child {
+    color: red;
+}
+
+.three .parent:nth-child(2)>.baby {
+    color: red;
+}
+
+.four > div[title]:not(.no-need) {
+    color: red;
+}
+
+.five > div:nth-child(2)>div[title="Elzero"] {
+    color: red;
+}
+
+.six > div:not(.no-need)>div:nth-last-of-type(2) {
+    color: red;
+}
+
+.seven > div:first-child > div:nth-last-child(2) { 
+    color: red;
+}
+.eight > div > *:not(:first-child , :last-child , h3){
+    color : red ;
+}
