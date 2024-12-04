@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+
+.two {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.two div {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.three {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.three div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    flex-direction: column;
+    width: 49.7%;
+}
+
+.three div:first-child,
+.three div:last-child {
+    width: 100%;
+}
+
+
+@media print {
+    .assign-one {
+        font-size: 40px;
+    }
+}
+
+/* Phones */
+@media (min-device-width: 360px) {
+    .two div {
+        width: 100%;
+    }
+
+    .two div h3 {
+        color: black;
+    }
+
+    .three div h3 {
+        color: black;
+    }
+
+    .three div {
+        width: 100%;
+    }
+}
+
+/* Medium */
+
+@media (min-device-width: 480px) {
+    .two div {
+        width: 49%;
+    }
+
+    .two div h3 {
+        color: red;
+    }
+
+
+    .three div,
+    .three div:last-child {
+        width: 32.7%;
+    }
+
+    .three div:first-child {
+        width: 100%;
+    }
+
+    .three div h3 {
+        color: red;
+    }
+}
+
+/* Labtops */
+@media(min-device-width: 1200px) {
+    .two div {
+        width: 24%;
+    }
+
+    .two div h3 {
+        color: #05988a;
+    }
+
+    .three div {
+        width: 49.7%;
+    }
+
+    .three div h3 {
+        color: #05988a;
+    }
+
+    .three div:first-child,
+    .three div:last-child {
+        width: 100%;
+    }
+}
