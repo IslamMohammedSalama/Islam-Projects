@@ -1,0 +1,74 @@
+/* My Frame Work */ 
+
+.center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-position {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.circle-100 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.circle-200 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.arrow {
+    margin: 20px auto;
+    width: 400px;
+    height: 40px;
+    background-color: #ddd;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.top::before {
+    content: "";
+    position: absolute;
+    border: 15px solid transparent;
+    border-bottom-color: #ddd;
+    left: 50%;
+    top: calc(0% - 15px);
+    transform: translate(-50%,-50%);
+}
+.bottom::before {
+    content: "";
+    position: absolute;
+    border: 15px solid transparent;
+    border-top-color: #ddd;
+    left: 50%;
+    top: calc(100% + 15px);
+    transform: translate(-50%,-50%);
+}
+.right::before {
+    content: "";
+    position: absolute;
+    border: 15px solid transparent;
+    border-left-color: #ddd;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.left::before {
+    content: "";
+    position: absolute;
+    border: 15px solid transparent;
+    border-right-color: #ddd;
+    left: calc(0% - 30px);
+    top: 50%;
+    transform: translateY(-50%);
+}
