@@ -50,7 +50,7 @@
 }
 
 /* Phones */
-@media (min-device-width: 360px) {
+@media (max-device-width: 767px) {
     .two div {
         width: 100%;
     }
@@ -70,7 +70,7 @@
 
 /* Medium */
 
-@media (min-device-width: 480px) {
+@media (min-device-width: 768px) {
     .two div {
         width: 49%;
     }
