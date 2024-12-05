@@ -1,0 +1,36 @@
+:root {
+    --elzero-line-width : 5px ;
+}
+
+.elzero-lines {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: #ddd;
+    margin: 50px auto;
+    border: var(--elzero-line-width) solid red;
+    outline: var(--elzero-line-width) solid blue;
+}
+
+.elzero-lines::before {
+    content: "";
+    position: absolute;
+    width: calc(100% + (var(--elzero-line-width) * 4));
+    height: calc(100% + (var(--elzero-line-width) * 4));
+    background-color: #ccc;
+    border: var(--elzero-line-width) solid green;
+    outline: var(--elzero-line-width) solid black;
+    z-index: -1;
+}
+
+.font {
+    /* font-style: italic; */
+    /* font-weight: bold; */
+    /* font-size: 30px; */
+    /* line-height: 30px; */
+    /* font-family: Arial, sans-serif; */
+    font: italic bold 30px/30px Arial, sans-serif;
+  }
