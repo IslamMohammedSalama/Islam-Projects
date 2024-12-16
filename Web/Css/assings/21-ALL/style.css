@@ -1,6 +1,6 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     box-sizing: border-box;
 }
 
@@ -164,6 +164,7 @@ hr {
     padding: 15px;
     background-color: #ddd;
 }
+
 .lists li:nth-child(4)::before {
     background-color: white;
 }
@@ -179,10 +180,12 @@ hr {
 .lists li ul {
     padding: 20px;
 }
+
 .lists li ul li::before {
     background-color: #009688;
     color: white;
 }
+
 .lists li:last-of-type {
     margin-bottom: 0;
 }
@@ -190,6 +193,65 @@ hr {
 .lists ul li ul li:last-of-type {
     margin-bottom: 0;
 }
-.lists ul li ul{
+
+.lists ul li ul {
     padding-bottom: 0;
+}
+
+div {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+div a {
+    display: block;
+    background-color: #2196f3;
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    width: fit-content;
+}
+
+div a::before {
+    content: "Name : " attr(title) " | URL : " attr(href);
+}
+
+.text {
+    text-align: center;
+    font-size: 100px;
+    text-transform: capitalize;
+    background: linear-gradient(to bottom,
+            #ef3604,
+            #be940f 80%);
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+.container {
+    border: 5px solid black;
+    width: 810px;
+    height: 810px;
+    display: grid;
+    grid-template-columns: repeat(8 , 1fr);
+    grid-template-rows: repeat(8 , 1fr);
+}
+
+.container .black,
+.container .white {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+.container .black {
+    background-color: black;
+}
+
+.container .white {
+    background-color: white;
 }
