@@ -53,7 +53,7 @@ hr {
 }
 
 .input-box span {
-    display: inline-block;
+    /* display: inline-block; */
     background-color: #009688;
     border-radius: 10px 0 0 10px;
     font-size: 25px;
@@ -286,4 +286,83 @@ div a::before {
 
 .table tr td:nth-child(even) {
     background-color: #f4f4f4;
+}
+.plans {
+    position: relative;
+    display: flex;
+    width: 1400px;
+    height: 600px;
+    margin: 0 auto;
+    justify-content: space-between;
+    background-color: #eee;
+    padding: 40px 20px 20px;
+
+}
+.plans div:not(.popular , .before ,  .after) {
+    width: 32%;
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 20px;
+    background-color: white;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    color: #948f9c;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+.plans div p span {
+    font-weight: bold;
+    color: #8d8892;
+}
+.plans .title {
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+.plans .price span {
+    font-size: 40px;
+    color: #197beb;
+}
+.plans .price span sup {
+    font-size: 25px;
+}
+.plans div button {
+    border: none;
+    font-weight: bold;
+    background-color: #197beb;
+    padding: 15px 20px;
+    border-radius: 15px;
+    color: white;
+}
+.plans .business {
+    position: relative;
+    z-index: 1;
+}
+.plans div .popular {
+    position: absolute;
+    background-color: #197beb;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    top: -20px;
+    z-index: 2;
+}
+.plans .business .before {
+    position: absolute;
+    top: -40px;
+    right: 24px;
+    border: 20px solid #0b56ac;
+    border-color: transparent transparent #0b56ac transparent;
+}
+.plans .business .after {
+    position: absolute;
+    top: -40px;
+    left: 24px;
+    border: 20px solid #0b56ac;
+    border-color: transparent transparent #0b56ac transparent;
 }
