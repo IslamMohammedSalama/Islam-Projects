@@ -237,8 +237,8 @@ div a::before {
     width: 810px;
     height: 810px;
     display: grid;
-    grid-template-columns: repeat(8 , 1fr);
-    grid-template-rows: repeat(8 , 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 }
 
 .container .black,
@@ -254,4 +254,36 @@ div a::before {
 
 .container .white {
     background-color: white;
+}
+
+
+.table {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+
+}
+
+.table td,
+.table th {
+    width: calc(100%/ 3);
+    height: calc(100% / 6);
+    font-size: 20px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+
+.table td:hover {
+    background-color: #f4f4f4;
+    border-color: #2196f3;
+    color: #2196f3;
+}
+.table tr:hover td {
+    background-color: #f4f4f4;
+}
+
+.table tr td:nth-child(even) {
+    background-color: #f4f4f4;
 }
