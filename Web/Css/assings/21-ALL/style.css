@@ -454,7 +454,7 @@ div a::before {
 
 .body-camera {
 
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
