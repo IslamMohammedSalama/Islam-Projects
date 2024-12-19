@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -436,4 +438,159 @@ div a::before {
 
 .storage-size div:hover::before {
     background-color: #3171ff;
+}
+
+
+.camera {
+    display: flex;
+    background-color: #eee;
+    width: 1000px;
+    height: 1000px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+.body-camera {
+
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background: linear-gradient(to bottom, #ccc 25%, #607d8b 25%, #607d8b 75%, #ccc 75%, #ccc 100%);
+    border-radius: 15px;
+    z-index: 10;
+}
+
+.body-camera .len {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 2px 2px 15px;
+    z-index: 100;
+}
+
+.body-camera .len::before {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: #358fb6;
+    border: 40px solid #3e3e3e;
+    outline: solid #cecece 20px;
+}
+
+.body-camera .len::after {
+    content: "";
+    background-color: #68b8db;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 50%;
+    top: 100px;
+    left: 100px;
+}
+
+.body-camera .button {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    top: 0;
+    left: 30px;
+    transform: translateY(-100%);
+    background-color: #607d8b;
+    border-radius: 15px 15px 5px 5px;
+}
+
+.body-camera .button::before {
+    content: "";
+    background-color: red;
+    height: 10px;
+    width: 75px;
+    position: absolute;
+    border-radius: 15px 15px 0 0;
+    transform: translateY(-100%);
+    left: 12px;
+}
+
+.body-camera .flash {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    height: 60px;
+    width: 150px;
+    background-color: #607d8b;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+}
+
+.body-camera .flash::before {
+    content: "";
+    background-color: #607d8b;
+    width: 60px;
+    height: 100px;
+    position: absolute;
+    border-radius: 15px;
+    transform: rotate(-25deg);
+    right: -20px;
+    top: 3px;
+    z-index: -1;
+}
+
+.body-camera .flash::after {
+    content: "";
+    background-color: #607d8b;
+    width: 60px;
+    height: 100px;
+    position: absolute;
+    border-radius: 15px;
+    transform: rotate(25deg);
+    left: -20px;
+    top: 3px;
+    z-index: -1;
+}
+
+.body-camera .flash .light {
+    background-color: #cecece;
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-camera .flash .light::before {
+    content: "";
+    background-color: #607d8b;
+    width: 40px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.body-camera::before {
+    content: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    background: linear-gradient(to bottom, #ccc 25%, #607d8b 25%, #607d8b 75%, #ccc 75%, #ccc 100%);
+    border-radius: 15px;
+    z-index: 10;
+    position: absolute;
 }
