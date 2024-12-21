@@ -229,8 +229,7 @@ div a::before {
     text-transform: capitalize;
     background: linear-gradient(to bottom,
             #ef3604,
-            #be940f 80%);
-    background-clip: text;
+            #be940f 70%) text;
     color: transparent;
     font-weight: bold;
 }
@@ -593,4 +592,57 @@ div a::before {
     border-radius: 15px;
     z-index: 10;
     position: absolute;
+}
+
+.text-with-border {
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    width: fit-content;
+    font-size: 80px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    -webkit-text-stroke: 4px #9c27b0;
+}
+
+table:nth-of-type(2) {
+    margin: 0 auto 80px;
+    width: fit-content;
+    background-color: #eee;
+    position: relative;
+}
+
+table:nth-of-type(2) td,
+table:nth-of-type(2) th {
+    padding: 20px;
+    text-align: center;
+    margin: 1px;
+    background-color: #fff;
+}
+
+table:nth-of-type(2) th {
+    background-color: #ccc;
+}
+
+table:nth-of-type(2) tfoot tr td {
+    background-color: #009aff;
+    font-weight: bold;
+    color: #fff;
+}
+
+table:nth-of-type(2) tfoot tr td:first-of-type {
+    background-color: #ffe400;
+    color: inherit;
+}
+
+table:nth-of-type(2) caption {
+    padding: 15px;
+    width: 100%;
+    background-color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
 }
