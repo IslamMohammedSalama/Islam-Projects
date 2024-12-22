@@ -15,6 +15,7 @@ hr {
 }
 
 .elzero-lines {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     display: flex;
     justify-content: center;
@@ -48,6 +49,7 @@ hr {
 }
 
 .input-box {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     width: 600px;
     height: 50px;
@@ -55,7 +57,6 @@ hr {
     border-radius: 13px;
     height: 73px;
     border: 3px solid #ddd;
-
 }
 
 .input-box span {
@@ -80,6 +81,7 @@ hr {
 }
 
 .menu {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     display: flex;
     position: relative;
@@ -135,6 +137,7 @@ hr {
 }
 
 .a {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     width: fit-content;
 }
@@ -148,6 +151,7 @@ hr {
 }
 
 .lists {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     width: 400px;
     background-color: #eee;
@@ -645,4 +649,65 @@ table:nth-of-type(2) caption {
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
+}
+
+.line-break {
+    display: block;
+    width: 900px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 15px;
+    background-color: #fff;
+    column-count: 3;
+    column-gap: 146px;
+    column-rule: 2px dashed #000;
+    text-align: left;
+    hyphens: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.langs {
+    width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #eee;
+}
+
+.langs li {
+    list-style: none;
+    font-size: 20px;
+    padding: 25px;
+    border-bottom: 1px solid #ccc;
+    background-color: white;
+    position: relative;
+    counter-increment: counter 0;
+}
+
+.langs li:first-of-type::before {
+    counter-set: counter 13;
+}
+
+.langs li::before {
+    content: "(" counter(counter) ")";
+    counter-increment: counter 3;
+
+    background-color: #f44336;
+    position: absolute;
+    right: 20px;
+    top: 12.5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    color: white;
+    font-size: 18;
+}
+
+.langs li:nth-of-type(odd)::before {
+    background-color: #9c27b0;
 }
