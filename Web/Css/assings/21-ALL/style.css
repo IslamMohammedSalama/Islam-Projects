@@ -652,7 +652,6 @@ table:nth-of-type(2) caption {
 }
 
 .line-break {
-    display: block;
     width: 900px;
     margin: 0 auto;
     font-family: Arial, sans-serif;
@@ -660,12 +659,12 @@ table:nth-of-type(2) caption {
     padding: 15px;
     background-color: #fff;
     column-count: 3;
-    column-gap: 146px;
+    line-break: anywhere;
+    column-gap: 135px;
     column-rule: 2px dashed #000;
     text-align: left;
     hyphens: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .langs {
