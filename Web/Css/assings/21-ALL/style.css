@@ -12,6 +12,7 @@ hr {
 
 :root {
     --elzero-line-width: 5px;
+    --elzero-border : 10px
 }
 
 .elzero-lines {
@@ -709,4 +710,25 @@ table:nth-of-type(2) caption {
 
 .langs li:nth-of-type(odd)::before {
     background-color: #9c27b0;
+}
+
+.shadow {
+    width: 400px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    margin: 100px auto;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 
+    0 0 0 calc(1 * var(--elzero-border)) #cddc39,
+    0 0 0 calc(2 * var(--elzero-border)) #e91e63,
+    0 0 0 calc(3 * var(--elzero-border)) #9c27b0,
+    0 0 0 calc(4 * var(--elzero-border)) #4caf50,
+    0 0 0 calc(5 * var(--elzero-border)) #3f51b5,
+    0 0 0 calc(6 * var(--elzero-border)) #795548,
+    0 0 0 calc(7 * var(--elzero-border)) #ffc107,
+    0 0 0 calc(8 * var(--elzero-border)) #009688;
 }
