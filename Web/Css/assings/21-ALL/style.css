@@ -692,7 +692,6 @@ table:nth-of-type(2) caption {
 .langs li::before {
     content: "(" counter(counter) ")";
     counter-increment: counter 3;
-
     background-color: #f44336;
     position: absolute;
     right: 20px;
