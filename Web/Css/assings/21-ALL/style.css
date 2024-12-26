@@ -771,3 +771,109 @@ table:nth-of-type(2) caption {
     left: 0;
     transform: translate(-100%, -50%);
 }
+
+
+/* 
+.example {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  margin: 10px 20px 15px 20px;
+}
+.one {
+  background-color: black;
+  background-image: url("../imgs/one.jpg");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+  background : black url("../imgs/one.jpg") left top cover no-repeat
+}
+.two {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #000;
+  border-top : 1px solid #000;
+}
+.three {
+  top: 10px;
+  right: 20px;
+  bottom: 10px;
+  left: 20px;
+  inset : 10px 10px 20px 20px ;
+}
+.four {
+  flex-grow: 3;
+  flex-shrink: 3;
+  flex-basis: 10%;
+  flex : 3 3 10% ;
+}
+.five {
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-flow : column wrap ;
+}
+*/
+
+
+.imgs {
+    display: grid;
+    width: 800px;
+    height: 600px;
+    background-color: #eee;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        "one two three three"
+        "one four five six"
+        "seven four eight eight"
+    ;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.imgs div {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.imgs .one {
+    grid-area: one;
+    background-color: blue;
+}
+
+.imgs .two {
+    grid-area: two;
+    background-color: red;
+}
+
+.imgs .three {
+    grid-area: three;
+    background-color: green;
+}
+
+.imgs .four {
+    grid-area: four;
+    background-color: violet;
+}
+
+.imgs .five {
+    grid-area: five;
+    background-color: fuchsia;
+}
+
+.imgs .six {
+    grid-area: six;
+    background-color: blueviolet;
+}
+
+.imgs .seven {
+    grid-area: seven;
+    background-color: greenyellow;
+}
+
+.imgs .eight {
+    grid-area: eight;
+    background-color: gold;
+}
