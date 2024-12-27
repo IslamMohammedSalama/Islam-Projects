@@ -4,6 +4,12 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    user-select: none;
+}
+
+div {
+    margin: 0 auto;
+    width: fit-content;
 }
 
 hr {
@@ -82,7 +88,6 @@ hr {
 }
 
 .menu {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     display: flex;
     position: relative;
@@ -137,18 +142,28 @@ hr {
     top: 40px;
 }
 
-.a {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+.links {
     margin: 0 auto;
     width: fit-content;
 }
 
-.a a {
+.links a {
+    display: block;
+    background-color: #2196f3;
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
     font-size: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
 }
 
-.a a:last-of-type {
-    color: green;
+.links a::before {
+    content: "Name : " attr(title) " | URL : " attr(href);
 }
 
 .lists {
@@ -204,28 +219,6 @@ hr {
 
 .lists ul li ul {
     padding-bottom: 0;
-}
-
-div {
-    width: fit-content;
-    margin: 0 auto;
-}
-
-div a {
-    display: block;
-    background-color: #2196f3;
-    text-decoration: none;
-    margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    width: fit-content;
-}
-
-div a::before {
-    content: "Name : " attr(title) " | URL : " attr(href);
 }
 
 .text {
@@ -772,7 +765,6 @@ table:nth-of-type(2) caption {
     transform: translate(-100%, -50%);
 }
 
-
 /* 
 .example {
   margin-top: 10px;
@@ -814,7 +806,6 @@ table:nth-of-type(2) caption {
   flex-flow : column wrap ;
 }
 */
-
 
 .imgs {
     display: grid;
@@ -877,3 +868,68 @@ table:nth-of-type(2) caption {
     grid-area: eight;
     background-color: gold;
 }
+
+.the-grid {
+    display: grid;
+    width: 820px;
+    height: 820px;
+    padding: 20px;
+    background-color: #eee;
+    grid-template-rows: repeat(14, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    grid-template-areas:
+        "one one two three three"
+        "one one two three three"
+        "one one four four four "
+        "one one four four four "
+        "five five four four four"
+        "five five four four four"
+        "six six six six seven"
+        "six six six six seven"
+        "eight nine nine nine ten"
+        "eight nine nine nine eleven"
+        "eight nine nine nine twelve"
+        "thirteen thirteen thirteen thirteen thirteen"
+        "fourteen fourteen fiveteen fiveteen fiveteen"
+        "sixteen seventeen eighteen nineteen twenty"
+    ;
+}
+
+.the-grid div {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    font-size: 50px;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    counter-increment: counter 1;
+
+}
+
+.the-grid div::before {
+    content: counter(counter);
+}
+
+.the-grid div:nth-of-type(1) {grid-area: one;}
+.the-grid div:nth-of-type(2) {grid-area: two;}
+.the-grid div:nth-of-type(3) {grid-area: three;}
+.the-grid div:nth-of-type(4) {grid-area: four;}
+.the-grid div:nth-of-type(5) {grid-area: five;}
+.the-grid div:nth-of-type(6) {grid-area: six;}
+.the-grid div:nth-of-type(7) {grid-area: seven;}
+.the-grid div:nth-of-type(8) {grid-area: eight;}
+.the-grid div:nth-of-type(9) {grid-area: nine;}
+.the-grid div:nth-of-type(10) {grid-area: ten;}
+.the-grid div:nth-of-type(11) {grid-area: eleven;}
+.the-grid div:nth-of-type(12) {grid-area: twelve;}
+.the-grid div:nth-of-type(13) {grid-area: thirteen;}
+.the-grid div:nth-of-type(14) {grid-area: fourteen;}
+.the-grid div:nth-of-type(15) {grid-area: fiveteen;}
+.the-grid div:nth-of-type(16) {grid-area: sixteen;}
+.the-grid div:nth-of-type(17) {grid-area: seventeen;}
+.the-grid div:nth-of-type(18) {grid-area: eighteen;}
+.the-grid div:nth-of-type(19) {grid-area: nineteen;}
+.the-grid div:nth-of-type(20) {grid-area: twenty;}
