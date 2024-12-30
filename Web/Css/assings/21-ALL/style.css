@@ -1093,3 +1093,154 @@ table:nth-of-type(2) caption {
     border: 5px solid #25c460;
     border-color: #25c460 transparent transparent transparent;
 }
+
+
+.login-widget {
+    width: 800px;
+    height: 400px;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 auto;
+    border: 1px solid #ededed;
+    align-items: center;
+    position: relative;
+}
+
+.login-widget>.title {
+    width: 100%;
+    height: 15%;
+    background-color: #007aff;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.login-widget>.login {
+    height: 85%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-evenly;
+}
+
+.login-widget>.login label {
+    color: #787e7e;
+    font-size: 20px;
+}
+
+.login-widget>.login input {
+    font-size: 20px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+    caret-color: #218dff;
+    height: 15%;
+}
+
+.login-widget>.login>button {
+    background-color: #007aff;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.login-widget>.login>button:hover {
+    background-color: #0058b6;
+}
+
+.login-widget>.connect {
+    width: 45%;
+    height: 85%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+
+}
+
+.login-widget>.connect .title {
+    font-size: 20px;
+    color: #787e7e;
+}
+
+.login-widget>.connect button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    transition-duration: 0.2s;
+}
+
+.login-widget>.connect button.facebook {
+    background-color: #1977f3;
+}
+
+.login-widget>.connect button.facebook:hover {
+    background-color: #1255ad;
+}
+
+.login-widget>.connect button.twitter {
+    background-color: #1ea1f3;
+}
+
+.login-widget>.connect button.twitter:hover {
+    background-color: #1470aa;
+}
+
+.login-widget>.connect button.linkedin {
+    background-color: #0177b5;
+}
+
+.login-widget>.connect button.linkedin:hover {
+    background-color: #004a72;
+}
+
+
+.login-widget>.or {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #787e7e;
+    font-size: 20px;
+    z-index: 100;
+    height: 10%;
+}
+.login-widget>.or::before{
+    content: "";
+    position: absolute;
+    height: 35%;
+    width: 2px;
+    background-color: #eee;
+    z-index: -1;
+    top: 16%;
+}
+.login-widget>.or::after{
+    content: "";
+    position: absolute;
+    height: 35%;
+    width: 2px;
+    background-color: #eee;
+    z-index: -1;
+    bottom: 1%;
+}
