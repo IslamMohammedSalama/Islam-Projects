@@ -262,34 +262,54 @@ hr {
     width: 600px;
     height: 600px;
     margin: 0 auto;
+    overflow: hidden;
+    & td,
+    & th {
+        width: calc(100%/ 3);
+        height: calc(100% / 6);
+        font-size: 20px;
+        border: 1px solid #d0d0d0;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+        transition-duration: 0.25s;
+    }
+
+    & th {
+        background-color: white;
+    }
+
+    & td:hover {
+        background-color: #f4f4f4;
+        border-color: #2196f3;
+        color: #2196f3;
+    }
+
+    & tr:hover td {
+        background-color: #f4f4f4;
+    }
+
+    & td:hover::after {
+        background-color: #f4f4f4;
+        height: 10000px;
+        left: 0;
+        position: absolute;
+        top: -5000px;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & td::after {
+        content: '';
+        transition: 0.25s;
+    }
 }
 
-.table td,
-.table th {
-    width: calc(100%/ 3);
-    height: calc(100% / 6);
-    font-size: 20px;
-    border: 1px solid #d0d0d0;
-    border-radius: 5px;
-    text-align: center;
-    position: relative;
-    transition-duration: 0.25s;
 
-}
 
-.table td:hover {
+/* .table tr td:nth-child(even) {
     background-color: #f4f4f4;
-    border-color: #2196f3;
-    color: #2196f3;
-}
-
-.table tr:hover td {
-    background-color: #f4f4f4;
-}
-
-.table tr td:nth-child(even) {
-    background-color: #f4f4f4;
-}
+} */
 
 .plans {
     position: relative;
@@ -387,6 +407,7 @@ hr {
     display: flex;
     padding: 20px;
     margin: 0 auto;
+    gap: 20px;
 }
 
 .storage-size div {
@@ -1226,7 +1247,8 @@ table:nth-of-type(2) caption {
     z-index: 100;
     height: 10%;
 }
-.login-widget>.or::before{
+
+.login-widget>.or::before {
     content: "";
     position: absolute;
     height: 35%;
@@ -1235,7 +1257,8 @@ table:nth-of-type(2) caption {
     z-index: -1;
     top: 16%;
 }
-.login-widget>.or::after{
+
+.login-widget>.or::after {
     content: "";
     position: absolute;
     height: 35%;
