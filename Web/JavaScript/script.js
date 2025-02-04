@@ -158,8 +158,8 @@ if (st.slice(0, 6).repeat(2) === "ElzeroElzero") {
   Switch Challenge
 */
 
-let job = "Manager";
-let salary = 0;
+// let job = "Manager";
+// let salary = 0;
 
 // if (job === "Manager") {
 //   salary = 8000;
@@ -171,29 +171,29 @@ let salary = 0;
 //   salary = 4000;
 // }
 
-switch (job) {
-	case "Manager":
-		salary = 8000;
-		break;
-	case "IT":
-	case "Support":
-		salary = 6000;
-    break;
-	case "Developer":
-	case "Designer":
-		salary = 7000;
-    break;
-	default:
-		salary = 4000;
-    break;
-}
-console.log(`My Salary Is ${salary}`);
+// switch (job) {
+// 	case "Manager":
+// 		salary = 8000;
+// 		break;
+// 	case "IT":
+// 	case "Support":
+// 		salary = 6000;
+//     break;
+// 	case "Developer":
+// 	case "Designer":
+// 		salary = 7000;
+//     break;
+// 	default:
+// 		salary = 4000;
+//     break;
+// }
+// console.log(`My Salary Is ${salary}`);
 /*
   If Challenge
 */
 
-let holidays = 0;
-let money = 0;
+// let holidays = 0;
+// let money = 0;
 
 // switch (holidays) {
 // 	case 0:
@@ -222,22 +222,44 @@ let money = 0;
 // 		console.log(`My Money is ${money}`);
 // }
 
-if (holidays === 0) {
-	money = 5000;
-	console.log(`My Money is ${money}`);
-} else if ((holidays === 1) | (holidays === 2)) {
-	money = 3000;
-	console.log(`My Money is ${money}`);
-} else if (holidays === 3) {
-	money = 2000;
-	console.log(`My Money is ${money}`);
-} else if (holidays === 4) {
-	money = 1000;
-	console.log(`My Money is ${money}`);
-} else if (holidays === 5) {
-	money = 0;
-	console.log(`My Money is ${money}`);
-} else {
-	money = 0;
-	console.log(`My Money is ${money}`);
-}
+// if (holidays === 0) {
+// 	money = 5000;
+// 	console.log(`My Money is ${money}`);
+// } else if ((holidays === 1) | (holidays === 2)) {
+// 	money = 3000;
+// 	console.log(`My Money is ${money}`);
+// } else if (holidays === 3) {
+// 	money = 2000;
+// 	console.log(`My Money is ${money}`);
+// } else if (holidays === 4) {
+// 	money = 1000;
+// 	console.log(`My Money is ${money}`);
+// } else if (holidays === 5) {
+// 	money = 0;
+// 	console.log(`My Money is ${money}`);
+// } else {
+// 	money = 0;
+// 	console.log(`My Money is ${money}`);
+// }
+
+/*
+  Array Challenge
+*/
+
+let zero = 0;
+
+let counter = 3;
+
+let my = ["Ahmed", "Mazero", "Elham", "Osama", "Gamal", "Ameer"];
+
+// Write Code Here
+
+my = my.slice(zero, ++counter).reverse();
+
+console.log(my); // ["Osama", "Elham", "Mazero", "Ahmed"];
+my = my.slice(++zero, --counter);
+console.log(my); // ["Elham", "Mazero"]
+
+console.log(`${my[0].substr(0, 2)}${my[1].substr(2, 4)}`); // "Elzero"
+
+console.log(`${my[1][4].toLowerCase()}${my[1][5].toUpperCase()}`); // "rO"
