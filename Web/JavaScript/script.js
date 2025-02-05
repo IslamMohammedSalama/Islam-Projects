@@ -246,7 +246,7 @@ if (st.slice(0, 6).repeat(2) === "ElzeroElzero") {
   Array Challenge
 */
 
-let zero = 0;
+/* let zero = 0;
 
 let counter = 3;
 
@@ -263,3 +263,40 @@ console.log(my); // ["Elham", "Mazero"]
 console.log(`${my[0].substr(0, 2)}${my[1].substr(2, 4)}`); // "Elzero"
 
 console.log(`${my[1][4].toLowerCase()}${my[1][5].toUpperCase()}`); // "rO"
+ */
+/* 
+  Loop Challenge
+*/
+
+let myAdmins = ["Ahmed", "Osama", "Sayed", "Stop", "Samera"];
+let myEmployees = [
+	"Amgad",
+	"Samah",
+	"Ameer",
+	"Omar",
+	"Othman",
+	"Amany",
+	"Samia",
+	"Anwar",
+];
+
+document.write(`<div>We Have ${myAdmins.length} Admins</div>`);
+
+for (let index = 0; index < myAdmins.length; index++) {
+	let counter = index + 1;
+	if (myAdmins[index] === "Stop") {
+		break;
+	}
+	document.write("<hr>");
+	document.write(
+		`<div>The Admin For Team ${counter} Is ${myAdmins[index]}</div>`
+	);
+	document.write("<h2>Team Members : </h2>");
+	let counter2 = 0;
+	for (let index2 = 0; index2 < myEmployees.length; index2++) {
+		if (myAdmins[index].charAt(0) == myEmployees[index2].charAt(0)) {
+			counter2++;
+			document.write(`<div>${counter2} - ${myEmployees[index2]}</div>`);
+		}
+	}
+}
