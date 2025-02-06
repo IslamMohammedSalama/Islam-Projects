@@ -268,7 +268,7 @@ console.log(`${my[1][4].toLowerCase()}${my[1][5].toUpperCase()}`); // "rO"
   Loop Challenge
 */
 
-let myAdmins = ["Ahmed", "Osama", "Sayed", "Stop", "Samera"];
+/* let myAdmins = ["Ahmed", "Osama", "Sayed", "Stop", "Samera"];
 let myEmployees = [
 	"Amgad",
 	"Samah",
@@ -300,3 +300,45 @@ for (let index = 0; index < myAdmins.length; index++) {
 		}
 	}
 }
+ */
+
+/*
+  Function - Random Argument Challenge
+  ====================================
+  Create Function showDetails
+  Function Accept 3 Parameters [a, b, c]
+  Data Types For Info Is
+  - String => Name
+  - Number => Age
+  - Boolean => Status
+  Argument Is Random
+  Data Is Not Sorted Output Depend On Data Types
+  - Use Ternary Conditional Operator
+*/
+
+function showDetails(...args) {
+	let name = "UnKnown";
+	let age = "UnKnown";
+	let status = "UnKnown";
+	for (let index = 0; index < args.length; index++) {
+		typeof args[index] === "string"
+			? (name = args[index])
+			: typeof args[index] === "number"
+			? (age = args[index])
+			: typeof args[index] === "boolean"
+			? (status = args[index])
+			: console.log();
+	}
+	console.log(
+		`Hello ${name}, Your Age Is ${age}, ${
+			status === true
+				? "You Are Available For Hire"
+				: "You Are Not Available For Hire"
+		}`
+	);
+}
+
+showDetails("Osama", 38, true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
+showDetails(38, "Osama", true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
+showDetails(true, 38, "Osama"); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
+showDetails(false, "Osama", 38); // "Hello Osama, Your Age Is 38, You Are Not Available For Hire"
