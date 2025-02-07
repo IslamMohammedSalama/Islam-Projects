@@ -316,29 +316,61 @@ for (let index = 0; index < myAdmins.length; index++) {
   - Use Ternary Conditional Operator
 */
 
-function showDetails(...args) {
-	let name = "UnKnown";
-	let age = "UnKnown";
-	let status = "UnKnown";
-	for (let index = 0; index < args.length; index++) {
-		typeof args[index] === "string"
-			? (name = args[index])
-			: typeof args[index] === "number"
-			? (age = args[index])
-			: typeof args[index] === "boolean"
-			? (status = args[index])
-			: console.log();
-	}
-	console.log(
-		`Hello ${name}, Your Age Is ${age}, ${
-			status === true
-				? "You Are Available For Hire"
-				: "You Are Not Available For Hire"
-		}`
-	);
+// function showDetails(...args) {
+// 	let name = "UnKnown";
+// 	let age = "UnKnown";
+// 	let status = "UnKnown";
+// 	for (let index = 0; index < args.length; index++) {
+// 		typeof args[index] === "string"
+// 			? (name = args[index])
+// 			: typeof args[index] === "number"
+// 			? (age = args[index])
+// 			: typeof args[index] === "boolean"
+// 			? (status = args[index])
+// 			: console.log();
+// 	}
+// 	console.log(
+// 		`Hello ${name}, Your Age Is ${age}, ${
+// 			status === true
+// 				? "You Are Available For Hire"
+// 				: "You Are Not Available For Hire"
+// 		}`
+// 	);
+// }
+
+// showDetails("Osama", 38, true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
+// showDetails(38, "Osama", true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
+// showDetails(true, 38, "Osama"); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
+// showDetails(false, "Osama", 38); // "Hello Osama, Your Age Is 38, You Are Not Available For Hire"
+
+/*
+  Function Arrow Challenges
+*/
+
+// [1] One Statement In Function
+// [2] Convert To Arrow Function
+// [3] Print The Output [Arguments May Change]
+
+// let names = function (...names) {
+// 	return `String [${names.join("], [")}] => Done !`;
+// };
+
+let names = (...names) => `String [${names.join("], [")}] => Done !`
+
+console.log(names("Osama", "Mohamed", "Ali", "Ibrahim"));
+// String [Osama], [Mohamed], [Ali], [Ibrahim] => Done !
+
+/* ================================= */
+
+// [1] Replace ??? In Return Statement To Get The Output
+// [2] Create The Same Function With Regular Syntax
+// [3] Use Array Inside The Arguments To Get The Output
+
+let myNumbers = [20, 50, 10, 60];
+
+// let calc = (one, two, ...nums) => one + two + nums[+(!Array.isArray(myNumbers))];
+let calc = function (one, two, ...nums) {
+	return one + two + nums[+!Array.isArray(myNumbers)];
 }
 
-showDetails("Osama", 38, true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
-showDetails(38, "Osama", true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
-showDetails(true, 38, "Osama"); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
-showDetails(false, "Osama", 38); // "Hello Osama, Your Age Is 38, You Are Not Available For Hire"
+console.log(calc(10, 20, 50, 10, 60)); // 80
