@@ -53,12 +53,11 @@ function specialMix(...data) {
 		if (isNaN(parseInt(data[index])) !== false) {
 			continue;
 		} else {
-            result += parseInt(data[index]);
+			result += parseInt(data[index]);
 		}
 	}
-
-    if (result === 0) return "All Is String";
-    return result;
+	if (result === 0) return "All Is String";
+	return result;
 }
 
 console.log(specialMix(10, 20, 30)); // 60
