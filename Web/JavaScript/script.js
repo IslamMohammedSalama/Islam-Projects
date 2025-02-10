@@ -355,9 +355,9 @@ for (let index = 0; index < myAdmins.length; index++) {
 // 	return `String [${names.join("], [")}] => Done !`;
 // };
 
-let names = (...names) => `String [${names.join("], [")}] => Done !`
+// let names = (...names) => `String [${names.join("], [")}] => Done !`
 
-console.log(names("Osama", "Mohamed", "Ali", "Ibrahim"));
+// console.log(names("Osama", "Mohamed", "Ali", "Ibrahim"));
 // String [Osama], [Mohamed], [Ali], [Ibrahim] => Done !
 
 /* ================================= */
@@ -366,11 +366,42 @@ console.log(names("Osama", "Mohamed", "Ali", "Ibrahim"));
 // [2] Create The Same Function With Regular Syntax
 // [3] Use Array Inside The Arguments To Get The Output
 
-let myNumbers = [20, 50, 10, 60];
+// let myNumbers = [20, 50, 10, 60];
 
 // let calc = (one, two, ...nums) => one + two + nums[+(!Array.isArray(myNumbers))];
-let calc = function (one, two, ...nums) {
-	return one + two + nums[+!Array.isArray(myNumbers)];
-}
+// let calc = function (one, two, ...nums) {
+// 	return one + two + nums[+!Array.isArray(myNumbers)];
+// }
 
-console.log(calc(10, 20, 50, 10, 60)); // 80
+// console.log(calc(10, 20, 50, 10, 60)); // 80
+
+/*
+  Higher Order Functions Challenges
+
+  You Can Use
+  - ,
+  - _
+  - Space
+  - True => 1 => One Time Only In The Code
+
+  You Cannot Use
+  - Numbers
+  - Letters
+
+  - You Must Use [Filter + Map + Reduce + Your Knowledge]
+  - Order Is Not Important
+  - All In One Chain
+
+*/
+
+let myString = "1,2,3,EE,l,z,e,r,o,_,W,e,b,_,S,c,h,o,o,l,2,0,Z";
+
+let solution = myString
+	.split("")
+	.map((ele) => (ele === "," ? "" : ele))
+	.filter((ele) => isNaN(parseInt(ele)))
+	.reduce((acc, current) => acc + current)
+	.slice(true, -isNaN(myString))
+	.replaceAll("_", " ");
+	
+console.log(solution); // Elzero Web School
