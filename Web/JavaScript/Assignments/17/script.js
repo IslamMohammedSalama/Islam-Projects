@@ -84,5 +84,5 @@ console.log(
 );
 
 window.addEventListener("click", (e) => {
-    console.log(`This Is ${e.target.nodeName}`)
+    console.log(`This Is ${e.target.nodeName[0].toUpperCase()}${e.target.nodeName.slice(1).toLowerCase()}`)
 });
