@@ -394,14 +394,142 @@ for (let index = 0; index < myAdmins.length; index++) {
 
 */
 
-let myString = "1,2,3,EE,l,z,e,r,o,_,W,e,b,_,S,c,h,o,o,l,2,0,Z";
+// let myString = "1,2,3,EE,l,z,e,r,o,_,W,e,b,_,S,c,h,o,o,l,2,0,Z";
 
-let solution = myString
-	.split("")
-	.map((ele) => (ele === "," ? "" : ele))
-	.filter((ele) => isNaN(parseInt(ele)))
-	.reduce((acc, current) => acc + current)
-	.slice(true, -isNaN(myString))
-	.replaceAll("_", " ");
-	
-console.log(solution); // Elzero Web School
+// let solution = myString
+// 	.split("")
+// 	.map((ele) => (ele === "," ? "" : ele))
+// 	.filter((ele) => isNaN(parseInt(ele)))
+// 	.reduce((acc, current) => acc + current)
+// 	.slice(true, -isNaN(myString))
+// 	.replaceAll("_", " ");
+
+// console.log(solution); // Elzero Web School
+
+// body
+document.body.style.cssText = `
+margin:0;
+padding:0;
+`;
+
+// header
+let header = document.createElement("header");
+header.className = "header";
+
+header.style.cssText = `
+	padding : 20px;
+	display:flex;
+	justify-content : space-between;
+	align-items : center;
+	height:7.5vh;
+	width:100%;
+	box-sizing : border-box;
+`;
+
+let logo = document.createElement("a");
+logo.innerHTML = "Elzero";
+logo.style.cssText = `
+	font-size : 30px;
+	font-weight : bold;
+	color : #24a76f;
+`;
+
+let nav = document.createElement("ul");
+
+nav.style.cssText = `
+	list-style:none;
+	padding:0;
+	margin:0;
+	display:flex;
+	gap:20px;
+`;
+let navOne = document.createElement("li");
+navOne.innerHTML = "Home";
+navOne.style.cssText = `
+	color : #777;
+`;
+let navTwo = document.createElement("li");
+navTwo.innerHTML = "About";
+navTwo.style.cssText = `
+	color : #777;
+`;
+let navThree = document.createElement("li");
+navThree.innerHTML = "Service";
+navThree.style.cssText = `
+	color : #777;
+`;
+let navFour = document.createElement("li");
+navFour.innerHTML = "Contact";
+navFour.style.cssText = `
+	color : #777;
+`;
+
+nav.appendChild(navOne);
+nav.appendChild(navTwo);
+nav.appendChild(navThree);
+nav.appendChild(navFour);
+header.appendChild(logo);
+header.appendChild(nav);
+
+// content
+
+let content = document.createElement("section");
+content.className = "content";
+content.style.cssText = `
+	background-color : #ececec;
+	height:calc(100vh - (7.5vh * 2));
+	width:100%;
+	box-sizing:border-box;
+	padding:20px;
+	display:grid;
+	grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+	gap:20px
+`;
+
+for (let index = 0; index < 15; index++) {
+	let num = index + 1;
+	let product = document.createElement("div");
+	product.style.cssText = `
+	background-color:white;
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	flex-flow:column;
+	box-sizing:border-box;
+	padding:20px;
+	`;
+	let title = document.createElement("h3");
+	title.innerHTML = `${num}`;
+	title.style.margin = "0 0 20px 0";
+	let name = document.createElement("span");
+	name.innerHTML = `Product`;
+	product.appendChild(title);
+	product.appendChild(name);
+	content.appendChild(product);
+}
+// Footer
+let footer = document.createElement("footer");
+footer.className = "footer";
+footer.style.cssText = `
+height:7.5vh;
+width:100%;
+background-color : #24a76f;
+padding:20px;
+box-sizing:border-box;
+display:flex;
+justify-content:center;
+align-items:center;
+`;
+let footerText = document.createElement("p");
+footerText.textContent = "CopyRight 2025";
+
+footerText.style.cssText = `
+font-size:20px;
+color:white;
+`;
+
+footer.appendChild(footerText);
+
+document.body.appendChild(header);
+document.body.appendChild(content);
+document.body.appendChild(footer);
