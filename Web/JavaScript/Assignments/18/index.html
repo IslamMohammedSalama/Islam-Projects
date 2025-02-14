@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column nowrap;
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            /* hide it */
+            top: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(0, 0);
+            transition: 0.5s;
+        }
+
+        .show {
+            top: 50%;
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+        }
+        .popup .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+            background-color: #343434;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+
+        .popup .close:hover {
+            background-color: #4a4a4a;
+        }
+
+        .popup .close::before {
+            content: '';
+            width: calc(100% - 15px);
+            height: 1px;
+            background-color: white;
+            transform: rotate(45deg);
+        }
+
+        .popup .close::after {
+            content: '';
+            width: calc(100% - 15px);
+            height: 1px;
+            background-color: white;
+            position: absolute;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="popup">
+        <div class="close"></div>
+        <h3 class="title">Welcome</h3>
+        <p>Welcome To Elzero Web School</p>
+    </div>
+    <div class="counter-one">10</div>
+    <div class="counter-two">10</div>
+    <div class="counter-three">10</div>
+</body>
+<script src="script.js"></script>
+
+</html>
