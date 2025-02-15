@@ -530,6 +530,95 @@ color:white;
 
 footer.appendChild(footerText);
 
-document.body.appendChild(header);
-document.body.appendChild(content);
-document.body.appendChild(footer);
+document.body.before(header);
+document.body.before(content);
+document.body.before(footer);
+
+let input = document.querySelector(".input");
+let submit = document.querySelector(".add");
+let tasksDiv = document.querySelector(".tasks");
+
+// Empty Array To Store The Tasks
+let arrayOfTasks = [];
+
+if (localStorage.getItem("tasks")) {
+	arrayOfTasks = JSON.parse(localStorage.getItem("tasks"));
+}
+
+getDataFromLocalStorage();
+
+tasksDiv.addEventListener("click", (e) => {
+	if (e.target.classList.contains("del")) {
+		deleteTaskWith(e.target.parentElement.getAttribute("data-id"));
+		e.target.parentElement.remove();
+	}
+	if (e.target.classList.contains("task")) {
+		// Toggle Completed For The Task
+		toggleStatusTaskWith(e.target.getAttribute("data-id"));
+		// Toggle Done Class
+		e.target.classList.toggle("done");
+	}
+});
+
+submit.onclick = () => {
+	if (input.value !== "") {
+		addTasksToArrey(input.value);
+		input.value = "";
+	}
+};
+
+function addTasksToArrey(taskText) {
+	const task = {
+		id: Date.now(),
+		title: taskText,
+		complated: false,
+	};
+	arrayOfTasks.push(task);
+	addDataToLocalStorageFrom(arrayOfTasks);
+	addElementsToPageFrom(arrayOfTasks);
+}
+
+function addElementsToPageFrom(arr) {
+	arr.forEach((element) => {
+		let newTask = document.createElement("div");
+		newTask.className = "task";
+		newTask.innerHTML = element.title;
+		if (element.completed) {
+			newTask.className = "task done";
+		}
+		newTask.setAttribute("data-id", element.id);
+		let span = document.createElement("span");
+		span.innerHTML = "Delete";
+		span.className = "del";
+
+		newTask.append(span);
+		tasksDiv.append(newTask);
+	});
+}
+
+function addDataToLocalStorageFrom(arr) {
+	localStorage.setItem("tasks", JSON.stringify(arr));
+}
+
+function getDataFromLocalStorage() {
+	let data = window.localStorage.getItem("tasks");
+	if (data) {
+		let tasks = JSON.parse(data);
+		addElementsToPageFrom(tasks);
+	}
+}
+
+function deleteTaskWith(taskId) {
+	arrayOfTasks = arrayOfTasks.filter((task) => task.id != taskId);
+	addDataToLocalStorageFrom(arrayOfTasks);
+}
+function toggleStatusTaskWith(taskId) {
+	for (let i = 0; i < arrayOfTasks.length; i++) {
+		if (arrayOfTasks[i].id == taskId) {
+			arrayOfTasks[i].completed == false
+				? (arrayOfTasks[i].completed = true)
+				: (arrayOfTasks[i].completed = false);
+		}
+	}
+	addDataToLocalStorageFrom(arrayOfTasks);
+}
