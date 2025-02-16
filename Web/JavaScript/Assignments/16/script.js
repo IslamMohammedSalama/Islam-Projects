@@ -34,19 +34,26 @@ input.oninput = function () {
 let one = document.querySelector(".one");
 let two = document.querySelector(".two");
 
-let oneTitle = two.title;
-let twoTitle = one.title;
+// let oneTitle = two.title;
+// let twoTitle = one.title;
 
-let oneContent = two.textContent;
-let twoContent = one.textContent;
+// let oneContent = two.textContent;
+// let twoContent = one.textContent;
+
 // Shaffile Titles
 
-one.title = twoTitle;
-two.title = oneTitle;
+// one.title = twoTitle;
+// two.title = oneTitle;
+
+// New Way
+[one.title, two.title] = [two.title, one.title];
 
 // Shaffile Content
-one.textContent = oneContent;
-two.textContent = twoContent;
+// one.textContent = oneContent;
+// two.textContent = twoContent;
+
+// New Way
+[one.textContent, two.textContent] = [two.textContent, one.textContent];
 
 let newImgs = document.querySelectorAll(".newimgs img");
 
