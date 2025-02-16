@@ -622,3 +622,53 @@ function toggleStatusTaskWith(taskId) {
 	}
 	addDataToLocalStorageFrom(arrayOfTasks);
 }
+
+/*
+  Destructuring
+  - Challenge
+*/
+
+let chosen = 3;
+
+let myFriends = [
+	{ title: "Osama", age: 39, available: true, skills: ["HTML", "CSS"] },
+	{ title: "Ahmed", age: 25, available: false, skills: ["Python", "Django"] },
+	{ title: "Sayed", age: 33, available: true, skills: ["PHP", "Laravel"] },
+];
+
+let [osama, ahmed, sayed] = myFriends;
+
+if (chosen === 1) {
+	let {
+		title: oTitle,
+		age: oAge,
+		available: oHire,
+		skills: [, oSkillTwo],
+	} = osama;
+	console.log(oTitle);
+	console.log(oAge);
+	console.log(oHire ? "Avilable" : "Not Avilable");
+	console.log(oSkillTwo);
+} else if (chosen === 2) {
+	let {
+		title: aTitle,
+		age: aAge,
+		available: aHire,
+		skills: [, aSkillTwo],
+	} = ahmed;
+	console.log(aTitle);
+	console.log(aAge);
+	console.log(aHire ? "Avilable" : "Not Avilable");
+	console.log(aSkillTwo);
+} else if (chosen === 3) {
+	let {
+		title: sTitle,
+		age: sAge,
+		available: sHire,
+		skills: [, sSkillTwo],
+	} = sayed;
+	console.log(sTitle);
+	console.log(sAge);
+	console.log(sHire ? "Avilable" : "Not Avilable");
+	console.log(sSkillTwo);
+}
