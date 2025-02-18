@@ -263,7 +263,7 @@ hr {
     height: 600px;
     margin: 0 auto;
     overflow: hidden;
-    /* border-spacing: 0; */
+    border-spacing: 10px; 
 
     & td,
     & th {
@@ -271,7 +271,7 @@ hr {
         height: calc(100% / 6);
         font-size: 20px;
         border: 1px solid #d0d0d0;
-        border-radius: 5px;
+        border-radius: 10px;
         text-align: center;
         position: relative;
         transition-duration: 0.25s;
