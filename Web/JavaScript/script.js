@@ -693,20 +693,19 @@ let n1 = [10, 30, 10, 20];
 let n2 = [30, 20, 10];
 console.log(Math.max(...n2) * [...n1, ...n2].length); // 210
 
-
 /*
   Regular Expression
   - Challenge
 */
 
-let url1 = 'elzero.org';
-let url2 = 'http://elzero.org';
-let url3 = 'https://elzero.org';
-let url4 = 'https://www.elzero.org';
-let url5 = 'https://www.elzero.org:8080/articles.php?id=100&cat=topics';
-let url6 = 'https://www.elzero.org:8080/articles.php?id=100&cat=topics/sdasdsa';
+let url1 = "elzero.org";
+let url2 = "http://elzero.org";
+let url3 = "https://elzero.org";
+let url4 = "https://www.elzero.org";
+let url5 = "https://www.elzero.org:8080/articles.php?id=100&cat=topics";
+let url6 = "https://www.elzero.org:8080/articles.php?id=100&cat=topics/sdasdsa";
 
-let re = /((http)s?:\/\/)?(www.)?\w+.\w+(:\d+\/\w+.\w+\D+\w+\D+)?/ig;
+let re = /((http)s?:\/\/)?(www.)?\w+.\w+(:\d+\/\w+.\w+\D+\w+\D+)?/gim;
 
 console.log(url1.match(re));
 console.log(url2.match(re));
