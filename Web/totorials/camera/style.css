@@ -1,0 +1,166 @@
+body,
+*::after,
+*::before {
+	box-sizing: border-box;
+	-webkit-text-fill-color: transparent;
+	padding: 0;
+	margin: 0;
+	background-color: #cece;
+}
+
+.camera-body {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 600px;
+	height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to bottom,
+			#eee 25%,
+			#479ac4 25%,
+			#479ac4 75%,
+			#eee 75%,
+			#eee 100%);
+	border-radius: 50px;
+}
+
+.camera-body::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 600px;
+	height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to bottom,
+			#eee 25%,
+			#479ac4 25%,
+			#479ac4 75%,
+			#eee 75%,
+			#eee 100%);
+	border-radius: 50px;
+}
+
+.lens {
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	box-shadow: 2px 2px 15px;
+	z-index: 100;
+}
+
+.lens::before {
+	content: "";
+	display: block;
+	width: 220px;
+	height: 220px;
+	border-radius: 50%;
+	background-color: #479ac4;
+	border: 40px solid #3e3e3e;
+	outline: solid #cecece 20px;
+}
+
+.lens::after {
+	content: "";
+	background-color: #68b8db;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: absolute;
+	left: 100px;
+	top: 100px;
+}
+
+.button {
+	width: 80px;
+	height: 20px;
+	background-color: #479ac4;
+	position: absolute;
+	top: 0;
+	left: 50px;
+	transform: translateY(-100%);
+	border-radius: 20px 20px 5px 5px;
+}
+
+
+.button::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	transform: translateY(-100%);
+	left: 12.5px;
+	width: 55px;
+	height: 10px;
+	border-radius: 10px 10px 0 0;
+	background-color: #ff0000;
+}
+
+
+
+.flash {
+	position: absolute;
+	top: 0;
+	transform: translate(-50%, -100%);
+	left: 50%;
+	width: 150px;
+	height: 60px;
+	background-color: #479ac4;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flash .light {
+	position: relative;
+	z-index: 100;
+	height: 40px;
+	width: 100px;
+	background-color: #cecece;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.flash .light:after {
+	content: "";
+	position: absolute;
+	height:25px;
+	width: 60px;
+	background-color: #479ac4;
+	border-radius: 50px;
+}
+.flash::before {
+	content: "";
+	position: absolute;
+	top: 40px;
+	transform: rotate(60deg);
+	left: calc(50% - 5px);
+	width: 150px;
+	height: 60px;
+	background-color: #479ac4;
+	border-radius: 50px;
+}
+
+.flash::after {
+	content: "";
+	position: absolute;
+	top: 40px;
+	transform: rotate(-60deg);
+	left: calc(-50% + 5px);
+	width: 150px;
+	height: 60px;
+	background-color: #479ac4;
+	border-radius: 50px;
+}
