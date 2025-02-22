@@ -265,6 +265,10 @@ hr {
 	overflow: hidden;
 	border-spacing: 10px;
 
+	& thead {
+		height: calc(100% / 6);
+	}
+
 	& td,
 	& th {
 		width: calc(100%/ 3);
@@ -292,9 +296,10 @@ hr {
 		background-color: #f4f4f4;
 	}
 
-	&:has(tr:not(tr:first-of-type) > *:nth-child(1):hover) tr:not(tr:first-of-type)>*:nth-child(1),
-	& :has(tr:not(tr:first-of-type) > *:nth-child(2):hover) tr:not(tr:first-of-type)>*:nth-child(2),
-	& :has(tr:not(tr:first-of-type) > *:nth-child(3):hover) tr:not(tr:first-of-type)>*:nth-child(3) {
+	& tbody:has(tr > td:nth-child(1):hover) tr>*:nth-child(1),
+	& tbody:has(tr > td:nth-child(2):hover) tr>*:nth-child(2),
+	& tbody:has(tr > td:nth-child(3):hover) tr>*:nth-child(3) 
+	{
 		background-color: #f4f4f4;
 	}
 }
