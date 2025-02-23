@@ -41,7 +41,7 @@ fetch("data.jsonc")
 		return resVal.json();
 	})
 	.then((resValTwo) => {
-        document.write(`-`.repeat())
+		document.write(`-`.repeat());
 		for (let index = 0; index < resValTwo.length; index++) {
 			let mainDiv = document.createElement("div");
 			let h2 = document.createElement("h2");
