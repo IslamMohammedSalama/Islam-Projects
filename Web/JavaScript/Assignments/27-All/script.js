@@ -95,8 +95,7 @@ function swapEveryTwoChars(word) {
 		if (parseInt(l) === 0) {
 			finalWord = finalWord + word[l].toUpperCase();
 			continue;
-		}
-		else if (word[l] === word[l].toUpperCase()) {
+		} else if (word[l] === word[l].toUpperCase()) {
 			console.log("Captal Letter Is Here");
 			finalWord = finalWord + word[l].toLowerCase();
 		} else {
@@ -114,11 +113,11 @@ console.log(swapEveryTwoChars("heLlO")); // Hello
 // Write Your Function Implementation Here
 
 String.prototype.elzeroRepeat = function (val) {
-	let final = "" ;
+	let final = "";
 	for (let index = 0; index < val; index++) {
-		final = final + this
+		final = final + this;
 	}
-	return final ;
-}
+	return final;
+};
 
 console.log("Elzero ".elzeroRepeat(3)); // Elzero Elzero Elzero
