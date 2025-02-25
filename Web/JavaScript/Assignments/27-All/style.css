@@ -1,0 +1,56 @@
+table {
+	margin: 0 auto;
+	overflow: hidden;
+	border-spacing: 10px;
+
+	& thead {
+		height: calc(100% / 6);
+	}
+
+	& td,
+	& th {
+		width: calc(100%/ 3);
+		height: calc(100% / 6);
+		font-size: 20px;
+		border: 1px solid #d0d0d0;
+		border-radius: 10px;
+		text-align: center;
+		position: relative;
+		transition-duration: 0.25s;
+        padding: 25px;
+		font-size: 15px;
+
+	}
+
+	& th {
+		background-color: white;
+	}
+
+	& td:hover {
+		background-color: #f4f4f4;
+		border-color: #2196f3;
+		color: #2196f3;
+		cursor: pointer;
+	}
+    & td > a {
+		text-decoration: none;
+        background-color: #2196f3;
+        padding: 10px;
+        color:white;
+        border-radius: 50px;
+        transition: 0.3s;
+        &:hover {
+            background-color: #1a7ac9;
+        }
+	}
+	& tr:hover td {
+		background-color: #f4f4f4;
+	}
+
+	& tbody:has(tr > td:nth-child(1):hover) tr>*:nth-child(1),
+	& tbody:has(tr > td:nth-child(2):hover) tr>*:nth-child(2),
+	& tbody:has(tr > td:nth-child(3):hover) tr>*:nth-child(3) 
+	{
+		background-color: #f4f4f4;
+	}
+}

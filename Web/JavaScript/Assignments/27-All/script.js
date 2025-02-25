@@ -355,25 +355,430 @@ function dashBetweenOdd(num) {
 console.log(dashBetweenOdd(150653127)); // 1-5065-3-127
 console.log(dashBetweenOdd(5314557922)); // 5-3-145-5-7-922
 
-
 // assign TwintyFive
 console.log("-".repeat(40));
 
 let myArr = [10, 10, 20, 20, 10, 30, 50, 20, 10];
 
 myArr.length = 0;
-console.log(myArr)
+console.log(myArr);
 
-myArr = []
-console.log(myArr)
-let len = myArr.length
+myArr = [];
+console.log(myArr);
+let len = myArr.length;
 for (let index = 0; index < len; index++) {
-	myArr.shift()
+	myArr.shift();
 }
-console.log(myArr)
-myArr.splice(0,myArr.length)
-console.log(myArr)
+console.log(myArr);
+myArr.splice(0, myArr.length);
+console.log(myArr);
 
 // Output Needed
 // []
 
+// assign TwintySix
+console.log("-".repeat(40));
+
+let myArrTwo = [10, 10, 20, 20, 10, 30, 50, 20, 10];
+
+console.log(Array.from(new Set(myArrTwo)));
+
+let newArr = [];
+
+for (let index = 0; index < myArrTwo.length; index++) {
+	let preItem = 0;
+	if (index === 0) {
+		newArr.push(myArrTwo.sort()[index]);
+	} else {
+		preItem = myArrTwo.sort()[index - 1];
+		if (preItem !== myArrTwo.sort()[index]) {
+			newArr.push(myArrTwo.sort()[index]);
+		} else {
+			continue;
+		}
+	}
+}
+console.log(newArr);
+
+console.log(
+	myArrTwo.sort().reduce((acc, curr) => {
+		return acc.includes(curr) ? acc : [...acc, curr];
+	}, [])
+);
+
+console.log(myArrTwo.sort().filter((v, i) => myArrTwo.indexOf(v) === i));
+
+// Output Needed
+// [10, 20, 30, 50]
+
+// assign TwintySeven
+console.log("-".repeat(40));
+
+let myArrThree = ["69", "108", "122", "101", "114", "111"];
+
+// Your Code Here
+
+let nArr = myArrThree.map((val) => String.fromCharCode(val)).join("");
+
+console.log(nArr);
+
+// assign TwintyEight
+console.log("-".repeat(40));
+
+// Write Your Function Here
+function customMerge(...arreys) {
+	let result = [];
+	for (let index = 0; index < arreys.length; index++) {
+		result = result.concat([...arreys[index]]);
+	}
+	for (let index = 0; index < result.length; index++) {
+		result[index] = parseInt(result[index]);
+	}
+	return result.sort();
+}
+
+console.log(
+	customMerge([10, 20, "30", 1000], [100, "50", 20], [90, 20, "40", 10])
+);
+// [10, 10, 20, 20, 20, 30, 40, 50, 90, 100, 1000]
+
+// assign TwintyNine
+console.log("-".repeat(40));
+
+// Write Your Function Here
+
+function customCalc(...args) {
+	let numsOnly = [];
+	let result = 0;
+	for (let index = 0; index < args.length; index++) {
+		if (typeof +args[index] === "number" && !isNaN(+args[index])) {
+			numsOnly.push(+args[index]);
+		}
+	}
+	console.log(numsOnly);
+	for (let index = 0; index < numsOnly.length; index++) {
+		result += numsOnly[index];
+	}
+	return result * numsOnly[0] * numsOnly[numsOnly.length - 1];
+}
+
+console.log(customCalc("10", 20, "A", "40", 15));
+// 12750 <= (10 + 20 + 40 + 15) * 10 * 15
+
+console.log(customCalc(5, "15", 10, 5, 10));
+// 2250 <= (5 + 15 + 10 + 5 + 10) * 5 * 10
+
+console.log(customCalc(30, 5, "C", 10));
+// 13500 <= (30 + 5 + 10) * 30 * 10
+
+// assign Thirty
+console.log("-".repeat(40));
+
+for (let i = 1; i < 100; i += 5) {
+	console.log(i);
+	i += 5;
+}
+
+// Output Needed
+// 1;
+// 11;
+// 21;
+// 31;
+// 41;
+// 51;
+// 61;
+// 71;
+// 81;
+// 91;
+
+// assign ThirtyOne
+console.log("-".repeat(40));
+
+let myArray = [100, 200, 300, 400];
+
+// Method 1
+
+let clonedArray = [...myArray];
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 2
+clonedArray = [];
+
+clonedArray = myArray;
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 3
+clonedArray = [];
+
+clonedArray = Array.from(myArray);
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 4
+clonedArray = [];
+
+clonedArray = Object.assign([], myArray);
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 5
+
+clonedArray = [];
+for (let index = 0; index < myArray.length; index++) {
+	clonedArray.push(myArray[index]);
+}
+
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 6
+clonedArray = [];
+
+clonedArray.push(...myArray);
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 7
+clonedArray = [];
+
+clonedArray.unshift(...myArray);
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 7
+
+clonedArray = myArray.map((e) => e);
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 8
+
+clonedArray = [].concat(myArray);
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// Method 9
+
+clonedArray = myArray.filter((e) => e);
+
+console.log(clonedArray); // [100, 200, 300, 400]
+
+// assign ThirtyTwo
+console.log("-".repeat(40));
+
+let strNumber = "10";
+
+// Method 1
+console.log(strNumber * 1); // 10
+console.log(strNumber - 0); // 10 <= Same Solution
+
+// Method 2
+console.log(parseInt(strNumber));
+
+// Method 3
+console.log(parseFloat(strNumber));
+
+// Method 4
+console.log(+strNumber);
+
+// Method 5
+console.log(Number(strNumber));
+
+// Method 6
+console.log(strNumber / 1);
+
+// Method 7
+console.log(strNumber - 0);
+
+// Output Needed
+10;
+
+// assign ThirtyThree
+console.log("-".repeat(40));
+
+console.log(
+	"%cElzero Web School",
+	`
+background-color : #0075ff ;
+padding:20px;
+font-size:30px;
+font-weight : bold;
+`
+);
+// assign ThirtyFour
+console.log("-".repeat(40));
+
+let arr = [1, 1, 1, 2, 3, 4, 3];
+
+let uniqueElements = Array.from(new Set(arr));
+console.log(uniqueElements); // [1, 2, 3, 4]
+
+uniqueElements = arr.reduce(
+	(acc, curr) => (acc.includes(curr) ? acc : [...acc, curr]),
+	[]
+);
+
+console.log(uniqueElements); // [1, 2, 3, 4]
+uniqueElements = arr.filter((v, i) => arr.indexOf(v) === i);
+console.log(uniqueElements);
+
+uniqueElements = [];
+arr.sort();
+for (let index = 0; index < arr.length; index++) {
+	let preItem = 0;
+	if (index === 0) {
+		uniqueElements.push(arr[index]);
+	} else {
+		preItem = arr[index - 1];
+		if (preItem !== arr[index]) {
+			uniqueElements.push(arr[index]);
+		} else {
+			continue;
+		}
+	}
+}
+
+console.log(uniqueElements);
+
+// assign ThirtyFive
+console.log("-".repeat(40));
+
+let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+let leng = 20;
+let randomSeiral = "";
+
+for (let index = 0; index < leng; index++) {
+	randomSeiral += chars[Math.floor(Math.random() * chars.length)];
+}
+
+console.log(randomSeiral);
+
+// assign ThirtySix
+console.log("-".repeat(40));
+
+let aToZ = "abcdefghijklmnopqrstuvwxyz";
+aToZ = "";
+for (let index = 65; index < 91; index++) {
+	aToZ += String.fromCharCode(index).toLowerCase();
+}
+
+console.log(aToZ);
+
+let numOne = 100;
+let numTwo = 200;
+
+// assign ThirtySeven
+console.log("-".repeat(40));
+
+if (numOne > numTwo) {
+	console.log("1st > 2nd");
+} else if (numOne < numTwo) {
+	console.log("1st < 2nd");
+} else {
+	console.log("1st = 2nd");
+}
+
+// 1st < 2nd
+
+// Write Your Ternary Operator Code Here
+console.log(
+	numOne > numTwo ? "1st > 2nd" : numOne < numTwo ? "1st < 2nd" : "1st = 2nd"
+);
+
+numOne > numTwo
+	? console.log("1st > 2nd")
+	: numOne < numTwo
+	? console.log("1st < 2nd")
+	: console.log("1st = 2nd");
+
+// assign ThirtyEight
+console.log("-".repeat(40));
+
+let str = "i lovE elzeRO weB schOOL";
+let strAfter = "";
+
+for (let index = 0; index < str.split(" ").length; index++) {
+	strAfter +=
+		str.split(" ")[index].charAt(0).toUpperCase() +
+		str.split(" ")[index].slice(1).toLowerCase() +
+		" ";
+}
+
+console.log(strAfter);
+
+// Output Needed
+("I Love Elzero Web School");
+
+// assign ThirtyNine
+console.log("-".repeat(40));
+
+let myData = ["Osama", "Mohamed", "Elsayed", "Elzero"];
+
+// Write Your Code Here
+
+Object.defineProperty(myData, "length", { writable: false });
+
+// myData.push();  // Error
+console.log(myData); // ['Osama', 'Mohamed', 'Elsayed', 'Elzero']
+
+// assign FourtyOne
+console.log("-".repeat(40));
+
+const myDataTwo = {
+	user: "Elzero",
+	age: 41,
+	country: "Egypt",
+};
+
+// Write Your Code Here
+
+Object.defineProperty(myDataTwo, "skill", {
+	writable: false,
+});
+
+// myDataTwo.skill = "Programming"; // Error
+
+console.log(myDataTwo.user); // Elzero
+console.log(myDataTwo.age); // 41
+console.log(myDataTwo.country); // Egypt
+console.log(myDataTwo.skill); // Undefined
+
+// assign FourtyTwo
+console.log("-".repeat(40));
+
+document.addEventListener("keydown", function (e) {
+	if (e.ctrlKey && e.altKey && e.shiftKey) {
+		console.log("You Pressed Ctrl + Alt + Shift");
+	}
+});
+
+// assign FourtyThree
+console.log("-".repeat(40));
+
+let newProm = new Promise((res, rej) => {
+	let newReq = new XMLHttpRequest();
+	newReq.open("Get", "https://api.github.com/users/ElzeroWebSchool/repos");
+	newReq.send();
+	newReq.onload = function () {
+		if (this.readyState === 4 && this.status === 200) {
+			res(this.responseText);
+		} else {
+			rej(new Error("Not Found"));
+		}
+	};
+});
+
+let table = document.querySelector("tbody");
+
+newProm.then((data) => {
+	let ourData = JSON.parse(data);
+	console.log(ourData);
+	for (let index = 0; index < ourData.length; index++) {
+		let newRow = document.createElement("tr");
+		let repoName = document.createElement("td");
+		repoName.innerText = ourData[index].name;
+		let stars = document.createElement("td");
+		stars.innerText = ourData[index].stargazers_count;
+		let link = document.createElement("td");
+		let visitButton = document.createElement("a");
+		visitButton.href = ourData[index].html_url;
+		visitButton.innerHTML = `Link Here To Visit`;
+		visitButton.target = "_blank"
+		link.append(visitButton);
+		newRow.append(repoName, stars, link);
+		table.appendChild(newRow);
+	}
+});
