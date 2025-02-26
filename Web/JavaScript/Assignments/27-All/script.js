@@ -934,7 +934,6 @@ function createStarsTwo(num) {
 		repeat += 2;
 	}
 	for (let index = -1; index < num; index++) {
-		console.log("hello");
 		result = result + "*".repeat(repeat) + "\n";
 		repeat -= 2;
 	}
@@ -972,7 +971,6 @@ console.log("-".repeat(40));
 
 function createStarsThree(num) {
 	let repeat = num * 2 + 1;
-	console.log(repeat);
 	let repeatSpace = 0;
 	let result = "";
 	for (let index = -1; index < num; index++) {
