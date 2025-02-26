@@ -776,9 +776,230 @@ newProm.then((data) => {
 		let visitButton = document.createElement("a");
 		visitButton.href = ourData[index].html_url;
 		visitButton.innerHTML = `Link Here To Visit`;
-		visitButton.target = "_blank"
+		visitButton.target = "_blank";
 		link.append(visitButton);
 		newRow.append(repoName, stars, link);
 		table.appendChild(newRow);
 	}
 });
+
+// assign FourtyFour
+console.log("-".repeat(40));
+
+let last = 30;
+
+function* getodd() {
+	let nums = [];
+	let result = 0;
+	let index = 0;
+	while (last !== 1) {
+		if (index === 0) {
+			last -= 1;
+			nums.push(last);
+			yield last;
+		} else {
+			last -= 4;
+			nums.push(last);
+			yield last;
+		}
+		index++;
+	}
+	for (let index = 0; index < nums.length; index++) {
+		result += nums[index];
+	}
+	yield result;
+}
+let gen = getodd();
+
+for (let index = 0; index <= 8; index++) {
+	console.log(gen.next().value);
+}
+
+// First Request Output Needed
+29;
+25;
+21;
+17;
+13;
+9;
+5;
+1;
+
+// Second Request Output Needed
+120;
+
+// assign FourtyFive
+console.log("-".repeat(40));
+
+let rangeEnd = 10;
+let myRange = [];
+
+for (let index = 1; index <= rangeEnd; index++) {
+	myRange.push(index);
+}
+
+console.log(myRange); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+myRange = [];
+
+let index = 1;
+while (index <= rangeEnd) {
+	myRange.push(index);
+	index++;
+}
+console.log(myRange); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+myRange = [];
+index = 10;
+
+while (index > 0) {
+	myRange.unshift(index);
+	index--;
+}
+
+// Output Needed
+console.log(myRange); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// assign FourtySix
+console.log("-".repeat(40));
+
+let numsThree = [10, -20, 300, 50, 100, -50];
+
+let maxNumber = Math.max(...numsThree);
+console.log(maxNumber); // 300
+
+maxNumber = 0;
+for (let index = 0; index < numsThree.length; index++) {
+	if (maxNumber < numsThree[index]) {
+		maxNumber = numsThree[index];
+	}
+}
+console.log(maxNumber); // 300
+
+maxNumber = numsThree.reduce((acc, curr) => (acc > curr ? acc : curr));
+
+console.log(maxNumber); // 300
+
+// assign FourtySeven
+console.log("-".repeat(40));
+
+let btn = document.querySelector(".form button");
+
+addEventListener("click", (ev) => {
+	if (ev.target.tagName === "BUTTON") {
+		let link = document.createElement("a");
+		let textToSave = document.querySelector(".form textarea").value;
+		let newFile = new Blob([textToSave], {
+			type: "text/plain",
+		});
+		link.href = URL.createObjectURL(newFile);
+		link.download = "saved-file.txt";
+		link.click();
+		URL.revokeObjectURL(link.href);
+	}
+});
+
+// assign FourtyEight
+console.log("-".repeat(40));
+
+function createStars(num) {
+	let result = "";
+	let repeat = 1;
+	for (let index = 0; index < num; index++) {
+		result = result + "*".repeat(repeat) + "\n";
+		repeat += 2;
+	}
+	return result;
+}
+
+console.log(createStars(8));
+
+// Output Needed
+//   *
+//   ***
+//   *****
+//   *******
+//   *********
+//   ***********
+//   *************
+//   ***************
+
+// assign FourtyNine
+console.log("-".repeat(40));
+
+function createStarsTwo(num) {
+	let result = "";
+	let repeat = 1;
+	for (let index = 0; index < num; index++) {
+		result = result + "*".repeat(repeat) + "\n";
+		repeat += 2;
+	}
+	for (let index = -1; index < num; index++) {
+		console.log("hello");
+		result = result + "*".repeat(repeat) + "\n";
+		repeat -= 2;
+	}
+	return result;
+}
+
+console.log(createStarsTwo(3));
+
+// Output Needed
+//   *
+//   ***
+//   *****
+//   ***
+//   *
+
+console.log(createStarsTwo(7));
+
+// Output Needed
+//   *
+//   ***
+//   *****
+//   *******
+//   *********
+//   ***********
+//   *************
+//   ***********
+//   *********
+//   *******
+//   *****
+//   ***
+//   *
+
+// assign Fivty
+console.log("-".repeat(40));
+
+function createStarsThree(num) {
+	let repeat = num * 2 + 1;
+	console.log(repeat);
+	let repeatSpace = 0;
+	let result = "";
+	for (let index = -1; index < num; index++) {
+		result = result + " ".repeat(repeatSpace) + "*".repeat(repeat) + "\n";
+		repeat -= 2;
+		repeatSpace += 1;
+	}
+	for (let index = 0; index < num; index++) {
+		repeat += 2;
+		repeatSpace -= 1;
+		result = result + " ".repeat(repeatSpace) + "*".repeat(repeat) + "\n";
+	}
+	return result;
+}
+
+console.log(createStarsThree(6));
+
+// Output Needed
+// ***********
+//  *********
+//   *******
+//    *****
+//     ***
+//      *
+//      *
+//     ***
+//    *****
+//   *******
+//  *********
+// ***********
