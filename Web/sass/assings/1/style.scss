@@ -1,0 +1,78 @@
+$main: "school";
+$child: "box";
+$language: "en"; // English
+$gap: 20px;
+
+.#{$main} {
+	padding: $gap;
+	direction: if($language== "en", ltr, rtl);
+	margin-left: $gap;
+	& .#{$main}-#{$child} {
+		padding: calc($gap / 2);
+	}
+	&:hover .#{$main}-#{$child} {
+		background-color: #eee;
+	}
+}
+
+// Output
+// .school {
+//   padding: 20px;
+//   direction: ltr;
+//   margin-left: 20px;
+// }
+// .school .school-box {
+//   padding: 10px;
+// }
+// .school:hover .school-box {
+//   background-color: #eee;
+// }
+
+// SASS Code
+$main-color: red;
+$alt-color: blue;
+
+// Needed Output
+/* Theme Version: 1.0 */
+/* Website Theme Main Color Is: #{$main-color} */
+/* Website Theme Alternate Color Is: #{$alt-color} */
+$number: 10;
+
+.class {
+	@if $number > 8 {
+		color: blue;
+	} @else if $number > 5 {
+		color: green;
+	} @else {
+		color: red;
+	}
+}
+
+// SASS Code
+$number: 10;
+$color: red;
+$theme: light;
+
+.class {
+	color: if(
+		$number > 5 and $color == red and not($theme == dark),
+		$color,
+		green
+	);
+}
+
+// SASS Code
+$number: 10;
+
+.box {
+	@if $number == 10 or ($number == 9) or ($number == 8) {
+        @if $number == 10 {
+            background-color: #EEE;
+            text-align: center;
+        }@else if $number == 9 {
+            background-color: #EEE;
+        }@else {
+            @error "Nothing"
+        }
+	}
+}
