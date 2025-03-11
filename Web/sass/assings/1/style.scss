@@ -66,13 +66,13 @@ $number: 10;
 
 .box {
 	@if $number == 10 or ($number == 9) or ($number == 8) {
-        @if $number == 10 {
-            background-color: #EEE;
-            text-align: center;
-        }@else if $number == 9 {
-            background-color: #EEE;
-        }@else {
-            @error "Nothing"
-        }
+		@if $number == 10 {
+			background-color: #eee;
+			text-align: center;
+		} @else if $number == 9 {
+			background-color: #eee;
+		} @else {
+			@error "Nothing";
+		}
 	}
 }
