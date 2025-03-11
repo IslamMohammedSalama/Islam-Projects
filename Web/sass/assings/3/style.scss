@@ -1,0 +1,34 @@
+$num: 2;
+$start: 100;
+
+@function double($size) {
+	@return $size * $num;
+}
+
+@for $index from 1 through 5 {
+	.box-#{$start} {
+		width: #{$start}px;
+		height: #{double($start)}px;
+	}
+	$start: $start * $num;
+}
+
+@function get-total($nums...) {
+	$total: 0;
+	@each $num in $nums {
+		$total: $total + $num;
+	}
+	@return $total;
+}
+
+// SASS Code
+.box {
+	top: get-total(100, 50, 20);
+	right: get-total(100, 50);
+}
+
+// Output
+//   .box {
+//     top: 170;
+//     right: 150;
+//   }
