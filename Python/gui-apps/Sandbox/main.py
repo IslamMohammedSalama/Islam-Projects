@@ -15,9 +15,9 @@ from scene_lighting import SceneLighting
 from ursina import texture
 texture.default_filtering = 'nearest' 
 
-window.render_mode = 'flat'
-camera.clip_plane_far = 50  # Reduce far clipping distance (default is often 1000+)
-window.vsync = False
+# window.render_mode = 'flat'
+# camera.clip_plane_far = 50  # Reduce far clipping distance (default is often 1000+)
+# window.vsync = False
 mouse.locked = False
 Text.default_font = "./assets/Roboto.ttf"
 Text.default_resolution = Text.size * 1080
