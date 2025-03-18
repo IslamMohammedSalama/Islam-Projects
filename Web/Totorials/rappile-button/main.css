@@ -4,8 +4,7 @@ body {
   align-items: center;
   height: 100dvh;
 }
-
-button {
+body button {
   text-transform: uppercase;
   padding: 0.8em;
   width: 200px;
@@ -13,13 +12,16 @@ button {
   color: #fff;
   border: none;
   border-radius: 50px;
-  transition: all 1s;
+  transition: all 0.25s;
   font-size: 15px;
   font-weight: 500;
   position: relative;
   overflow: hidden;
 }
-
-button:hover {
+body button:hover {
+  filter: brightness(80%);
   cursor: pointer;
+}
+body button:active {
+  transform: scale(0.95);
 }/*# sourceMappingURL=main.css.map */
