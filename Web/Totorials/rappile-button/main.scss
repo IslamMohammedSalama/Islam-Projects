@@ -1,0 +1,30 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    height: 100dvh;
+}
+
+button {
+	text-transform: uppercase;
+	padding: 0.8em;
+	width: 200px;
+	background: #0053d9;
+	color: #fff;
+	border: none;
+	border-radius: 50px;
+	transition: all 1s;
+	font-size: 15px;
+	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+}
+
+button:hover {
+	// filter: brightness(80%);
+	cursor: pointer;
+}
+
+// button:active {
+// 	transform: scale(0.92);
+// }
