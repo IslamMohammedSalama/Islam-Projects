@@ -1,0 +1,1 @@
+{"version":3,"sources":["sass.scss"],"names":[],"mappings":"AAAA,MACC,kBACA,UACA","file":"../style.min.css","sourcesContent":[".test {\n\tposition: absolute;\n\ttop: 100px;\n\theight: 1000000px;\n}\n"]}

@@ -1,0 +1,13 @@
+.txt-c {
+    text-align: center;
+}
+
+@media (max-width:767px) {
+    .hidden-xs {
+        display: none !important;
+    }
+
+    .txt-c-mobile {
+        text-align: center;
+    }
+}
